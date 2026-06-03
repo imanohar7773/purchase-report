@@ -3,400 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Purchase Report Tool</title>
+<title>Purchase Report — Manohar Singh</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',sans-serif;background:#f0f4f8;color:#333}
-header{background:linear-gradient(135deg,#1a73e8,#0d47a1);color:white;padding:16px 24px;display:flex;align-items:center;gap:12px}
-header h1{font-size:1.3rem}
-header .sub{font-size:0.75rem;opacity:0.8;margin-top:2px}
-header .credit{margin-left:auto;text-align:right;font-size:0.8rem}
-header .credit b{font-size:1rem;display:block}
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-/* Nav Tabs */
-.tabs{display:flex;background:#fff;border-bottom:2px solid #e0e0e0;overflow-x:auto}
-.tab{padding:12px 20px;cursor:pointer;font-size:0.9rem;font-weight:600;color:#666;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s}
-.tab.active{color:#1a73e8;border-bottom-color:#1a73e8;background:#f0f6ff}
-.tab:hover{background:#f5f5f5}
+const firebaseConfig = {
+  apiKey: "AIzaSyCVgNHEiedIAz6GJdFNfnGRBPUtX6vM6ko",
+  authDomain: "purchase-report-fb978.firebaseapp.com",
+  projectId: "purchase-report-fb978",
+  storageBucket: "purchase-report-fb978.firebasestorage.app",
+  messagingSenderId: "519728871190",
+  appId: "1:519728871190:web:edc388a5599cc4c85b8237"
+};
 
-.container{max-width:1200px;margin:20px auto;padding:0 14px}
-.card{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:18px;margin-bottom:18px}
-.card-title{font-size:0.95rem;font-weight:700;color:#444;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #e8f0fe;display:flex;align-items:center;gap:6px}
-
-/* Summary Grid */
-.sum-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.sum-box{border-radius:10px;padding:14px;text-align:center}
-.sum-box .val{font-size:1.3rem;font-weight:700}
-.sum-box .lbl{font-size:0.72rem;margin-top:3px;opacity:0.8}
-.sb1{background:linear-gradient(135deg,#e8f0fe,#c2d4fb);color:#1a56c9}
-.sb2{background:linear-gradient(135deg,#fce8e6,#fbc5c1);color:#c5221f}
-.sb3{background:linear-gradient(135deg,#e6f4ea,#c6e8cc);color:#1e7e34}
-.sb4{background:linear-gradient(135deg,#fff3e0,#ffe0b2);color:#e65100}
-.sb5{background:linear-gradient(135deg,#f3e8fd,#e1bee7);color:#7b1fa2}
-
-/* Form */
-.form-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
-.fg{flex:1;min-width:140px}
-label{font-size:0.78rem;color:#666;display:block;margin-bottom:3px}
-input,select{width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:0.88rem;outline:none;transition:border 0.2s}
-input:focus,select:focus{border-color:#1a73e8}
-.btn{padding:8px 18px;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;transition:opacity 0.2s}
-.btn:hover{opacity:0.85}
-.bp{background:#1a73e8;color:#fff}
-.bs{background:#34a853;color:#fff}
-.bw{background:#fbbc04;color:#333}
-.bd{background:#ea4335;color:#fff}
-.bo{background:#ff6d00;color:#fff}
-.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-
-/* Table */
-.tw{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:0.83rem}
-thead{background:#1a73e8;color:#fff}
-th{padding:9px 10px;text-align:left;white-space:nowrap}
-td{padding:7px 10px;border-bottom:1px solid #eee}
-tbody tr:nth-child(even){background:#f8f9ff}
-tbody tr:hover{background:#e8f0fe}
-tfoot td{background:#e8f0fe;font-weight:700;padding:9px 10px}
-.right{text-align:right}
-
-/* Charts */
-.chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.chart-box{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:16px}
-.chart-box h3{font-size:0.88rem;color:#555;margin-bottom:12px;font-weight:700}
-canvas{max-height:260px}
-
-/* Vendor Table */
-.vendor-rank{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid #f0f0f0}
-.vendor-rank:last-child{border:none}
-.rank-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;flex-shrink:0}
-.r1{background:#ffd700;color:#333}
-.r2{background:#c0c0c0;color:#333}
-.r3{background:#cd7f32;color:#fff}
-.rn{background:#e8f0fe;color:#1a73e8}
-.vendor-name{flex:1;font-size:0.88rem;font-weight:600}
-.vendor-bar-wrap{width:120px;height:8px;background:#eee;border-radius:4px;overflow:hidden}
-.vendor-bar{height:100%;background:#1a73e8;border-radius:4px}
-.vendor-amt{font-size:0.85rem;font-weight:700;color:#1a73e8;min-width:80px;text-align:right}
-
-/* Badge */
-.badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:0.72rem;font-weight:600}
-.bb{background:#cce5ff;color:#004085}
-.bg{background:#d4edda;color:#155724}
-
-/* Filter bar */
-.filter-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:14px}
-.filter-bar .fg{min-width:130px}
-
-/* Page sections */
-.page{display:none}
-.page.active{display:block}
-
-/* Toast */
-#toast{position:fixed;bottom:20px;right:20px;background:#333;color:#fff;padding:10px 16px;border-radius:8px;font-size:0.83rem;display:none;z-index:999;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
-
-/* Upload */
-.upload-area{border:2px dashed #1a73e8;border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:background 0.2s}
-.upload-area:hover{background:#e8f0fe}
-.upload-area input{display:none}
-
-@media(max-width:600px){
-  .sum-box .val{font-size:1.1rem}
-  th,td{padding:6px 8px;font-size:0.78rem}
-}
-@media print{
-  header~.tabs,.btn-row,.btn,#toast{display:none!important}
-  .card{box-shadow:none}
-}
-</style>
-</head>
-<body>
-
-<header>
-  <span style="font-size:1.8rem">📊</span>
-  <div>
-    <h1>Purchase Report Tool</h1>
-    <div class="sub">Analytics · Vendor Insights · Monthly/Yearly Reports</div>
-  </div>
-  <div class="credit"><span style="opacity:0.7">Created by</span><b>Manohar Singh</b></div>
-</header>
-
-<div class="tabs">
-  <div class="tab active" onclick="showPage('dashboard')">🏠 Dashboard</div>
-  <div class="tab" onclick="showPage('entry')">➕ Add Entry</div>
-  <div class="tab" onclick="showPage('records')">📋 Records</div>
-  <div class="tab" onclick="showPage('analytics')">📈 Analytics</div>
-  <div class="tab" onclick="showPage('vendors')">🏪 Vendors</div>
-  <div class="tab" onclick="showPage('import')">📁 Import/Export</div>
-</div>
-
-<!-- DASHBOARD -->
-<div class="page active" id="pg-dashboard">
-<div class="container">
-  <div class="card">
-    <div class="card-title">📈 Overall Summary</div>
-    <div class="sum-grid">
-      <div class="sum-box sb1"><div class="val" id="d-total">₹0</div><div class="lbl">Total Purchase</div></div>
-      <div class="sum-box sb2"><div class="val" id="d-tax">₹0</div><div class="lbl">Total Tax</div></div>
-      <div class="sum-box sb3"><div class="val" id="d-base">₹0</div><div class="lbl">Base Amount</div></div>
-      <div class="sum-box sb4"><div class="val" id="d-count">0</div><div class="lbl">Total Invoices</div></div>
-      <div class="sum-box sb5"><div class="val" id="d-vendors">0</div><div class="lbl">Unique Vendors</div></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">📅 This Month Summary
-      <span id="cur-month-label" style="margin-left:auto;font-size:0.8rem;color:#888"></span>
-    </div>
-    <div class="sum-grid">
-      <div class="sum-box sb1"><div class="val" id="m-total">₹0</div><div class="lbl">Month Purchase</div></div>
-      <div class="sum-box sb2"><div class="val" id="m-tax">₹0</div><div class="lbl">Month Tax</div></div>
-      <div class="sum-box sb3"><div class="val" id="m-count">0</div><div class="lbl">Month Invoices</div></div>
-      <div class="sum-box sb5"><div class="val" id="m-vendors">0</div><div class="lbl">Month Vendors</div></div>
-    </div>
-  </div>
-
-  <div class="chart-grid">
-    <div class="chart-box">
-      <h3>📊 Last 6 Months Purchase Trend</h3>
-      <canvas id="trendChart"></canvas>
-    </div>
-    <div class="chart-box">
-      <h3>🏪 Top 5 Vendors (All Time)</h3>
-      <canvas id="vendorPieChart"></canvas>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">🏆 Top Vendors This Month</div>
-    <div id="dash-top-vendors"><div style="color:#aaa;text-align:center;padding:20px">No data yet</div></div>
-  </div>
-</div>
-</div>
-
-<!-- ADD ENTRY -->
-<div class="page" id="pg-entry">
-<div class="container">
-  <div class="card">
-    <div class="card-title">✏️ Add New Purchase Invoice</div>
-    <div class="form-row">
-      <div class="fg"><label>Invoice No *</label><input type="text" id="f_inv" placeholder="e.g. A000098"></div>
-      <div class="fg"><label>Invoice Date *</label><input type="date" id="f_date"></div>
-      <div class="fg" style="flex:2"><label>Supplier Name *</label><input type="text" id="f_sup" list="supList" placeholder="Type supplier name"><datalist id="supList"></datalist></div>
-    </div>
-    <div class="form-row">
-      <div class="fg"><label>Category</label>
-        <select id="f_cat">
-          <option value="">-- Select --</option>
-          <option>Dairy & Paneer</option><option>Bakery</option><option>Grocery</option>
-          <option>Beverages</option><option>Packaging</option><option>Electronics</option>
-          <option>Stationery</option><option>Other</option>
-        </select>
-      </div>
-      <div class="fg"><label>Base Amount (₹) *</label><input type="number" id="f_base" placeholder="0.00" oninput="calcTotal()"></div>
-      <div class="fg"><label>Tax Amount (₹)</label><input type="number" id="f_tax" placeholder="0.00" value="0" oninput="calcTotal()"></div>
-      <div class="fg"><label>Total Amount (₹)</label><input type="number" id="f_total" placeholder="Auto" style="background:#f5f5f5"></div>
-    </div>
-    <div class="form-row">
-      <div class="fg" style="flex:3"><label>Notes (optional)</label><input type="text" id="f_note" placeholder="Any remarks..."></div>
-    </div>
-    <div class="btn-row">
-      <button class="btn bp" onclick="addEntry()">➕ Add Invoice</button>
-      <button class="btn bw" onclick="clearForm()">🔄 Clear</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">⚡ Recent 5 Entries</div>
-    <div id="recent-entries"><div style="color:#aaa;text-align:center;padding:16px">No entries yet</div></div>
-  </div>
-</div>
-</div>
-
-<!-- RECORDS -->
-<div class="page" id="pg-records">
-<div class="container">
-  <div class="card">
-    <div class="card-title">🔍 Filter Records</div>
-    <div class="filter-bar">
-      <div class="fg"><label>Year</label>
-        <select id="r_year" onchange="renderRecords()"><option value="">All Years</option></select>
-      </div>
-      <div class="fg"><label>Month</label>
-        <select id="r_month" onchange="renderRecords()">
-          <option value="">All Months</option>
-          <option value="01">January</option><option value="02">February</option>
-          <option value="03">March</option><option value="04">April</option>
-          <option value="05">May</option><option value="06">June</option>
-          <option value="07">July</option><option value="08">August</option>
-          <option value="09">September</option><option value="10">October</option>
-          <option value="11">November</option><option value="12">December</option>
-        </select>
-      </div>
-      <div class="fg"><label>Vendor</label>
-        <select id="r_vendor" onchange="renderRecords()"><option value="">All Vendors</option></select>
-      </div>
-      <div class="fg"><label>Category</label>
-        <select id="r_cat" onchange="renderRecords()"><option value="">All Categories</option></select>
-      </div>
-      <div class="fg" style="flex:2"><label>Search</label>
-        <input type="text" id="r_search" placeholder="Invoice / Supplier..." oninput="renderRecords()">
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn bs" onclick="exportCSV()">⬇️ Export CSV</button>
-      <button class="btn bp" onclick="window.print()">🖨️ Print</button>
-      <button class="btn bd" style="font-size:0.78rem;padding:6px 12px" onclick="clearAll()">🗑️ Clear All</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">📋 Purchase Records <span id="rec-count" style="color:#1a73e8;font-size:0.82rem;margin-left:6px"></span></div>
-    <div class="tw">
-      <table>
-        <thead><tr><th>#</th><th>Invoice No</th><th>Date</th><th>Supplier</th><th>Category</th><th class="right">Base Amt</th><th class="right">Tax</th><th class="right">Total</th><th>Notes</th><th>Del</th></tr></thead>
-        <tbody id="rec-body"></tbody>
-        <tfoot id="rec-foot"></tfoot>
-      </table>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- ANALYTICS -->
-<div class="page" id="pg-analytics">
-<div class="container">
-  <div class="card">
-    <div class="card-title">📅 Select Period</div>
-    <div class="filter-bar">
-      <div class="fg"><label>Year</label>
-        <select id="a_year" onchange="renderAnalytics()"><option value="">All Years</option></select>
-      </div>
-    </div>
-  </div>
-
-  <div class="chart-grid">
-    <div class="chart-box" style="grid-column:1/-1">
-      <h3>📊 Monthly Purchase — Base vs Tax</h3>
-      <canvas id="monthlyChart" style="max-height:300px"></canvas>
-    </div>
-  </div>
-
-  <div class="chart-grid">
-    <div class="chart-box">
-      <h3>📆 Yearly Comparison</h3>
-      <canvas id="yearlyChart"></canvas>
-    </div>
-    <div class="chart-box">
-      <h3>🏷️ Category-wise Spend</h3>
-      <canvas id="catChart"></canvas>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">📅 Month-wise Summary Table</div>
-    <div class="tw"><table>
-      <thead><tr><th>Month</th><th class="right">Invoices</th><th class="right">Base Amount</th><th class="right">Tax</th><th class="right">Total</th><th class="right">Avg/Invoice</th></tr></thead>
-      <tbody id="month-table"></tbody>
-    </table></div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">📆 Year-wise Summary Table</div>
-    <div class="tw"><table>
-      <thead><tr><th>Year</th><th class="right">Invoices</th><th class="right">Base Amount</th><th class="right">Tax</th><th class="right">Total</th></tr></thead>
-      <tbody id="year-table"></tbody>
-    </table></div>
-  </div>
-</div>
-</div>
-
-<!-- VENDORS -->
-<div class="page" id="pg-vendors">
-<div class="container">
-  <div class="card">
-    <div class="card-title">🔍 Filter by Period</div>
-    <div class="filter-bar">
-      <div class="fg"><label>Year</label><select id="v_year" onchange="renderVendors()"><option value="">All Years</option></select></div>
-      <div class="fg"><label>Month</label>
-        <select id="v_month" onchange="renderVendors()">
-          <option value="">All Months</option>
-          <option value="01">January</option><option value="02">February</option>
-          <option value="03">March</option><option value="04">April</option>
-          <option value="05">May</option><option value="06">June</option>
-          <option value="07">July</option><option value="08">August</option>
-          <option value="09">September</option><option value="10">October</option>
-          <option value="11">November</option><option value="12">December</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">🏆 Vendor Ranking — Purchase Amount</div>
-    <div id="vendor-rank-list"><div style="color:#aaa;text-align:center;padding:20px">No data yet</div></div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">📋 Vendor-wise Detail Table</div>
-    <div class="tw"><table>
-      <thead><tr><th>Rank</th><th>Vendor Name</th><th class="right">Invoices</th><th class="right">Base Amt</th><th class="right">Tax</th><th class="right">Total</th><th class="right">Avg/Invoice</th><th class="right">% Share</th></tr></thead>
-      <tbody id="vendor-table"></tbody>
-    </table></div>
-  </div>
-</div>
-</div>
-
-<!-- IMPORT/EXPORT -->
-<div class="page" id="pg-import">
-<div class="container">
-  <div class="card">
-    <div class="card-title">📁 Import CSV File</div>
-    <div class="upload-area" onclick="document.getElementById('csvFile').click()">
-      <input type="file" id="csvFile" accept=".csv" multiple onchange="handleCSV(event)">
-      <div style="font-size:2rem">📂</div>
-      <p style="margin-top:8px;color:#555">Click to upload CSV</p>
-      <p style="font-size:0.75rem;color:#999;margin-top:4px">Columns: InvoiceNo, InvoiceDate, SupplierName, InvoiceTotalAmount, InvoiceTax, TotalAmount</p>
-      <div class="btn bp" style="display:inline-block;margin-top:10px">Choose File(s)</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">⬇️ Export Options</div>
-    <div class="btn-row">
-      <button class="btn bs" onclick="exportCSV()">📄 Export All as CSV</button>
-      <button class="btn bp" onclick="exportMonthCSV()">📅 Export Current Month CSV</button>
-      <button class="btn bo" onclick="exportVendorCSV()">🏪 Export Vendor Summary CSV</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">💾 Backup & Restore</div>
-    <div class="btn-row">
-      <button class="btn bs" onclick="backupData()">💾 Backup JSON</button>
-      <button class="btn bw" onclick="document.getElementById('restoreFile').click()">📥 Restore from Backup</button>
-      <input type="file" id="restoreFile" accept=".json" style="display:none" onchange="restoreData(event)">
-    </div>
-    <p style="font-size:0.78rem;color:#888;margin-top:10px">💡 Backup regularly taaki data safe rahe. JSON file download hogi — wapas restore kar sakte ho.</p>
-  </div>
-
-  <div class="card" style="border:2px solid #ea4335">
-    <div class="card-title" style="color:#ea4335">⚠️ Danger Zone</div>
-    <button class="btn bd" onclick="clearAll()">🗑️ Delete All Data</button>
-    <p style="font-size:0.78rem;color:#888;margin-top:8px">Yeh action undo nahi hogi. Pehle backup lo.</p>
-  </div>
-</div>
-</div>
-
-<div id="toast"></div>
-
-<script>
-let data = JSON.parse(localStorage.getItem('prData')||'[]');
-let charts = {};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const MONTHS_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+let data = [];
+let charts = {};
+let isAdmin = false;
+
+// ── URL MODE CHECK ──
+const urlParams = new URLSearchParams(window.location.search);
+const viewMode = urlParams.get('view') === 'true' || window.location.href.includes('view=true');
+isAdmin = !viewMode;
 
 function fmt(n){return parseFloat(n||0).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2})}
 function fmtShort(n){n=parseFloat(n||0);if(n>=100000)return'₹'+(n/100000).toFixed(1)+'L';if(n>=1000)return'₹'+(n/1000).toFixed(1)+'K';return'₹'+fmt(n)}
@@ -409,27 +43,44 @@ function toISO(s){
   if(m){let yr=m[3].length===2?'20'+m[3]:m[3];return`${yr}-${mo[m[2].toLowerCase()]||'01'}-${m[1].padStart(2,'0')}`}
   return s;
 }
-function save(){localStorage.setItem('prData',JSON.stringify(data));updateAllDropdowns()}
-function toast(msg,dur=2500){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',dur)}
-
-function showPage(id){
+function toast(msg,dur=2800){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',dur)}
+function showPage(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('pg-'+id).classList.add('active');
-  event.target.classList.add('active');
+  if(el)el.classList.add('active');
   if(id==='dashboard')renderDashboard();
   if(id==='records')renderRecords();
-  if(id==='analytics')renderAnalytics();
-  if(id==='vendors')renderVendors();
+  if(id==='analytics'){updateDropdowns();renderAnalytics();}
+  if(id==='vendors'){updateDropdowns();renderVendors();}
+}
+window.showPage = showPage;
+
+// ── FIREBASE REALTIME LISTENER ──
+function startListener(){
+  document.getElementById('status').textContent = '🔄 Connecting...';
+  const q = query(collection(db,'purchases'), orderBy('ts','desc'));
+  onSnapshot(q, snap => {
+    data = snap.docs.map(d=>({...d.data(), _id:d.id}));
+    document.getElementById('status').textContent = '🟢 Live';
+    updateDropdowns();
+    renderDashboard();
+    // refresh active tab
+    let active = document.querySelector('.page.active');
+    if(active){
+      let id = active.id.replace('pg-','');
+      if(id==='records')renderRecords();
+      if(id==='analytics')renderAnalytics();
+      if(id==='vendors')renderVendors();
+    }
+  }, err=>{
+    document.getElementById('status').textContent = '🔴 Offline';
+    toast('⚠️ Connection error: '+err.message);
+  });
 }
 
-function calcTotal(){
-  let b=parseFloat(document.getElementById('f_base').value)||0;
-  let t=parseFloat(document.getElementById('f_tax').value)||0;
-  document.getElementById('f_total').value=(b+t).toFixed(2);
-}
-
-function addEntry(){
+// ── ADD ENTRY ──
+async function addEntry(){
   let inv=document.getElementById('f_inv').value.trim();
   let date=document.getElementById('f_date').value;
   let sup=document.getElementById('f_sup').value.trim().toUpperCase();
@@ -439,10 +90,31 @@ function addEntry(){
   let total=base+tax;
   let note=document.getElementById('f_note').value.trim();
   if(!inv||!date||!sup||!base){toast('⚠️ Invoice No, Date, Supplier & Base Amount required!');return}
-  data.push({inv,date,sup,cat,base,tax,total,note,id:Date.now()});
-  save();renderDashboard();renderRecent();clearForm();
-  toast('✅ Invoice added successfully!');
+  document.getElementById('addBtn').disabled=true;
+  document.getElementById('addBtn').textContent='Saving...';
+  try{
+    await addDoc(collection(db,'purchases'),{inv,date,sup,cat,base,tax,total,note,ts:Date.now()});
+    clearForm();toast('✅ Invoice saved to Firebase!');
+  }catch(e){toast('❌ Error: '+e.message)}
+  document.getElementById('addBtn').disabled=false;
+  document.getElementById('addBtn').textContent='➕ Add Invoice';
 }
+window.addEntry = addEntry;
+
+async function deleteEntry(id){
+  if(!isAdmin){toast('⚠️ View-only mode — delete not allowed');return}
+  if(!confirm('Delete this entry?'))return;
+  try{await deleteDoc(doc(db,'purchases',id));toast('🗑️ Deleted')}
+  catch(e){toast('❌ '+e.message)}
+}
+window.deleteEntry = deleteEntry;
+
+function calcTotal(){
+  let b=parseFloat(document.getElementById('f_base').value)||0;
+  let t=parseFloat(document.getElementById('f_tax').value)||0;
+  document.getElementById('f_total').value=(b+t).toFixed(2);
+}
+window.calcTotal = calcTotal;
 
 function clearForm(){
   ['f_inv','f_sup','f_base','f_note'].forEach(id=>document.getElementById(id).value='');
@@ -451,13 +123,18 @@ function clearForm(){
   document.getElementById('f_cat').value='';
   document.getElementById('f_date').valueAsDate=new Date();
 }
+window.clearForm = clearForm;
 
-function deleteEntry(id){
-  data=data.filter(r=>r.id!==id);
-  save();renderRecords();renderDashboard();renderRecent();
-  toast('🗑️ Entry deleted');
+// ── SHARE LINK ──
+function copyShareLink(){
+  let url = window.location.href.split('?')[0]+'?view=true';
+  navigator.clipboard.writeText(url).then(()=>toast('✅ View link copied! Share karo — sirf dekhne wala link hai')).catch(()=>{
+    prompt('Yeh link copy karo:',url);
+  });
 }
+window.copyShareLink = copyShareLink;
 
+// ── FILTER ──
 function getFiltered(year='',month='',vendor='',cat='',search=''){
   return data.filter(r=>{
     if(year&&!r.date.startsWith(year))return false;
@@ -472,49 +149,38 @@ function getFiltered(year='',month='',vendor='',cat='',search=''){
 // ── DASHBOARD ──
 function renderDashboard(){
   let all=data;
-  let tot=all.reduce((s,r)=>s+r.total,0);
-  let tax=all.reduce((s,r)=>s+r.tax,0);
-  let base=all.reduce((s,r)=>s+r.base,0);
+  let tot=all.reduce((s,r)=>s+r.total,0),tax=all.reduce((s,r)=>s+r.tax,0),base=all.reduce((s,r)=>s+r.base,0);
   document.getElementById('d-total').textContent='₹'+fmt(tot);
   document.getElementById('d-tax').textContent='₹'+fmt(tax);
   document.getElementById('d-base').textContent='₹'+fmt(base);
   document.getElementById('d-count').textContent=all.length;
   document.getElementById('d-vendors').textContent=new Set(all.map(r=>r.sup)).size;
-
-  let now=new Date();
-  let cy=now.getFullYear()+'';
-  let cm=(now.getMonth()+1+'').padStart(2,'0');
+  let now=new Date(),cy=now.getFullYear()+'',cm=(now.getMonth()+1+'').padStart(2,'0');
   let mData=all.filter(r=>r.date.startsWith(cy+'-'+cm));
   document.getElementById('cur-month-label').textContent=MONTHS_FULL[now.getMonth()]+' '+cy;
   document.getElementById('m-total').textContent='₹'+fmt(mData.reduce((s,r)=>s+r.total,0));
   document.getElementById('m-tax').textContent='₹'+fmt(mData.reduce((s,r)=>s+r.tax,0));
   document.getElementById('m-count').textContent=mData.length;
   document.getElementById('m-vendors').textContent=new Set(mData.map(r=>r.sup)).size;
-
-  renderTrendChart();
-  renderVendorPie();
-  renderDashTopVendors(mData);
-  renderRecent();
+  renderTrendChart();renderVendorPie();renderDashTopVendors(mData);renderRecent();
 }
 
 function renderTrendChart(){
-  let labels=[];let totals=[];
+  let labels=[],totals=[];
   let now=new Date();
   for(let i=5;i>=0;i--){
     let d=new Date(now.getFullYear(),now.getMonth()-i,1);
-    let y=d.getFullYear()+'';let m=(d.getMonth()+1+'').padStart(2,'0');
+    let y=d.getFullYear()+'',m=(d.getMonth()+1+'').padStart(2,'0');
     labels.push(MONTHS[d.getMonth()]+' '+y.slice(2));
-    let rows=data.filter(r=>r.date.startsWith(y+'-'+m));
-    totals.push(rows.reduce((s,r)=>s+r.total,0));
+    totals.push(data.filter(r=>r.date.startsWith(y+'-'+m)).reduce((s,r)=>s+r.total,0));
   }
   let ctx=document.getElementById('trendChart');
   if(charts.trend)charts.trend.destroy();
-  charts.trend=new Chart(ctx,{type:'bar',data:{labels,datasets:[{label:'Total Purchase',data:totals,backgroundColor:'rgba(26,115,232,0.7)',borderRadius:6}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>fmtShort(v)}}}}});
+  charts.trend=new Chart(ctx,{type:'bar',data:{labels,datasets:[{label:'Total',data:totals,backgroundColor:'rgba(26,115,232,0.75)',borderRadius:6}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>fmtShort(v)}}}}});
 }
 
 function renderVendorPie(){
-  let vm={};
-  data.forEach(r=>{vm[r.sup]=(vm[r.sup]||0)+r.total});
+  let vm={};data.forEach(r=>{vm[r.sup]=(vm[r.sup]||0)+r.total});
   let sorted=Object.entries(vm).sort((a,b)=>b[1]-a[1]).slice(0,5);
   let ctx=document.getElementById('vendorPieChart');
   if(charts.pie)charts.pie.destroy();
@@ -530,7 +196,7 @@ function renderDashTopVendors(rows){
   if(!sorted.length){el.innerHTML='<div style="color:#aaa;text-align:center;padding:16px">No data this month</div>';return}
   el.innerHTML=sorted.map(([name,amt],i)=>`
     <div class="vendor-rank">
-      <div class="rank-num ${i===0?'r1':i===1?'r2':i===2?'r3':'rn'}">${i+1}</div>
+      <div class="rank-num ${['r1','r2','r3','rn','rn'][i]}">${i+1}</div>
       <div class="vendor-name">${name}</div>
       <div class="vendor-bar-wrap"><div class="vendor-bar" style="width:${(amt/max*100).toFixed(0)}%"></div></div>
       <div class="vendor-amt">₹${fmt(amt)}</div>
@@ -538,45 +204,44 @@ function renderDashTopVendors(rows){
 }
 
 function renderRecent(){
-  let rows=[...data].sort((a,b)=>b.id-a.id).slice(0,5);
+  let rows=[...data].slice(0,5);
   let el=document.getElementById('recent-entries');
   if(!rows.length){el.innerHTML='<div style="color:#aaa;text-align:center;padding:16px">No entries yet</div>';return}
   el.innerHTML=`<div class="tw"><table><thead><tr><th>Invoice</th><th>Date</th><th>Supplier</th><th class="right">Total</th></tr></thead><tbody>
-    ${rows.map(r=>`<tr><td><span class="badge bb">${r.inv}</span></td><td>${fmtD(r.date)}</td><td>${r.sup}</td><td class="right" style="color:#1a73e8;font-weight:700">₹${fmt(r.total)}</td></tr>`).join('')}
+    ${rows.map(r=>`<tr><td><span class="badge bb">${r.inv}</span></td><td>${fmtD(r.date)}</td><td>${r.sup}</td><td class="right fw" style="color:#1a73e8">₹${fmt(r.total)}</td></tr>`).join('')}
   </tbody></table></div>`;
 }
 
 // ── RECORDS ──
 function renderRecords(){
-  let year=document.getElementById('r_year').value;
-  let month=document.getElementById('r_month').value;
-  let vendor=document.getElementById('r_vendor').value;
-  let cat=document.getElementById('r_cat').value;
-  let search=document.getElementById('r_search').value;
-  let rows=getFiltered(year,month,vendor,cat,search);
+  let rows=getFiltered(
+    document.getElementById('r_year').value,
+    document.getElementById('r_month').value,
+    document.getElementById('r_vendor').value,
+    document.getElementById('r_cat').value,
+    document.getElementById('r_search').value
+  );
   document.getElementById('rec-count').textContent=`(${rows.length} entries)`;
-  let tbody=document.getElementById('rec-body');
-  let tfoot=document.getElementById('rec-foot');
+  let tbody=document.getElementById('rec-body'),tfoot=document.getElementById('rec-foot');
   if(!rows.length){tbody.innerHTML='<tr><td colspan="10" style="text-align:center;color:#aaa;padding:24px">No records found</td></tr>';tfoot.innerHTML='';return}
   tbody.innerHTML=rows.map((r,i)=>`<tr>
     <td>${i+1}</td><td><span class="badge bb">${r.inv}</span></td><td>${fmtD(r.date)}</td>
     <td>${r.sup}</td><td>${r.cat?`<span class="badge bg">${r.cat}</span>`:''}</td>
     <td class="right">₹${fmt(r.base)}</td>
     <td class="right" style="color:${r.tax>0?'#e65100':'#aaa'}">₹${fmt(r.tax)}</td>
-    <td class="right" style="font-weight:700;color:#1a73e8">₹${fmt(r.total)}</td>
+    <td class="right fw" style="color:#1a73e8">₹${fmt(r.total)}</td>
     <td style="font-size:0.75rem;color:#888">${r.note||''}</td>
-    <td><button class="btn bd" style="padding:4px 8px;font-size:0.72rem" onclick="deleteEntry(${r.id})">🗑️</button></td>
+    <td>${isAdmin?`<button class="btn bd" style="padding:3px 8px;font-size:0.72rem" onclick="deleteEntry('${r._id}')">🗑️</button>`:''}</td>
   </tr>`).join('');
   let tb=rows.reduce((s,r)=>s+r.base,0),tt=rows.reduce((s,r)=>s+r.tax,0),tto=rows.reduce((s,r)=>s+r.total,0);
-  tfoot.innerHTML=`<tr><td colspan="5" class="right">TOTAL (${rows.length} invoices)</td><td class="right">₹${fmt(tb)}</td><td class="right">₹${fmt(tt)}</td><td class="right">₹${fmt(tto)}</td><td colspan="2"></td></tr>`;
+  tfoot.innerHTML=`<tr><td colspan="5" class="right">TOTAL (${rows.length})</td><td class="right">₹${fmt(tb)}</td><td class="right">₹${fmt(tt)}</td><td class="right">₹${fmt(tto)}</td><td colspan="2"></td></tr>`;
 }
+window.renderRecords = renderRecords;
 
 // ── ANALYTICS ──
 function renderAnalytics(){
   let year=document.getElementById('a_year').value;
   let rows=year?data.filter(r=>r.date.startsWith(year)):data;
-
-  // Monthly chart
   let mMap={};
   rows.forEach(r=>{
     let key=r.date.slice(0,7);
@@ -585,7 +250,6 @@ function renderAnalytics(){
   });
   let mKeys=Object.keys(mMap).sort();
   let mLabels=mKeys.map(k=>{let p=k.split('-');return MONTHS[parseInt(p[1])-1]+' '+p[0].slice(2)});
-
   let mc=document.getElementById('monthlyChart');
   if(charts.monthly)charts.monthly.destroy();
   charts.monthly=new Chart(mc,{type:'bar',data:{labels:mLabels,datasets:[
@@ -593,199 +257,347 @@ function renderAnalytics(){
     {label:'Tax',data:mKeys.map(k=>mMap[k].tax),backgroundColor:'rgba(234,67,53,0.75)',borderRadius:4}
   ]},options:{responsive:true,scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>fmtShort(v)}}}}});
 
-  // Yearly chart
-  let yMap={};
-  data.forEach(r=>{let y=r.date.slice(0,4);if(!yMap[y])yMap[y]=0;yMap[y]+=r.total});
+  let yMap={};data.forEach(r=>{let y=r.date.slice(0,4);if(!yMap[y])yMap[y]=0;yMap[y]+=r.total});
   let yKeys=Object.keys(yMap).sort();
   let yc=document.getElementById('yearlyChart');
   if(charts.yearly)charts.yearly.destroy();
-  charts.yearly=new Chart(yc,{type:'bar',data:{labels:yKeys,datasets:[{label:'Total Purchase',data:yKeys.map(k=>yMap[k]),backgroundColor:'rgba(52,168,83,0.75)',borderRadius:6}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>fmtShort(v)}}}}});
+  charts.yearly=new Chart(yc,{type:'bar',data:{labels:yKeys,datasets:[{label:'Total',data:yKeys.map(k=>yMap[k]),backgroundColor:'rgba(52,168,83,0.75)',borderRadius:6}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>fmtShort(v)}}}}});
 
-  // Category chart
-  let cMap={};
-  rows.forEach(r=>{let c=r.cat||'Uncategorized';if(!cMap[c])cMap[c]=0;cMap[c]+=r.total});
+  let cMap={};rows.forEach(r=>{let c=r.cat||'Uncategorized';if(!cMap[c])cMap[c]=0;cMap[c]+=r.total});
   let cKeys=Object.keys(cMap);
   let cc=document.getElementById('catChart');
   if(charts.cat)charts.cat.destroy();
-  if(cKeys.length){
-    charts.cat=new Chart(cc,{type:'doughnut',data:{labels:cKeys,datasets:[{data:cKeys.map(k=>cMap[k]),backgroundColor:['#1a73e8','#34a853','#fbbc04','#ea4335','#9c27b0','#00bcd4','#ff5722','#607d8b'],borderWidth:2}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:12}}}}});
-  }
+  if(cKeys.length)charts.cat=new Chart(cc,{type:'doughnut',data:{labels:cKeys,datasets:[{data:cKeys.map(k=>cMap[k]),backgroundColor:['#1a73e8','#34a853','#fbbc04','#ea4335','#9c27b0','#00bcd4','#ff5722','#607d8b'],borderWidth:2}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:12}}}}});
 
-  // Month table
   let mt=document.getElementById('month-table');
-  mt.innerHTML=mKeys.map(k=>{
-    let d=mMap[k];let p=k.split('-');
-    return`<tr><td>${MONTHS_FULL[parseInt(p[1])-1]} ${p[0]}</td><td class="right">${d.count}</td><td class="right">₹${fmt(d.base)}</td><td class="right">₹${fmt(d.tax)}</td><td class="right" style="font-weight:700;color:#1a73e8">₹${fmt(d.total)}</td><td class="right">₹${fmt(d.total/d.count)}</td></tr>`
-  }).join('')||'<tr><td colspan="6" style="text-align:center;color:#aaa">No data</td></tr>';
+  mt.innerHTML=mKeys.map(k=>{let d=mMap[k],p=k.split('-');return`<tr><td>${MONTHS_FULL[parseInt(p[1])-1]} ${p[0]}</td><td class="right">${d.count}</td><td class="right">₹${fmt(d.base)}</td><td class="right">₹${fmt(d.tax)}</td><td class="right fw" style="color:#1a73e8">₹${fmt(d.total)}</td><td class="right">₹${fmt(d.total/d.count)}</td></tr>`}).join('')||'<tr><td colspan="6" style="text-align:center;color:#aaa">No data</td></tr>';
 
-  // Year table
+  let yFull={};data.forEach(r=>{let y=r.date.slice(0,4);if(!yFull[y])yFull[y]={base:0,tax:0,total:0,count:0};yFull[y].base+=r.base;yFull[y].tax+=r.tax;yFull[y].total+=r.total;yFull[y].count++});
   let yt=document.getElementById('year-table');
-  let yFull={};
-  data.forEach(r=>{let y=r.date.slice(0,4);if(!yFull[y])yFull[y]={base:0,tax:0,total:0,count:0};yFull[y].base+=r.base;yFull[y].tax+=r.tax;yFull[y].total+=r.total;yFull[y].count++});
-  yt.innerHTML=Object.keys(yFull).sort().reverse().map(y=>{let d=yFull[y];return`<tr><td>${y}</td><td class="right">${d.count}</td><td class="right">₹${fmt(d.base)}</td><td class="right">₹${fmt(d.tax)}</td><td class="right" style="font-weight:700;color:#1a73e8">₹${fmt(d.total)}</td></tr>`}).join('')||'<tr><td colspan="5" style="text-align:center;color:#aaa">No data</td></tr>';
+  yt.innerHTML=Object.keys(yFull).sort().reverse().map(y=>{let d=yFull[y];return`<tr><td>${y}</td><td class="right">${d.count}</td><td class="right">₹${fmt(d.base)}</td><td class="right">₹${fmt(d.tax)}</td><td class="right fw" style="color:#1a73e8">₹${fmt(d.total)}</td></tr>`}).join('')||'<tr><td colspan="5" style="text-align:center;color:#aaa">No data</td></tr>';
 }
+window.renderAnalytics = renderAnalytics;
 
 // ── VENDORS ──
 function renderVendors(){
-  let year=document.getElementById('v_year').value;
-  let month=document.getElementById('v_month').value;
+  let year=document.getElementById('v_year').value,month=document.getElementById('v_month').value;
   let rows=getFiltered(year,month);
   let vm={};
-  rows.forEach(r=>{
-    if(!vm[r.sup])vm[r.sup]={base:0,tax:0,total:0,count:0};
-    vm[r.sup].base+=r.base;vm[r.sup].tax+=r.tax;vm[r.sup].total+=r.total;vm[r.sup].count++;
-  });
+  rows.forEach(r=>{if(!vm[r.sup])vm[r.sup]={base:0,tax:0,total:0,count:0};vm[r.sup].base+=r.base;vm[r.sup].tax+=r.tax;vm[r.sup].total+=r.total;vm[r.sup].count++});
   let sorted=Object.entries(vm).sort((a,b)=>b[1].total-a[1].total);
-  let grandTotal=rows.reduce((s,r)=>s+r.total,0);
-  let max=sorted[0]?sorted[0][1].total:1;
-
+  let grandTotal=rows.reduce((s,r)=>s+r.total,0),max=sorted[0]?sorted[0][1].total:1;
   let rl=document.getElementById('vendor-rank-list');
   if(!sorted.length){rl.innerHTML='<div style="color:#aaa;text-align:center;padding:20px">No data</div>';return}
   rl.innerHTML=sorted.slice(0,10).map(([name,d],i)=>`
     <div class="vendor-rank">
-      <div class="rank-num ${i===0?'r1':i===1?'r2':i===2?'r3':'rn'}">${i+1}</div>
+      <div class="rank-num ${['r1','r2','r3','rn','rn','rn','rn','rn','rn','rn'][i]}">${i+1}</div>
       <div class="vendor-name">${name}</div>
       <div class="vendor-bar-wrap"><div class="vendor-bar" style="width:${(d.total/max*100).toFixed(0)}%"></div></div>
       <div class="vendor-amt">₹${fmt(d.total)}</div>
     </div>`).join('');
-
-  let vt=document.getElementById('vendor-table');
-  vt.innerHTML=sorted.map(([name,d],i)=>`<tr>
-    <td><span class="rank-num ${i===0?'r1':i===1?'r2':i===2?'r3':'rn'}" style="display:inline-flex">${i+1}</span></td>
-    <td style="font-weight:600">${name}</td>
-    <td class="right">${d.count}</td>
-    <td class="right">₹${fmt(d.base)}</td>
-    <td class="right">₹${fmt(d.tax)}</td>
-    <td class="right" style="font-weight:700;color:#1a73e8">₹${fmt(d.total)}</td>
+  document.getElementById('vendor-table').innerHTML=sorted.map(([name,d],i)=>`<tr>
+    <td>${i+1}</td><td class="fw">${name}</td><td class="right">${d.count}</td>
+    <td class="right">₹${fmt(d.base)}</td><td class="right">₹${fmt(d.tax)}</td>
+    <td class="right fw" style="color:#1a73e8">₹${fmt(d.total)}</td>
     <td class="right">₹${fmt(d.total/d.count)}</td>
     <td class="right">${grandTotal>0?(d.total/grandTotal*100).toFixed(1)+'%':'0%'}</td>
   </tr>`).join('');
 }
+window.renderVendors = renderVendors;
 
 // ── DROPDOWNS ──
-function updateAllDropdowns(){
+function updateDropdowns(){
   let years=[...new Set(data.map(r=>r.date.slice(0,4)))].sort().reverse();
   let vendors=[...new Set(data.map(r=>r.sup))].sort();
   let cats=[...new Set(data.filter(r=>r.cat).map(r=>r.cat))].sort();
-
   ['a_year','v_year','r_year'].forEach(id=>{
-    let el=document.getElementById(id);let cur=el.value;
-    el.innerHTML='<option value="">All Years</option>'+years.map(y=>`<option value="${y}">${y}</option>`).join('');
+    let el=document.getElementById(id),cur=el.value;
+    el.innerHTML='<option value="">All Years</option>'+years.map(y=>`<option>${y}</option>`).join('');
     el.value=cur;
   });
-  let rv=document.getElementById('r_vendor');let cur=rv.value;
-  rv.innerHTML='<option value="">All Vendors</option>'+vendors.map(v=>`<option value="${v}">${v}</option>`).join('');
-  rv.value=cur;
-  let rc=document.getElementById('r_cat');let curc=rc.value;
-  rc.innerHTML='<option value="">All Categories</option>'+cats.map(c=>`<option value="${c}">${c}</option>`).join('');
-  rc.value=curc;
-
-  // Supplier datalist
+  let rv=document.getElementById('r_vendor'),cur=rv.value;
+  rv.innerHTML='<option value="">All Vendors</option>'+vendors.map(v=>`<option>${v}</option>`).join('');rv.value=cur;
+  let rc=document.getElementById('r_cat'),curc=rc.value;
+  rc.innerHTML='<option value="">All Categories</option>'+cats.map(c=>`<option>${c}</option>`).join('');rc.value=curc;
   document.getElementById('supList').innerHTML=vendors.map(v=>`<option value="${v}">`).join('');
 }
 
 // ── EXPORT ──
 function exportCSV(){
   let rows=getFiltered(document.getElementById('r_year').value,document.getElementById('r_month').value,document.getElementById('r_vendor').value,document.getElementById('r_cat').value,document.getElementById('r_search').value);
-  if(!rows.length){toast('⚠️ No data to export');return}
-  let csv='SrNo,InvoiceNo,InvoiceDate,SupplierName,Category,BaseAmount,InvoiceTax,TotalAmount,Notes\n';
+  if(!rows.length){toast('⚠️ No data');return}
+  let csv='SrNo,InvoiceNo,InvoiceDate,SupplierName,Category,BaseAmount,Tax,TotalAmount,Notes\n';
   rows.forEach((r,i)=>{csv+=`${i+1},"${r.inv}","${fmtD(r.date)}","${r.sup}","${r.cat||''}",${r.base},${r.tax},${r.total},"${r.note||''}"\n`});
-  dlCSV(csv,'purchase_report_'+new Date().toISOString().slice(0,10)+'.csv');
+  let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='purchase_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
   toast('✅ CSV exported!');
 }
+window.exportCSV = exportCSV;
 
-function exportMonthCSV(){
-  let now=new Date();
-  let y=now.getFullYear()+'';let m=(now.getMonth()+1+'').padStart(2,'0');
-  let rows=getFiltered(y,m);
-  if(!rows.length){toast('⚠️ No data this month');return}
-  let csv='SrNo,InvoiceNo,InvoiceDate,SupplierName,Category,BaseAmount,InvoiceTax,TotalAmount\n';
-  rows.forEach((r,i)=>{csv+=`${i+1},"${r.inv}","${fmtD(r.date)}","${r.sup}","${r.cat||''}",${r.base},${r.tax},${r.total}\n`});
-  dlCSV(csv,`purchase_${MONTHS[now.getMonth()]}_${y}.csv`);
-  toast('✅ Month CSV exported!');
-}
-
-function exportVendorCSV(){
-  let vm={};
-  data.forEach(r=>{if(!vm[r.sup])vm[r.sup]={base:0,tax:0,total:0,count:0};vm[r.sup].base+=r.base;vm[r.sup].tax+=r.tax;vm[r.sup].total+=r.total;vm[r.sup].count++});
-  let sorted=Object.entries(vm).sort((a,b)=>b[1].total-a[1].total);
-  let csv='Rank,VendorName,Invoices,BaseAmount,Tax,TotalAmount,Avg_Invoice\n';
-  sorted.forEach(([name,d],i)=>{csv+=`${i+1},"${name}",${d.count},${d.base.toFixed(2)},${d.tax.toFixed(2)},${d.total.toFixed(2)},${(d.total/d.count).toFixed(2)}\n`});
-  dlCSV(csv,'vendor_summary.csv');
-  toast('✅ Vendor CSV exported!');
-}
-
-function dlCSV(csv,name){
-  let a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-  a.download=name;a.click();
-}
-
-function backupData(){
-  let json=JSON.stringify({backup:true,date:new Date().toISOString(),data},null,2);
-  let a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([json],{type:'application/json'}));
-  a.download='purchase_backup_'+new Date().toISOString().slice(0,10)+'.json';
-  a.click();toast('💾 Backup downloaded!');
-}
-
-function restoreData(e){
-  let file=e.target.files[0];if(!file)return;
-  let r=new FileReader();
-  r.onload=ev=>{
-    try{
-      let obj=JSON.parse(ev.target.result);
-      if(obj.data&&Array.isArray(obj.data)){
-        if(confirm(`${obj.data.length} entries restore karein? Existing data replace ho jaayega.`)){
-          data=obj.data;save();renderDashboard();toast('✅ Data restored!');
-        }
-      }else toast('⚠️ Invalid backup file');
-    }catch(err){toast('⚠️ File read error')}
-  };r.readAsText(file);e.target.value='';
-}
-
+// ── CSV IMPORT ──
 function handleCSV(e){
   Array.from(e.target.files).forEach(file=>{
     let reader=new FileReader();
-    reader.onload=ev=>{
+    reader.onload=async ev=>{
       let lines=ev.target.result.split('\n').filter(l=>l.trim());
       let headers=lines[0].split(',').map(h=>h.trim().toLowerCase().replace(/"/g,''));
       let gi=names=>{for(let n of names){let i=headers.indexOf(n);if(i>-1)return i}return -1};
-      let iI=gi(['invoiceno','invoice no','invoice_no']);
-      let iD=gi(['invoicedate','invoice date','date']);
-      let iS=gi(['suppliername','supplier name','supplier']);
-      let iB=gi(['invoicetotalamount','baseamount','base amount','amount']);
-      let iT=gi(['invoicetax','tax']);
-      let iTo=gi(['totalamount','total amount','total']);
+      let iI=gi(['invoiceno','invoice no']),iD=gi(['invoicedate','invoice date','date']),iS=gi(['suppliername','supplier name','supplier']),iB=gi(['invoicetotalamount','baseamount','base amount','amount']),iT=gi(['invoicetax','tax']),iTo=gi(['totalamount','total amount','total']);
       let added=0;
       for(let i=1;i<lines.length;i++){
         let c=lines[i].split(',').map(x=>x.trim().replace(/"/g,''));
         if(c.length<3)continue;
-        let inv=iI>-1?c[iI]:'INV-'+i;
-        let date=toISO(iD>-1?c[iD]:'');
-        let sup=(iS>-1?c[iS]:'Unknown').toUpperCase();
-        let base=parseFloat(iB>-1?c[iB]:0)||0;
-        let tax=parseFloat(iT>-1?c[iT]:0)||0;
-        let total=parseFloat(iTo>-1?c[iTo]:0)||(base+tax);
+        let base=parseFloat(iB>-1?c[iB]:0)||0,tax=parseFloat(iT>-1?c[iT]:0)||0,total=parseFloat(iTo>-1?c[iTo]:0)||(base+tax);
         if(!base&&!total)continue;
-        data.push({inv,date,sup,cat:'',base,tax,total,note:'',id:Date.now()+i});
+        await addDoc(collection(db,'purchases'),{inv:iI>-1?c[iI]:'INV-'+i,date:toISO(iD>-1?c[iD]:''),sup:(iS>-1?c[iS]:'Unknown').toUpperCase(),cat:'',base,tax,total,note:'',ts:Date.now()+i});
         added++;
       }
-      save();renderDashboard();toast(`✅ ${added} entries imported from ${file.name}`);
+      toast(`✅ ${added} entries imported!`);
     };reader.readAsText(file);
   });e.target.value='';
 }
-
-function clearAll(){
-  if(confirm('Sab data permanently delete kar dein?\n\nPehle Import/Export tab se backup le lein!')){
-    data=[];save();renderDashboard();renderRecords();toast('🗑️ All data cleared');
-  }
-}
+window.handleCSV = handleCSV;
 
 // ── INIT ──
-document.getElementById('f_date').valueAsDate=new Date();
-updateAllDropdowns();
-renderDashboard();
+function initUI(){
+  // Hide admin tabs in view mode
+  if(viewMode){
+    document.getElementById('tab-entry').style.display='none';
+    document.getElementById('tab-import').style.display='none';
+    document.getElementById('share-btn').style.display='none';
+    document.getElementById('view-banner').style.display='flex';
+  }
+  document.getElementById('f_date').valueAsDate=new Date();
+  startListener();
+}
+
+document.addEventListener('DOMContentLoaded', initUI);
 </script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#f0f4f8;color:#333}
+header{background:linear-gradient(135deg,#1a73e8,#0d47a1);color:white;padding:14px 20px;display:flex;align-items:center;gap:10px}
+header h1{font-size:1.2rem}
+header .sub{font-size:0.72rem;opacity:0.8;margin-top:2px}
+header .credit{margin-left:auto;text-align:right;font-size:0.75rem;opacity:0.85}
+header .credit b{font-size:0.95rem;display:block}
+#status{font-size:0.72rem;background:rgba(255,255,255,0.15);padding:3px 8px;border-radius:10px;margin-top:4px}
+.tabs{display:flex;background:#fff;border-bottom:2px solid #e0e0e0;overflow-x:auto}
+.tab{padding:11px 16px;cursor:pointer;font-size:0.85rem;font-weight:600;color:#666;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s}
+.tab.active{color:#1a73e8;border-bottom-color:#1a73e8;background:#f0f6ff}
+.tab:hover{background:#f5f5f5}
+.container{max-width:1200px;margin:18px auto;padding:0 12px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:16px;margin-bottom:16px}
+.card-title{font-size:0.92rem;font-weight:700;color:#444;margin-bottom:12px;padding-bottom:7px;border-bottom:2px solid #e8f0fe;display:flex;align-items:center;gap:6px}
+.sum-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.sum-box{border-radius:10px;padding:13px;text-align:center}
+.sum-box .val{font-size:1.2rem;font-weight:700}
+.sum-box .lbl{font-size:0.7rem;margin-top:2px;opacity:0.8}
+.sb1{background:linear-gradient(135deg,#e8f0fe,#c2d4fb);color:#1a56c9}
+.sb2{background:linear-gradient(135deg,#fce8e6,#fbc5c1);color:#c5221f}
+.sb3{background:linear-gradient(135deg,#e6f4ea,#c6e8cc);color:#1e7e34}
+.sb4{background:linear-gradient(135deg,#fff3e0,#ffe0b2);color:#e65100}
+.sb5{background:linear-gradient(135deg,#f3e8fd,#e1bee7);color:#7b1fa2}
+.form-row{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:9px}
+.fg{flex:1;min-width:130px}
+label{font-size:0.76rem;color:#666;display:block;margin-bottom:3px}
+input,select{width:100%;padding:7px 9px;border:1px solid #ddd;border-radius:6px;font-size:0.86rem;outline:none;transition:border 0.2s}
+input:focus,select:focus{border-color:#1a73e8}
+.btn{padding:8px 16px;border:none;border-radius:6px;cursor:pointer;font-size:0.83rem;font-weight:600;transition:opacity 0.2s}
+.btn:hover{opacity:0.85}
+.bp{background:#1a73e8;color:#fff}.bs{background:#34a853;color:#fff}
+.bw{background:#fbbc04;color:#333}.bd{background:#ea4335;color:#fff}
+.bshare{background:#00897b;color:#fff}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:0.82rem}
+thead{background:#1a73e8;color:#fff}
+th{padding:8px 9px;text-align:left;white-space:nowrap}
+td{padding:7px 9px;border-bottom:1px solid #eee}
+tbody tr:nth-child(even){background:#f8f9ff}
+tbody tr:hover{background:#e8f0fe}
+tfoot td{background:#e8f0fe;font-weight:700;padding:8px 9px}
+.right{text-align:right}.fw{font-weight:700}
+.chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:14px}
+.chart-box{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.07);padding:14px}
+.chart-box h3{font-size:0.85rem;color:#555;margin-bottom:10px;font-weight:700}
+canvas{max-height:250px}
+.vendor-rank{display:flex;align-items:center;gap:10px;padding:9px 10px;border-bottom:1px solid #f0f0f0}
+.vendor-rank:last-child{border:none}
+.rank-num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75rem;flex-shrink:0}
+.r1{background:#ffd700;color:#333}.r2{background:#c0c0c0;color:#333}.r3{background:#cd7f32;color:#fff}.rn{background:#e8f0fe;color:#1a73e8}
+.vendor-name{flex:1;font-size:0.85rem;font-weight:600}
+.vendor-bar-wrap{width:100px;height:7px;background:#eee;border-radius:4px;overflow:hidden}
+.vendor-bar{height:100%;background:#1a73e8;border-radius:4px}
+.vendor-amt{font-size:0.82rem;font-weight:700;color:#1a73e8;min-width:80px;text-align:right}
+.badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:0.7rem;font-weight:600}
+.bb{background:#cce5ff;color:#004085}.bg{background:#d4edda;color:#155724}
+.filter-bar{display:flex;flex-wrap:wrap;gap:9px;align-items:flex-end;margin-bottom:12px}
+.page{display:none}.page.active{display:block}
+#toast{position:fixed;bottom:18px;right:18px;background:#222;color:#fff;padding:10px 16px;border-radius:8px;font-size:0.82rem;display:none;z-index:999;box-shadow:0 4px 12px rgba(0,0,0,0.25)}
+#view-banner{display:none;background:#e8f5e9;border:1px solid #34a853;border-radius:8px;padding:10px 14px;margin-bottom:14px;align-items:center;gap:8px;font-size:0.85rem;color:#1b5e20}
+.upload-area{border:2px dashed #1a73e8;border-radius:10px;padding:22px;text-align:center;cursor:pointer;transition:background 0.2s}
+.upload-area:hover{background:#e8f0fe}
+.upload-area input{display:none}
+@media(max-width:600px){.sum-box .val{font-size:1rem}th,td{padding:5px 7px;font-size:0.76rem}}
+@media print{header~.tabs,.btn-row,.btn,#toast{display:none!important}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <span style="font-size:1.7rem">📊</span>
+  <div>
+    <h1>Purchase Report Tool</h1>
+    <div class="sub">Live Firebase · Analytics · Vendor Insights</div>
+    <div id="status">🔄 Connecting...</div>
+  </div>
+  <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+    <button class="btn bshare" id="share-btn" onclick="copyShareLink()" style="font-size:0.78rem;padding:6px 12px">🔗 Copy View Link</button>
+    <div class="credit"><span style="opacity:0.7;font-size:0.7rem">Created by</span><b>Manohar Singh</b></div>
+  </div>
+</header>
+
+<div class="tabs">
+  <div class="tab active" onclick="showPage('dashboard',this)">🏠 Dashboard</div>
+  <div class="tab" id="tab-entry" onclick="showPage('entry',this)">➕ Add Entry</div>
+  <div class="tab" onclick="showPage('records',this)">📋 Records</div>
+  <div class="tab" onclick="showPage('analytics',this)">📈 Analytics</div>
+  <div class="tab" onclick="showPage('vendors',this)">🏪 Vendors</div>
+  <div class="tab" id="tab-import" onclick="showPage('import',this)">📁 Import/Export</div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="page active" id="pg-dashboard"><div class="container">
+  <div id="view-banner">👁️ <b>View-Only Mode</b> — You can see all data but cannot add or edit entries.</div>
+  <div class="card"><div class="card-title">📈 Overall Summary</div>
+    <div class="sum-grid">
+      <div class="sum-box sb1"><div class="val" id="d-total">₹0</div><div class="lbl">Total Purchase</div></div>
+      <div class="sum-box sb2"><div class="val" id="d-tax">₹0</div><div class="lbl">Total Tax</div></div>
+      <div class="sum-box sb3"><div class="val" id="d-base">₹0</div><div class="lbl">Base Amount</div></div>
+      <div class="sum-box sb4"><div class="val" id="d-count">0</div><div class="lbl">Total Invoices</div></div>
+      <div class="sum-box sb5"><div class="val" id="d-vendors">0</div><div class="lbl">Unique Vendors</div></div>
+    </div>
+  </div>
+  <div class="card"><div class="card-title">📅 This Month <span id="cur-month-label" style="margin-left:auto;font-size:0.78rem;color:#888"></span></div>
+    <div class="sum-grid">
+      <div class="sum-box sb1"><div class="val" id="m-total">₹0</div><div class="lbl">Month Purchase</div></div>
+      <div class="sum-box sb2"><div class="val" id="m-tax">₹0</div><div class="lbl">Month Tax</div></div>
+      <div class="sum-box sb4"><div class="val" id="m-count">0</div><div class="lbl">Invoices</div></div>
+      <div class="sum-box sb5"><div class="val" id="m-vendors">0</div><div class="lbl">Vendors</div></div>
+    </div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box"><h3>📊 Last 6 Months Trend</h3><canvas id="trendChart"></canvas></div>
+    <div class="chart-box"><h3>🏪 Top 5 Vendors</h3><canvas id="vendorPieChart"></canvas></div>
+  </div>
+  <div class="card"><div class="card-title">🏆 Top Vendors This Month</div><div id="dash-top-vendors"></div></div>
+  <div class="card"><div class="card-title">⚡ Recent Entries</div><div id="recent-entries"></div></div>
+</div></div>
+
+<!-- ADD ENTRY -->
+<div class="page" id="pg-entry"><div class="container">
+  <div class="card"><div class="card-title">✏️ Add New Purchase Invoice</div>
+    <div class="form-row">
+      <div class="fg"><label>Invoice No *</label><input type="text" id="f_inv" placeholder="e.g. A000098"></div>
+      <div class="fg"><label>Invoice Date *</label><input type="date" id="f_date"></div>
+      <div class="fg" style="flex:2"><label>Supplier Name *</label><input type="text" id="f_sup" list="supList" placeholder="Type supplier name"><datalist id="supList"></datalist></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Category</label>
+        <select id="f_cat"><option value="">-- Select --</option><option>Dairy & Paneer</option><option>Bakery</option><option>Grocery</option><option>Beverages</option><option>Packaging</option><option>Electronics</option><option>Stationery</option><option>Other</option></select>
+      </div>
+      <div class="fg"><label>Base Amount (₹) *</label><input type="number" id="f_base" placeholder="0.00" oninput="calcTotal()"></div>
+      <div class="fg"><label>Tax Amount (₹)</label><input type="number" id="f_tax" placeholder="0.00" value="0" oninput="calcTotal()"></div>
+      <div class="fg"><label>Total (₹)</label><input type="number" id="f_total" placeholder="Auto" style="background:#f5f5f5"></div>
+    </div>
+    <div class="form-row">
+      <div class="fg" style="flex:3"><label>Notes</label><input type="text" id="f_note" placeholder="Any remarks..."></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn bp" id="addBtn" onclick="addEntry()">➕ Add Invoice</button>
+      <button class="btn bw" onclick="clearForm()">🔄 Clear</button>
+    </div>
+  </div>
+</div></div>
+
+<!-- RECORDS -->
+<div class="page" id="pg-records"><div class="container">
+  <div class="card"><div class="card-title">🔍 Filter</div>
+    <div class="filter-bar">
+      <div class="fg"><label>Year</label><select id="r_year" onchange="renderRecords()"><option value="">All Years</option></select></div>
+      <div class="fg"><label>Month</label><select id="r_month" onchange="renderRecords()"><option value="">All Months</option><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
+      <div class="fg"><label>Vendor</label><select id="r_vendor" onchange="renderRecords()"><option value="">All Vendors</option></select></div>
+      <div class="fg"><label>Category</label><select id="r_cat" onchange="renderRecords()"><option value="">All Categories</option></select></div>
+      <div class="fg" style="flex:2"><label>Search</label><input type="text" id="r_search" placeholder="Invoice / Supplier..." oninput="renderRecords()"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn bs" onclick="exportCSV()">⬇️ Export CSV</button>
+      <button class="btn bp" onclick="window.print()">🖨️ Print</button>
+    </div>
+  </div>
+  <div class="card"><div class="card-title">📋 Records <span id="rec-count" style="color:#1a73e8;font-size:0.8rem;margin-left:6px"></span></div>
+    <div class="tw"><table><thead><tr><th>#</th><th>Invoice</th><th>Date</th><th>Supplier</th><th>Cat</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th>Notes</th><th></th></tr></thead>
+    <tbody id="rec-body"></tbody><tfoot id="rec-foot"></tfoot></table></div>
+  </div>
+</div></div>
+
+<!-- ANALYTICS -->
+<div class="page" id="pg-analytics"><div class="container">
+  <div class="card"><div class="card-title">📅 Filter Year</div>
+    <div class="filter-bar"><div class="fg"><label>Year</label><select id="a_year" onchange="renderAnalytics()"><option value="">All Years</option></select></div></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box" style="grid-column:1/-1"><h3>📊 Monthly Purchase — Base vs Tax</h3><canvas id="monthlyChart" style="max-height:280px"></canvas></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box"><h3>📆 Yearly Comparison</h3><canvas id="yearlyChart"></canvas></div>
+    <div class="chart-box"><h3>🏷️ Category-wise Spend</h3><canvas id="catChart"></canvas></div>
+  </div>
+  <div class="card"><div class="card-title">📅 Month-wise Table</div>
+    <div class="tw"><table><thead><tr><th>Month</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th class="right">Avg/Invoice</th></tr></thead><tbody id="month-table"></tbody></table></div>
+  </div>
+  <div class="card"><div class="card-title">📆 Year-wise Table</div>
+    <div class="tw"><table><thead><tr><th>Year</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th></tr></thead><tbody id="year-table"></tbody></table></div>
+  </div>
+</div></div>
+
+<!-- VENDORS -->
+<div class="page" id="pg-vendors"><div class="container">
+  <div class="card"><div class="card-title">🔍 Filter Period</div>
+    <div class="filter-bar">
+      <div class="fg"><label>Year</label><select id="v_year" onchange="renderVendors()"><option value="">All Years</option></select></div>
+      <div class="fg"><label>Month</label><select id="v_month" onchange="renderVendors()"><option value="">All Months</option><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
+    </div>
+  </div>
+  <div class="card"><div class="card-title">🏆 Vendor Ranking</div><div id="vendor-rank-list"></div></div>
+  <div class="card"><div class="card-title">📋 Vendor Detail Table</div>
+    <div class="tw"><table><thead><tr><th>Rank</th><th>Vendor</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th class="right">Avg</th><th class="right">% Share</th></tr></thead><tbody id="vendor-table"></tbody></table></div>
+  </div>
+</div></div>
+
+<!-- IMPORT/EXPORT -->
+<div class="page" id="pg-import"><div class="container">
+  <div class="card"><div class="card-title">📁 Import CSV</div>
+    <div class="upload-area" onclick="document.getElementById('csvFile').click()">
+      <input type="file" id="csvFile" accept=".csv" multiple onchange="handleCSV(event)">
+      <div style="font-size:2rem">📂</div>
+      <p style="margin-top:6px;color:#555">Click to upload CSV</p>
+      <p style="font-size:0.73rem;color:#999;margin-top:3px">Columns: InvoiceNo, InvoiceDate, SupplierName, InvoiceTotalAmount, InvoiceTax, TotalAmount</p>
+      <div class="btn bp" style="display:inline-block;margin-top:8px">Choose File</div>
+    </div>
+  </div>
+  <div class="card"><div class="card-title">⬇️ Export</div>
+    <div class="btn-row">
+      <button class="btn bs" onclick="exportCSV()">📄 Export CSV</button>
+      <button class="btn bp" onclick="window.print()">🖨️ Print Report</button>
+    </div>
+  </div>
+  <div class="card"><div class="card-title">🔗 Share View Link</div>
+    <p style="font-size:0.85rem;color:#555;margin-bottom:10px">Yeh link share karo — jo bhi open karega sirf <b>view</b> kar sakega, koi entry add/delete nahi kar sakega.</p>
+    <button class="btn bshare" onclick="copyShareLink()">🔗 Copy View-Only Link</button>
+  </div>
+</div></div>
+
+<div id="toast"></div>
 </body>
 </html>

@@ -338,20 +338,42 @@ function handleCSV(e){
   Array.from(e.target.files).forEach(file=>{
     let reader=new FileReader();
     reader.onload=async ev=>{
+      function parseCSVLine(line){
+        let result=[],cur='',inQ=false;
+        for(let ch of line){
+          if(ch==='"'){inQ=!inQ}
+          else if(ch===','&&!inQ){result.push(cur.trim());cur=''}
+          else{cur+=ch}
+        }
+        result.push(cur.trim());
+        return result;
+      }
       let lines=ev.target.result.split('\n').filter(l=>l.trim());
-      let headers=lines[0].split(',').map(h=>h.trim().toLowerCase().replace(/"/g,''));
+      let headers=parseCSVLine(lines[0]).map(h=>h.toLowerCase());
       let gi=names=>{for(let n of names){let i=headers.indexOf(n);if(i>-1)return i}return -1};
-      let iI=gi(['invoiceno','invoice no']),iD=gi(['invoicedate','invoice date','date']),iS=gi(['suppliername','supplier name','supplier']),iB=gi(['invoicetotalamount','baseamount','base amount','amount']),iT=gi(['invoicetax','tax']),iTo=gi(['totalamount','total amount','total']);
+      let iI=gi(['invoiceno','invoice no']),
+          iD=gi(['invoicedate','invoice date','date']),
+          iS=gi(['suppliername','supplier name','supplier']),
+          iB=gi(['baseamount','base amount','invoicetotalamount','amount']),
+          iT=gi(['invoicetax','tax']),
+          iTo=gi(['totalamount','total amount','total']),
+          iC=gi(['category','cat']);
       let added=0;
       for(let i=1;i<lines.length;i++){
-        let c=lines[i].split(',').map(x=>x.trim().replace(/"/g,''));
+        let c=parseCSVLine(lines[i]);
         if(c.length<3)continue;
         let base=parseFloat(iB>-1?c[iB]:0)||0,tax=parseFloat(iT>-1?c[iT]:0)||0,total=parseFloat(iTo>-1?c[iTo]:0)||(base+tax);
         if(!base&&!total)continue;
-        await addDoc(collection(db,'purchases'),{inv:iI>-1?c[iI]:'INV-'+i,date:toISO(iD>-1?c[iD]:''),sup:(iS>-1?c[iS]:'Unknown').toUpperCase(),cat:'',base,tax,total,note:'',ts:Date.now()+i});
+        await addDoc(collection(db,'purchases'),{
+          inv:iI>-1?c[iI]:'INV-'+i,
+          date:toISO(iD>-1?c[iD]:''),
+          sup:(iS>-1?c[iS]:'Unknown').toUpperCase(),
+          cat:iC>-1?c[iC]:'',
+          base,tax,total,note:'',ts:Date.now()+i
+        });
         added++;
       }
-      toast(`✅ ${added} entries imported!`);
+      toast('✅ '+added+' entries imported to Firebase!');
     };reader.readAsText(file);
   });e.target.value='';
 }

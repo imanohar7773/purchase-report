@@ -16,27 +16,22 @@ body{font-family:'Segoe UI',sans-serif;background:#f0f4f8;color:#333;font-size:1
 #status{background:rgba(255,255,255,0.15);padding:2px 9px;border-radius:10px}
 .credit{margin-left:auto;text-align:right;font-size:0.7rem}
 .credit b{font-size:0.85rem;display:block}
-
-/* SECTION TABS */
 .section-tabs{display:flex;background:#1a237e;overflow-x:auto}
 .stab{padding:9px 18px;cursor:pointer;font-size:0.8rem;font-weight:700;color:rgba(255,255,255,0.65);border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.15s;letter-spacing:0.3px}
 .stab.active{color:#fff;border-bottom-color:#64b5f6;background:rgba(255,255,255,0.1)}
 .stab:hover:not(.active){color:#fff;background:rgba(255,255,255,0.07)}
-
-/* PAGE TABS */
 .tabs{display:flex;background:#fff;border-bottom:2px solid #e0e7ff;overflow-x:auto;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
 .tab{padding:9px 13px;cursor:pointer;font-size:0.76rem;font-weight:600;color:#666;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.15s}
 .tab.active{color:#1565c0;border-bottom-color:#1565c0;background:#eff3ff}
 .tab:hover:not(.active){background:#f5f5f5}
 .inv-tab.active{color:#2e7d32;border-bottom-color:#2e7d32;background:#f1f8f3}
-
+.groc-tab.active{color:#e65100;border-bottom-color:#e65100;background:#fff3e0}
 .container{max-width:1300px;margin:14px auto;padding:0 11px}
 .card{background:#fff;border-radius:11px;box-shadow:0 1px 8px rgba(0,0,0,0.08);padding:15px;margin-bottom:13px}
 .card-title{font-size:0.87rem;font-weight:700;color:#333;margin-bottom:11px;padding-bottom:7px;border-bottom:2px solid #e8f0fe;display:flex;align-items:center;gap:5px}
 .inv .card-title{border-bottom-color:#e0f2e9}
+.groc .card-title{border-bottom-color:#fff3e0}
 .ct-right{margin-left:auto;font-size:0.72rem;color:#888;font-weight:400}
-
-/* KPI */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:9px;margin-bottom:13px}
 .kpi{border-radius:9px;padding:13px 11px;position:relative;overflow:hidden}
 .kpi-val{font-size:1.2rem;font-weight:800;margin-bottom:2px}
@@ -54,15 +49,16 @@ body{font-family:'Segoe UI',sans-serif;background:#f0f4f8;color:#333;font-size:1
 .kg2{background:linear-gradient(135deg,#e3f2fd,#bbdefb);color:#0d47a1}
 .kg3{background:linear-gradient(135deg,#fff3e0,#ffe0b2);color:#e65100}
 .kg4{background:linear-gradient(135deg,#f3e5f5,#e1bee7);color:#6a1b9a}
-
-/* CHARTS */
+.ko1{background:linear-gradient(135deg,#fff3e0,#ffe0b2);color:#e65100}
+.ko2{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);color:#1b5e20}
+.ko3{background:linear-gradient(135deg,#fce8e6,#f9c8c5);color:#b71c1c}
+.ko4{background:linear-gradient(135deg,#fef9c3,#fde68a);color:#854d0e}
+.ko5{background:linear-gradient(135deg,#f3e5f5,#e1bee7);color:#6a1b9a}
 .chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:11px;margin-bottom:13px}
 .chart-box{background:#fff;border-radius:11px;box-shadow:0 1px 8px rgba(0,0,0,0.08);padding:13px}
 .chart-box h3{font-size:0.8rem;font-weight:700;color:#444;margin-bottom:9px}
 .chart-full{grid-column:1/-1}
 canvas{max-height:230px}
-
-/* HEATMAP */
 .hm-row{display:flex;gap:3px;align-items:center}
 .hm-label{width:26px;font-size:0.62rem;color:#888;text-align:right;padding-right:3px;flex-shrink:0}
 .hm-cell{width:13px;height:13px;border-radius:2px;cursor:pointer;transition:transform 0.1s;flex-shrink:0}
@@ -71,8 +67,6 @@ canvas{max-height:230px}
 .hm-mon{font-size:0.6rem;color:#888;flex-shrink:0}
 .hm-legend{display:flex;align-items:center;gap:5px;margin-top:7px;font-size:0.68rem;color:#888}
 .hm-lbox{width:11px;height:11px;border-radius:2px}
-
-/* VENDOR */
 .vrank{display:flex;align-items:center;gap:8px;padding:8px 9px;border-bottom:1px solid #f0f0f0}
 .vrank:last-child{border:none}
 .rnum{width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.68rem;flex-shrink:0}
@@ -81,79 +75,109 @@ canvas{max-height:230px}
 .vbar-wrap{width:85px;height:6px;background:#eee;border-radius:3px;overflow:hidden}
 .vbar{height:100%;background:linear-gradient(90deg,#1565c0,#42a5f5);border-radius:3px}
 .vbar-g{background:linear-gradient(90deg,#2e7d32,#66bb6a)}
+.vbar-o{background:linear-gradient(90deg,#e65100,#ff9800)}
 .vamt{font-size:0.78rem;font-weight:700;color:#1565c0;min-width:72px;text-align:right}
-
-/* TABLE */
 .tw{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:0.77rem}
 thead{background:linear-gradient(90deg,#1565c0,#1976d2);color:#fff}
 .inv thead{background:linear-gradient(90deg,#2e7d32,#388e3c)}
+.groc thead{background:linear-gradient(90deg,#e65100,#f57c00)}
 th{padding:7px 9px;text-align:left;white-space:nowrap;font-weight:600}
 td{padding:6px 9px;border-bottom:1px solid #eee;vertical-align:middle}
 tbody tr:nth-child(even){background:#f8f9ff}
 .inv tbody tr:nth-child(even){background:#f8fff8}
+.groc tbody tr:nth-child(even){background:#fff8f3}
 tbody tr:hover{background:#e8f0fe}
 .inv tbody tr:hover{background:#e8f5e9}
+.groc tbody tr:hover{background:#fff3e0}
 tfoot td{background:#e8f0fe;font-weight:700;padding:7px 9px}
 .inv tfoot td{background:#e8f5e9}
 .right{text-align:right}.center{text-align:center}.fw{font-weight:700}
-
-/* FORM */
 .form-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
 .fg{flex:1;min-width:115px}
 label{font-size:0.7rem;color:#555;display:block;margin-bottom:3px;font-weight:600}
 input,select{width:100%;padding:6px 8px;border:1.5px solid #ddd;border-radius:6px;font-size:0.8rem;outline:none;transition:border 0.2s}
-input:focus,select:focus{border-color:#1565c0;box-shadow:0 0 0 2px rgba(21,101,192,0.1)}
-.inv input:focus,.inv select:focus{border-color:#2e7d32;box-shadow:0 0 0 2px rgba(46,125,50,0.1)}
+input:focus,select:focus{border-color:#1565c0}
+.inv input:focus,.inv select:focus{border-color:#2e7d32}
+.groc input:focus,.groc select:focus{border-color:#e65100}
 .btn{padding:6px 14px;border:none;border-radius:6px;cursor:pointer;font-size:0.76rem;font-weight:700;transition:all 0.2s}
 .btn:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,0.15)}
 .bp{background:#1565c0;color:#fff}.bs{background:#2e7d32;color:#fff}
 .bw{background:#f9a825;color:#333}.bd{background:#c62828;color:#fff}
 .bshare{background:#00695c;color:#fff}.bo{background:#e65100;color:#fff}
+.bwa{background:#25D366;color:#fff}
 .btn-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
-
-/* BADGE */
 .badge{display:inline-block;padding:2px 6px;border-radius:7px;font-size:0.68rem;font-weight:700}
 .bb{background:#dbeafe;color:#1e40af}.bg{background:#dcfce7;color:#166534}
 .by{background:#fef9c3;color:#854d0e}.br{background:#fee2e2;color:#991b1b}
-.bgr{background:#f3e8ff;color:#6b21a8}
-
-/* FILTER */
+.bgr{background:#f3e8ff;color:#6b21a8}.bo2{background:#fff3e0;color:#e65100}
 .filter-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;margin-bottom:11px}
 .filter-bar .fg{min-width:105px}
-
-/* INV SPECIFIC */
 .qty-input{width:65px;padding:4px 5px;border:1.5px solid #ddd;border-radius:4px;font-size:0.78rem;text-align:center}
 .qty-input:focus{border-color:#2e7d32;outline:none}
-.diff-plus{color:#2e7d32;font-weight:700}
-.diff-minus{color:#c62828;font-weight:700}
-.diff-zero{color:#888}
+.diff-plus{color:#2e7d32;font-weight:700}.diff-minus{color:#c62828;font-weight:700}.diff-zero{color:#888}
 .status-dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:3px}
 .dot-ok{background:#2e7d32}.dot-warn{background:#f9a825}.dot-bad{background:#c62828}
 .month-header{background:#e8f5e9;padding:9px 12px;border-radius:7px;margin-bottom:9px;display:flex;align-items:center;justify-content:space-between}
 .hc-card{background:#f8fff8;border:1px solid #c8e6c9;border-radius:9px;padding:11px;margin-bottom:9px}
-
-/* UPLOAD */
 .upload-area{border:2px dashed #1565c0;border-radius:9px;padding:18px;text-align:center;cursor:pointer;transition:background 0.2s}
 .upload-area:hover{background:#e8f0fe}
 .upload-area input{display:none}
-.inv .upload-area{border-color:#2e7d32}
-.inv .upload-area:hover{background:#e8f5e9}
-
-/* GROWTH */
+.inv .upload-area{border-color:#2e7d32}.inv .upload-area:hover{background:#e8f5e9}
+.groc .upload-area{border-color:#e65100}.groc .upload-area:hover{background:#fff3e0}
 .growth-card{background:#fff;border-radius:9px;padding:11px;box-shadow:0 1px 6px rgba(0,0,0,0.07);text-align:center}
 .growth-val{font-size:1.4rem;font-weight:800}
-
-/* SECTIONS */
 .section{display:none}.section.active{display:block}
 .page{display:none}.page.active{display:block}
 #view-banner{display:none;background:#e8f5e9;border:1.5px solid #43a047;border-radius:7px;padding:9px 13px;margin-bottom:11px;align-items:center;gap:7px;font-size:0.8rem;color:#1b5e20}
 
+/* GROCERY STOCK specific */
+.tl-wrap{display:flex;align-items:center;gap:5px}
+.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.tl-red{background:#e74c3c;box-shadow:0 0 4px #e74c3c80}
+.tl-yellow{background:#f39c12;box-shadow:0 0 4px #f39c1280}
+.tl-green{background:#27ae60;box-shadow:0 0 4px #27ae6080}
+.sbar-wrap{display:flex;align-items:center;gap:6px}
+.sbar{height:5px;border-radius:3px;background:#eee;width:50px}
+.sbar-fill{height:100%;border-radius:3px}
+.days-chip{display:inline-block;padding:2px 7px;border-radius:12px;font-size:0.68rem;font-weight:600}
+.dc-red{background:#fce4e4;color:#c0392b}
+.dc-orange{background:#fef3cd;color:#d35400}
+.dc-green{background:#d5f5e3;color:#1e8449}
+.g-cat-row td{background:#fff3e0;color:#e65100;font-weight:700;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.6px;padding:5px 9px;border-top:2px solid #ffd9b3}
+.editable{cursor:pointer;padding:2px 5px;border-radius:4px}
+.editable:hover{background:#fff3e0;outline:1px dashed #e65100}
+
+/* SETTINGS MODAL */
+.settings-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:1000;align-items:center;justify-content:center}
+.settings-overlay.open{display:flex}
+.settings-modal{background:#fff;border-radius:14px;width:440px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,0.25)}
+.sm-header{background:linear-gradient(135deg,#0d47a1,#1565c0);color:#fff;padding:14px 18px;border-radius:14px 14px 0 0;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:2}
+.sm-header h2{font-size:1rem;font-weight:700}
+.sm-close{background:rgba(255,255,255,0.2);border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:1rem}
+.sm-body{padding:16px}
+.sm-section{margin-bottom:16px}
+.sm-section-title{font-size:0.72rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #eee}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;margin-bottom:5px;background:#f8f9ff;border:1px solid #e8f0fe;transition:background 0.15s}
+.toggle-row:hover{background:#e8f0fe}
+.toggle-label{font-size:0.82rem;font-weight:600;color:#333;display:flex;align-items:center;gap:7px}
+.toggle-switch{position:relative;width:42px;height:22px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0;position:absolute}
+.toggle-slider{position:absolute;inset:0;background:#ccc;border-radius:22px;cursor:pointer;transition:background 0.2s}
+.toggle-slider::before{content:'';position:absolute;width:16px;height:16px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2)}
+.toggle-switch input:checked+.toggle-slider{background:#1565c0}
+.toggle-switch input:checked+.toggle-slider::before{transform:translateX(20px)}
+.sm-save-btn{width:100%;padding:10px;background:#1565c0;color:#fff;border:none;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;margin-top:8px}
+.sm-save-btn:hover{background:#0d47a1}
+.settings-btn{background:rgba(255,255,255,0.18);border:none;color:#fff;padding:5px 11px;border-radius:7px;cursor:pointer;font-size:0.76rem;font-weight:700}
+.settings-btn:hover{background:rgba(255,255,255,0.3)}
+
+/* TOAST / TOOLTIP */
 #toast{position:fixed;bottom:15px;right:15px;background:#1a1a2e;color:#fff;padding:9px 15px;border-radius:8px;font-size:0.76rem;display:none;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.3);max-width:270px}
 .tooltip{position:fixed;background:#333;color:#fff;padding:5px 9px;border-radius:5px;font-size:0.7rem;pointer-events:none;z-index:9998;display:none}
 
 @media(max-width:600px){.kpi-val{font-size:1rem}th,td{padding:5px 6px;font-size:0.7rem}.tab,.stab{padding:7px 10px;font-size:0.72rem}}
-@media print{.section-tabs,.tabs,.btn-row,.btn,#toast,.app-header .header-bottom{display:none!important}.card{box-shadow:none;break-inside:avoid}body{background:#fff}}
+@media print{.section-tabs,.tabs,.btn-row,.btn,#toast,.app-header .header-bottom,.settings-btn{display:none!important}.card{box-shadow:none;break-inside:avoid}body{background:#fff}}
 </style>
 </head>
 <body>
@@ -163,10 +187,13 @@ input:focus,select:focus{border-color:#1565c0;box-shadow:0 0 0 2px rgba(21,101,1
     <span style="font-size:1.7rem">📊</span>
     <div>
       <h1>Purchase MIS + Store Inventory</h1>
-      <div class="sub">Annual Performance Dashboard · Fixed Asset Tracker</div>
+      <div class="sub">Annual Performance Dashboard · Ginger Jaipur Ajmer Road</div>
     </div>
     <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:5px">
-      <button class="btn bshare" id="share-btn" onclick="copyShareLink()" style="font-size:0.7rem;padding:4px 10px">🔗 Share View Link</button>
+      <div style="display:flex;gap:7px;align-items:center">
+        <button class="btn bshare" id="share-btn" onclick="copyShareLink()" style="font-size:0.7rem;padding:4px 10px">🔗 Share View Link</button>
+        <button class="settings-btn" id="admin-settings-btn" onclick="openSettings()">⚙️ Settings</button>
+      </div>
       <div class="credit"><span style="opacity:0.7">Created by</span><b>Manohar Singh</b></div>
     </div>
   </div>
@@ -176,316 +203,191 @@ input:focus,select:focus{border-color:#1565c0;box-shadow:0 0 0 2px rgba(21,101,1
   </div>
 </div>
 
-<!-- SECTION SELECTOR -->
-<div class="section-tabs">
-  <div class="stab active" onclick="showSection('purchase',this)">📦 PURCHASE REPORT</div>
-  <div class="stab" onclick="showSection('inventory',this)">🏪 STORE INVENTORY</div>
+<!-- SECTION TABS -->
+<div class="section-tabs" id="section-tabs-bar">
+  <div class="stab active" id="stab-purchase" onclick="showSection('purchase',this)">📦 PURCHASE REPORT</div>
+  <div class="stab" id="stab-inventory" onclick="showSection('inventory',this)">🏪 STORE INVENTORY</div>
+  <div class="stab" id="stab-grocery" onclick="showSection('grocery',this)">🥬 GROCERY STOCK</div>
 </div>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!--                 PURCHASE SECTION               -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════ PURCHASE SECTION ══════════ -->
 <div class="section active" id="sec-purchase">
 <div class="tabs" id="purchase-tabs">
-  <div class="tab active" onclick="showPage('p-dashboard',this,'purchase-tabs')">🏠 Dashboard</div>
-  <div class="tab" id="tab-entry" onclick="showPage('p-entry',this,'purchase-tabs')">➕ Add Entry</div>
-  <div class="tab" onclick="showPage('p-daywise',this,'purchase-tabs')">📅 Day-wise</div>
-  <div class="tab" onclick="showPage('p-weekly',this,'purchase-tabs')">📆 Week-wise</div>
-  <div class="tab" onclick="showPage('p-monthly',this,'purchase-tabs')">🗓️ Monthly</div>
-  <div class="tab" onclick="showPage('p-quarterly',this,'purchase-tabs')">📊 Quarterly</div>
-  <div class="tab" onclick="showPage('p-annual',this,'purchase-tabs')">🏆 Annual</div>
-  <div class="tab" onclick="showPage('p-vendors',this,'purchase-tabs')">🏪 Vendors</div>
-  <div class="tab" onclick="showPage('p-records',this,'purchase-tabs')">📋 Records</div>
-  <div class="tab" id="tab-import" onclick="showPage('p-import',this,'purchase-tabs')">📁 Import/Export</div>
+  <div class="tab active" id="ptab-dashboard" onclick="showPage('p-dashboard',this,'purchase-tabs')">🏠 Dashboard</div>
+  <div class="tab" id="ptab-entry" onclick="showPage('p-entry',this,'purchase-tabs')">➕ Add Entry</div>
+  <div class="tab" id="ptab-daywise" onclick="showPage('p-daywise',this,'purchase-tabs')">📅 Day-wise</div>
+  <div class="tab" id="ptab-weekly" onclick="showPage('p-weekly',this,'purchase-tabs')">📆 Week-wise</div>
+  <div class="tab" id="ptab-monthly" onclick="showPage('p-monthly',this,'purchase-tabs')">🗓️ Monthly</div>
+  <div class="tab" id="ptab-quarterly" onclick="showPage('p-quarterly',this,'purchase-tabs')">📊 Quarterly</div>
+  <div class="tab" id="ptab-annual" onclick="showPage('p-annual',this,'purchase-tabs')">🏆 Annual</div>
+  <div class="tab" id="ptab-vendors" onclick="showPage('p-vendors',this,'purchase-tabs')">🏪 Vendors</div>
+  <div class="tab" id="ptab-records" onclick="showPage('p-records',this,'purchase-tabs')">📋 Records</div>
+  <div class="tab" id="ptab-import" onclick="showPage('p-import',this,'purchase-tabs')">📁 Import/Export</div>
 </div>
-
-<!-- P: DASHBOARD -->
 <div class="page active" id="pg-p-dashboard"><div class="container">
   <div id="view-banner">👁️ <b>View-Only Mode</b></div>
   <div class="kpi-grid" id="p-kpi"></div>
-  <div class="card"><div class="card-title">📈 Growth Indicators <span class="ct-right">vs Last Month</span></div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:9px" id="p-growth"></div>
-  </div>
-  <div class="chart-grid">
-    <div class="chart-box chart-full"><h3>📊 Monthly Purchase Trend</h3><canvas id="trendChart"></canvas></div>
-  </div>
+  <div class="card"><div class="card-title">📈 Growth Indicators <span class="ct-right">vs Last Month</span></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:9px" id="p-growth"></div></div>
+  <div class="chart-grid"><div class="chart-box chart-full"><h3>📊 Monthly Purchase Trend</h3><canvas id="trendChart"></canvas></div></div>
   <div class="chart-grid">
     <div class="chart-box"><h3>🏪 Top 5 Vendors</h3><canvas id="vendorPieChart"></canvas></div>
     <div class="chart-box"><h3>🏷️ Category Breakdown</h3><canvas id="catDoughnut"></canvas></div>
     <div class="chart-box"><h3>📆 Daily (This Month)</h3><canvas id="dailyChart"></canvas></div>
   </div>
-  <div class="card"><div class="card-title">🗓️ Purchase Activity Heatmap <span class="ct-right" id="hm-year-lbl"></span></div>
-    <div style="overflow-x:auto" id="heatmap-container"></div>
-    <div class="hm-legend"><span>Less</span><div class="hm-lbox" style="background:#ebedf0"></div><div class="hm-lbox" style="background:#c8d9f7"></div><div class="hm-lbox" style="background:#8fb5f0"></div><div class="hm-lbox" style="background:#5590e8"></div><div class="hm-lbox" style="background:#1565c0"></div><span>More</span></div>
-  </div>
+  <div class="card"><div class="card-title">🗓️ Purchase Activity Heatmap <span class="ct-right" id="hm-year-lbl"></span></div><div style="overflow-x:auto" id="heatmap-container"></div><div class="hm-legend"><span>Less</span><div class="hm-lbox" style="background:#ebedf0"></div><div class="hm-lbox" style="background:#c8d9f7"></div><div class="hm-lbox" style="background:#8fb5f0"></div><div class="hm-lbox" style="background:#5590e8"></div><div class="hm-lbox" style="background:#1565c0"></div><span>More</span></div></div>
   <div class="card"><div class="card-title">🏆 Top Vendors This Month</div><div id="dash-top-vendors"></div></div>
   <div class="card"><div class="card-title">⚡ Recent Entries</div><div id="recent-entries"></div></div>
 </div></div>
+<div class="page" id="pg-p-entry"><div class="container"><div class="card"><div class="card-title">✏️ Add New Purchase Invoice</div><div class="form-row"><div class="fg"><label>Invoice No *</label><input type="text" id="f_inv" placeholder="e.g. A000098"></div><div class="fg"><label>Date *</label><input type="date" id="f_date"></div><div class="fg" style="flex:2"><label>Supplier Name *</label><input type="text" id="f_sup" list="supList" placeholder="Supplier name"><datalist id="supList"></datalist></div></div><div class="form-row"><div class="fg"><label>Category</label><select id="f_cat"><option value="">--</option><option>Dairy & Paneer</option><option>Bakery</option><option>Grocery</option><option>Beverages</option><option>Packaging</option><option>Electronics</option><option>Stationery</option><option>Other</option></select></div><div class="fg"><label>Base Amount (₹)*</label><input type="number" id="f_base" placeholder="0.00" oninput="calcTotal()"></div><div class="fg"><label>Tax (₹)</label><input type="number" id="f_tax" value="0" oninput="calcTotal()"></div><div class="fg"><label>Total (₹)</label><input type="number" id="f_total" placeholder="Auto" style="background:#f5f5f5"></div></div><div class="form-row"><div class="fg" style="flex:3"><label>Notes</label><input type="text" id="f_note" placeholder="Remarks..."></div></div><div class="btn-row"><button class="btn bp" id="addBtn" onclick="addEntry()">➕ Add Invoice</button><button class="btn bw" onclick="clearForm()">🔄 Clear</button></div></div><div class="card"><div class="card-title">⚡ Recent 5 Entries</div><div id="p-recent"></div></div></div></div>
+<div class="page" id="pg-p-daywise"><div class="container"><div class="card"><div class="card-title">📅 Day-wise Report</div><div class="filter-bar"><div class="fg"><label>Year</label><select id="dw_year" onchange="renderDaywise()"><option value="">Select</option></select></div><div class="fg"><label>Month</label><select id="dw_month" onchange="renderDaywise()"><option value="">Select</option><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div><div class="fg"><label>Vendor</label><select id="dw_vendor" onchange="renderDaywise()"><option value="">All</option></select></div></div></div><div class="chart-box" style="background:#fff;border-radius:11px;box-shadow:0 1px 8px rgba(0,0,0,0.08);padding:13px;margin-bottom:13px"><h3>📊 Daily Chart</h3><canvas id="dayChart" style="max-height:200px"></canvas></div><div class="card"><div class="card-title">📋 Day-wise Detail <span id="dw-summary" class="ct-right"></span></div><div class="tw"><table><thead><tr><th>Date</th><th>Day</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th>Top Vendor</th></tr></thead><tbody id="dw-body"></tbody><tfoot id="dw-foot"></tfoot></table></div></div></div></div>
+<div class="page" id="pg-p-weekly"><div class="container"><div class="card"><div class="card-title">📆 Week-wise Report</div><div class="filter-bar"><div class="fg"><label>Year</label><select id="ww_year" onchange="renderWeekly()"><option value="">All</option></select></div><div class="fg"><label>Month</label><select id="ww_month" onchange="renderWeekly()"><option value="">All</option><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div></div></div><div class="chart-box" style="background:#fff;border-radius:11px;box-shadow:0 1px 8px rgba(0,0,0,0.08);padding:13px;margin-bottom:13px"><h3>📊 Weekly Trend</h3><canvas id="weekChart" style="max-height:200px"></canvas></div><div class="card"><div class="card-title">📋 Week-wise Summary</div><div class="tw"><table><thead><tr><th>Week</th><th>Period</th><th class="right">Days</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th class="right">Daily Avg</th></tr></thead><tbody id="ww-body"></tbody><tfoot id="ww-foot"></tfoot></table></div></div></div></div>
+<div class="page" id="pg-p-monthly"><div class="container"><div class="card"><div class="card-title">🗓️ Monthly Report</div><div class="filter-bar"><div class="fg"><label>Year</label><select id="mo_year" onchange="renderMonthly()"><option value="">All</option></select></div></div></div><div class="chart-grid"><div class="chart-box chart-full"><h3>📊 Monthly — Base vs Tax</h3><canvas id="moChart" style="max-height:240px"></canvas></div></div><div class="card"><div class="card-title">📋 Month-wise Table</div><div class="tw"><table><thead><tr><th>Month</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th class="right">Daily Avg</th><th class="right">Growth%</th></tr></thead><tbody id="mo-body"></tbody><tfoot id="mo-foot"></tfoot></table></div></div></div></div>
+<div class="page" id="pg-p-quarterly"><div class="container"><div class="card"><div class="card-title">📊 Quarterly Report</div><div class="filter-bar"><div class="fg"><label>Year</label><select id="qy_year" onchange="renderQuarterly()"><option value="">All</option></select></div></div></div><div class="chart-grid"><div class="chart-box"><h3>📊 Quarterly Comparison</h3><canvas id="qtrChart"></canvas></div><div class="chart-box"><h3>📊 Quarter Share %</h3><canvas id="qtrPie"></canvas></div></div><div class="card"><div class="card-title">📋 Quarter-wise Detail</div><div class="tw"><table><thead><tr><th>Quarter</th><th>Months</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th class="right">% Share</th></tr></thead><tbody id="qtr-body"></tbody><tfoot id="qtr-foot"></tfoot></table></div></div></div></div>
+<div class="page" id="pg-p-annual"><div class="container"><div class="card"><div class="card-title">🏆 Annual Performance</div><div id="annual-kpi" class="kpi-grid"></div></div><div class="chart-grid"><div class="chart-box chart-full"><h3>📊 Year-wise Total</h3><canvas id="annualChart" style="max-height:240px"></canvas></div></div><div class="card"><div class="card-title">📋 Year-wise Summary</div><div class="tw"><table><thead><tr><th>Year</th><th class="right">Invoices</th><th class="right">Vendors</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th class="right">Monthly Avg</th><th class="right">YoY Growth</th></tr></thead><tbody id="annual-body"></tbody></table></div></div><div class="card"><div class="card-title">🏆 Best & Worst Months</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:11px" id="best-worst"></div></div></div></div>
+<div class="page" id="pg-p-vendors"><div class="container"><div class="card"><div class="card-title">🏪 Vendor Analysis</div><div class="filter-bar"><div class="fg"><label>Year</label><select id="v_year" onchange="renderVendors()"><option value="">All</option></select></div><div class="fg"><label>Month</label><select id="v_month" onchange="renderVendors()"><option value="">All</option><option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option><option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option><option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select></div></div></div><div class="card"><div class="card-title">🏆 Vendor Ranking</div><div id="vendor-rank-list"></div></div><div class="card"><div class="card-title">📋 Vendor Detail</div><div class="tw"><table><thead><tr><th>Rank</th><th>Vendor</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th class="right">Avg</th><th class="right">% Share</th></tr></thead><tbody id="vendor-table"></tbody></table></div></div></div></div>
+<div class="page" id="pg-p-records"><div class="container"><div class="card"><div class="card-title">🔍 Filter</div><div class="filter-bar"><div class="fg"><label>Year</label><select id="r_year" onchange="renderRecords()"><option value="">All</option></select></div><div class="fg"><label>Month</label><select id="r_month" onchange="renderRecords()"><option value="">All</option><option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option><option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option><option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select></div><div class="fg"><label>Vendor</label><select id="r_vendor" onchange="renderRecords()"><option value="">All</option></select></div><div class="fg"><label>Category</label><select id="r_cat" onchange="renderRecords()"><option value="">All</option></select></div><div class="fg" style="flex:2"><label>Search</label><input type="text" id="r_search" placeholder="Invoice/Supplier..." oninput="renderRecords()"></div></div><div class="btn-row"><button class="btn bs" onclick="exportCSV()">⬇️ Export CSV</button><button class="btn bp" onclick="window.print()">🖨️ Print</button></div></div><div class="card"><div class="card-title">📋 Records <span id="rec-count" style="color:#1565c0;font-size:0.74rem;margin-left:5px"></span></div><div class="tw"><table><thead><tr><th>#</th><th>Invoice</th><th>Date</th><th>Supplier</th><th>Cat</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th>Notes</th><th></th></tr></thead><tbody id="rec-body"></tbody><tfoot id="rec-foot"></tfoot></table></div></div></div></div>
+<div class="page" id="pg-p-import"><div class="container"><div class="card"><div class="card-title">📁 Import CSV</div><div class="upload-area" onclick="document.getElementById('csvFile').click()"><input type="file" id="csvFile" accept=".csv" multiple onchange="handleCSV(event)"><div style="font-size:1.8rem">📂</div><p style="margin-top:5px;color:#555;font-size:0.8rem">Click to upload CSV</p><p style="font-size:0.68rem;color:#999;margin-top:2px">Columns: InvoiceNo, InvoiceDate, SupplierName, InvoiceTotalAmount, InvoiceTax, TotalAmount</p><div class="btn bp" style="display:inline-block;margin-top:7px;font-size:0.74rem">Choose File</div></div></div><div class="card"><div class="card-title">⬇️ Export</div><div class="btn-row"><button class="btn bs" onclick="exportCSV()">📄 All CSV</button><button class="btn bp" onclick="exportMonthCSV()">📅 This Month CSV</button><button class="btn bo" onclick="exportVendorCSV()">🏪 Vendor CSV</button><button class="btn bw" onclick="window.print()">🖨️ Print</button></div></div><div class="card"><div class="card-title">💾 Backup & Restore</div><div class="btn-row"><button class="btn bs" onclick="backupData()">💾 Download Backup</button><button class="btn bw" onclick="document.getElementById('restoreFile').click()">📥 Restore</button><input type="file" id="restoreFile" accept=".json" style="display:none" onchange="restoreData(event)"></div></div><div class="card" style="border:2px solid #c62828"><div class="card-title" style="color:#c62828">⚠️ Danger Zone</div><button class="btn bd" onclick="clearAll()">🗑️ Delete All Purchase Data</button></div></div></div>
+</div><!-- end purchase -->
 
-<!-- P: ADD ENTRY -->
-<div class="page" id="pg-p-entry"><div class="container">
-  <div class="card"><div class="card-title">✏️ Add New Purchase Invoice</div>
-    <div class="form-row">
-      <div class="fg"><label>Invoice No *</label><input type="text" id="f_inv" placeholder="e.g. A000098"></div>
-      <div class="fg"><label>Date *</label><input type="date" id="f_date"></div>
-      <div class="fg" style="flex:2"><label>Supplier Name *</label><input type="text" id="f_sup" list="supList" placeholder="Supplier name"><datalist id="supList"></datalist></div>
-    </div>
-    <div class="form-row">
-      <div class="fg"><label>Category</label><select id="f_cat"><option value="">--</option><option>Dairy & Paneer</option><option>Bakery</option><option>Grocery</option><option>Beverages</option><option>Packaging</option><option>Electronics</option><option>Stationery</option><option>Other</option></select></div>
-      <div class="fg"><label>Base Amount (₹)*</label><input type="number" id="f_base" placeholder="0.00" oninput="calcTotal()"></div>
-      <div class="fg"><label>Tax (₹)</label><input type="number" id="f_tax" value="0" oninput="calcTotal()"></div>
-      <div class="fg"><label>Total (₹)</label><input type="number" id="f_total" placeholder="Auto" style="background:#f5f5f5"></div>
-    </div>
-    <div class="form-row"><div class="fg" style="flex:3"><label>Notes</label><input type="text" id="f_note" placeholder="Remarks..."></div></div>
-    <div class="btn-row">
-      <button class="btn bp" id="addBtn" onclick="addEntry()">➕ Add Invoice</button>
-      <button class="btn bw" onclick="clearForm()">🔄 Clear</button>
-    </div>
-  </div>
-  <div class="card"><div class="card-title">⚡ Recent 5 Entries</div><div id="p-recent"></div></div>
-</div></div>
-
-<!-- P: DAY-WISE -->
-<div class="page" id="pg-p-daywise"><div class="container">
-  <div class="card"><div class="card-title">📅 Day-wise Report</div>
-    <div class="filter-bar">
-      <div class="fg"><label>Year</label><select id="dw_year" onchange="renderDaywise()"><option value="">Select</option></select></div>
-      <div class="fg"><label>Month</label><select id="dw_month" onchange="renderDaywise()"><option value="">Select</option><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
-      <div class="fg"><label>Vendor</label><select id="dw_vendor" onchange="renderDaywise()"><option value="">All</option></select></div>
-    </div>
-  </div>
-  <div class="chart-box" style="background:#fff;border-radius:11px;box-shadow:0 1px 8px rgba(0,0,0,0.08);padding:13px;margin-bottom:13px"><h3>📊 Daily Chart</h3><canvas id="dayChart" style="max-height:200px"></canvas></div>
-  <div class="card"><div class="card-title">📋 Day-wise Detail <span id="dw-summary" class="ct-right"></span></div>
-    <div class="tw"><table><thead><tr><th>Date</th><th>Day</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th>Top Vendor</th></tr></thead>
-    <tbody id="dw-body"></tbody><tfoot id="dw-foot"></tfoot></table></div>
-  </div>
-</div></div>
-
-<!-- P: WEEKLY -->
-<div class="page" id="pg-p-weekly"><div class="container">
-  <div class="card"><div class="card-title">📆 Week-wise Report</div>
-    <div class="filter-bar">
-      <div class="fg"><label>Year</label><select id="ww_year" onchange="renderWeekly()"><option value="">All</option></select></div>
-      <div class="fg"><label>Month</label><select id="ww_month" onchange="renderWeekly()"><option value="">All</option><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
-    </div>
-  </div>
-  <div class="chart-box" style="background:#fff;border-radius:11px;box-shadow:0 1px 8px rgba(0,0,0,0.08);padding:13px;margin-bottom:13px"><h3>📊 Weekly Trend</h3><canvas id="weekChart" style="max-height:200px"></canvas></div>
-  <div class="card"><div class="card-title">📋 Week-wise Summary</div>
-    <div class="tw"><table><thead><tr><th>Week</th><th>Period</th><th class="right">Days</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th class="right">Daily Avg</th></tr></thead>
-    <tbody id="ww-body"></tbody><tfoot id="ww-foot"></tfoot></table></div>
-  </div>
-</div></div>
-
-<!-- P: MONTHLY -->
-<div class="page" id="pg-p-monthly"><div class="container">
-  <div class="card"><div class="card-title">🗓️ Monthly Report</div>
-    <div class="filter-bar"><div class="fg"><label>Year</label><select id="mo_year" onchange="renderMonthly()"><option value="">All</option></select></div></div>
-  </div>
-  <div class="chart-grid"><div class="chart-box chart-full"><h3>📊 Monthly — Base vs Tax</h3><canvas id="moChart" style="max-height:240px"></canvas></div></div>
-  <div class="card"><div class="card-title">📋 Month-wise Table</div>
-    <div class="tw"><table><thead><tr><th>Month</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th class="right">Daily Avg</th><th class="right">Growth%</th></tr></thead>
-    <tbody id="mo-body"></tbody><tfoot id="mo-foot"></tfoot></table></div>
-  </div>
-</div></div>
-
-<!-- P: QUARTERLY -->
-<div class="page" id="pg-p-quarterly"><div class="container">
-  <div class="card"><div class="card-title">📊 Quarterly Report</div>
-    <div class="filter-bar"><div class="fg"><label>Year</label><select id="qy_year" onchange="renderQuarterly()"><option value="">All</option></select></div></div>
-  </div>
-  <div class="chart-grid">
-    <div class="chart-box"><h3>📊 Quarterly Comparison</h3><canvas id="qtrChart"></canvas></div>
-    <div class="chart-box"><h3>📊 Quarter Share %</h3><canvas id="qtrPie"></canvas></div>
-  </div>
-  <div class="card"><div class="card-title">📋 Quarter-wise Detail</div>
-    <div class="tw"><table><thead><tr><th>Quarter</th><th>Months</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th class="right">% Share</th></tr></thead>
-    <tbody id="qtr-body"></tbody><tfoot id="qtr-foot"></tfoot></table></div>
-  </div>
-</div></div>
-
-<!-- P: ANNUAL -->
-<div class="page" id="pg-p-annual"><div class="container">
-  <div class="card"><div class="card-title">🏆 Annual Performance</div><div id="annual-kpi" class="kpi-grid"></div></div>
-  <div class="chart-grid"><div class="chart-box chart-full"><h3>📊 Year-wise Total</h3><canvas id="annualChart" style="max-height:240px"></canvas></div></div>
-  <div class="card"><div class="card-title">📋 Year-wise Summary</div>
-    <div class="tw"><table><thead><tr><th>Year</th><th class="right">Invoices</th><th class="right">Vendors</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th class="right">Monthly Avg</th><th class="right">YoY Growth</th></tr></thead>
-    <tbody id="annual-body"></tbody></table></div>
-  </div>
-  <div class="card"><div class="card-title">🏆 Best & Worst Months</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px" id="best-worst"></div>
-  </div>
-</div></div>
-
-<!-- P: VENDORS -->
-<div class="page" id="pg-p-vendors"><div class="container">
-  <div class="card"><div class="card-title">🏪 Vendor Analysis</div>
-    <div class="filter-bar">
-      <div class="fg"><label>Year</label><select id="v_year" onchange="renderVendors()"><option value="">All</option></select></div>
-      <div class="fg"><label>Month</label><select id="v_month" onchange="renderVendors()"><option value="">All</option><option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option><option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option><option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select></div>
-    </div>
-  </div>
-  <div class="card"><div class="card-title">🏆 Vendor Ranking</div><div id="vendor-rank-list"></div></div>
-  <div class="card"><div class="card-title">📋 Vendor Detail</div>
-    <div class="tw"><table><thead><tr><th>Rank</th><th>Vendor</th><th class="right">Invoices</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th class="right">Avg</th><th class="right">% Share</th></tr></thead>
-    <tbody id="vendor-table"></tbody></table></div>
-  </div>
-</div></div>
-
-<!-- P: RECORDS -->
-<div class="page" id="pg-p-records"><div class="container">
-  <div class="card"><div class="card-title">🔍 Filter</div>
-    <div class="filter-bar">
-      <div class="fg"><label>Year</label><select id="r_year" onchange="renderRecords()"><option value="">All</option></select></div>
-      <div class="fg"><label>Month</label><select id="r_month" onchange="renderRecords()"><option value="">All</option><option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option><option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option><option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select></div>
-      <div class="fg"><label>Vendor</label><select id="r_vendor" onchange="renderRecords()"><option value="">All</option></select></div>
-      <div class="fg"><label>Category</label><select id="r_cat" onchange="renderRecords()"><option value="">All</option></select></div>
-      <div class="fg" style="flex:2"><label>Search</label><input type="text" id="r_search" placeholder="Invoice/Supplier..." oninput="renderRecords()"></div>
-    </div>
-    <div class="btn-row">
-      <button class="btn bs" onclick="exportCSV()">⬇️ Export CSV</button>
-      <button class="btn bp" onclick="window.print()">🖨️ Print</button>
-    </div>
-  </div>
-  <div class="card"><div class="card-title">📋 Records <span id="rec-count" style="color:#1565c0;font-size:0.74rem;margin-left:5px"></span></div>
-    <div class="tw"><table><thead><tr><th>#</th><th>Invoice</th><th>Date</th><th>Supplier</th><th>Cat</th><th class="right">Base</th><th class="right">Tax</th><th class="right">Total</th><th>Notes</th><th></th></tr></thead>
-    <tbody id="rec-body"></tbody><tfoot id="rec-foot"></tfoot></table></div>
-  </div>
-</div></div>
-
-<!-- P: IMPORT/EXPORT -->
-<div class="page" id="pg-p-import"><div class="container">
-  <div class="card"><div class="card-title">📁 Import CSV</div>
-    <div class="upload-area" onclick="document.getElementById('csvFile').click()">
-      <input type="file" id="csvFile" accept=".csv" multiple onchange="handleCSV(event)">
-      <div style="font-size:1.8rem">📂</div>
-      <p style="margin-top:5px;color:#555;font-size:0.8rem">Click to upload CSV</p>
-      <p style="font-size:0.68rem;color:#999;margin-top:2px">Columns: InvoiceNo, InvoiceDate, SupplierName, InvoiceTotalAmount, InvoiceTax, TotalAmount</p>
-      <div class="btn bp" style="display:inline-block;margin-top:7px;font-size:0.74rem">Choose File</div>
-    </div>
-  </div>
-  <div class="card"><div class="card-title">⬇️ Export</div>
-    <div class="btn-row">
-      <button class="btn bs" onclick="exportCSV()">📄 All CSV</button>
-      <button class="btn bp" onclick="exportMonthCSV()">📅 This Month CSV</button>
-      <button class="btn bo" onclick="exportVendorCSV()">🏪 Vendor CSV</button>
-      <button class="btn bw" onclick="window.print()">🖨️ Print</button>
-    </div>
-  </div>
-  <div class="card"><div class="card-title">💾 Backup & Restore</div>
-    <div class="btn-row">
-      <button class="btn bs" onclick="backupData()">💾 Download Backup</button>
-      <button class="btn bw" onclick="document.getElementById('restoreFile').click()">📥 Restore</button>
-      <input type="file" id="restoreFile" accept=".json" style="display:none" onchange="restoreData(event)">
-    </div>
-  </div>
-  <div class="card" style="border:2px solid #c62828"><div class="card-title" style="color:#c62828">⚠️ Danger Zone</div>
-    <button class="btn bd" onclick="clearAll()">🗑️ Delete All Purchase Data</button>
-  </div>
-</div></div>
-</div><!-- end purchase section -->
-
-<!-- ═══════════════════════════════════════════════ -->
-<!--               INVENTORY SECTION                -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- ══════════ INVENTORY SECTION ══════════ -->
 <div class="section inv" id="sec-inventory">
 <div class="tabs" id="inventory-tabs">
-  <div class="inv-tab tab active" onclick="showPage('i-dashboard',this,'inventory-tabs')">🏠 Dashboard</div>
-  <div class="inv-tab tab" onclick="showPage('i-items',this,'inventory-tabs')">📦 Manage Items</div>
-  <div class="inv-tab tab" onclick="showPage('i-update',this,'inventory-tabs')">📝 Monthly Update</div>
-  <div class="inv-tab tab" onclick="showPage('i-history',this,'inventory-tabs')">📅 History</div>
-  <div class="inv-tab tab" onclick="showPage('i-report',this,'inventory-tabs')">📊 Report</div>
+  <div class="inv-tab tab active" id="itab-dashboard" onclick="showPage('i-dashboard',this,'inventory-tabs')">🏠 Dashboard</div>
+  <div class="inv-tab tab" id="itab-items" onclick="showPage('i-items',this,'inventory-tabs')">📦 Manage Items</div>
+  <div class="inv-tab tab" id="itab-update" onclick="showPage('i-update',this,'inventory-tabs')">📝 Monthly Update</div>
+  <div class="inv-tab tab" id="itab-history" onclick="showPage('i-history',this,'inventory-tabs')">📅 History</div>
+  <div class="inv-tab tab" id="itab-report" onclick="showPage('i-report',this,'inventory-tabs')">📊 Report</div>
+</div>
+<div class="page active inv" id="pg-i-dashboard"><div class="container"><div class="kpi-grid" id="i-kpi"></div><div class="card inv"><div class="card-title">📦 Current Stock Status <span class="ct-right" id="i-cur-month"></span></div><div class="tw"><table><thead><tr><th>#</th><th>Product Name</th><th>Unit</th><th class="center">Opening</th><th class="center">Current</th><th class="center">Diff</th><th>Status</th></tr></thead><tbody id="i-dash-tbody"></tbody></table></div></div><div class="card inv"><div class="card-title">🏆 Top Changed Items</div><div id="i-top-changed"></div></div></div></div>
+<div class="page inv" id="pg-i-items"><div class="container"><div class="card inv"><div class="card-title">➕ Add New Item</div><div class="form-row"><div class="fg" style="flex:3"><label>Product Name *</label><input type="text" id="i_name" placeholder="e.g. Computer"></div><div class="fg"><label>Unit</label><select id="i_unit"><option>Nos</option><option>Kg</option><option>Ltr</option><option>Pcs</option><option>Box</option><option>Set</option></select></div><div class="fg"><label>Opening Stock *</label><input type="number" id="i_opening" placeholder="0" min="0"></div><div class="fg"><label>Category</label><select id="i_cat"><option value="">--</option><option>Electronics</option><option>Furniture</option><option>Office Equipment</option><option>Kitchen</option><option>Storage</option><option>Other</option></select></div></div><div class="btn-row"><button class="btn bs" onclick="addItem()">➕ Add Item</button><button class="btn bw" onclick="clearItemForm()">🔄 Clear</button></div></div><div class="card inv"><div class="card-title">📋 All Items <span id="item-count" class="ct-right"></span></div><div class="tw"><table><thead><tr><th>#</th><th>Product Name</th><th>Category</th><th>Unit</th><th class="center">Opening</th><th class="center">Current</th><th></th></tr></thead><tbody id="items-tbody"></tbody></table></div></div></div></div>
+<div class="page inv" id="pg-i-update"><div class="container"><div class="card inv"><div class="card-title">📝 Monthly Stock Update</div><div class="form-row"><div class="fg"><label>Month *</label><select id="upd_month"><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div><div class="fg"><label>Year *</label><input type="number" id="upd_year" value="2026" min="2020" max="2099"></div><div class="fg" style="display:flex;align-items:flex-end"><button class="btn bs" onclick="loadUpdateForm()" style="width:100%">📋 Load Items</button></div></div></div><div id="update-form-container"><div style="color:#aaa;text-align:center;padding:24px;background:#fff;border-radius:11px">Month select karo aur "Load Items" click karo</div></div></div></div>
+<div class="page inv" id="pg-i-history"><div class="container"><div class="card inv"><div class="card-title">🔍 Filter</div><div class="filter-bar"><div class="fg"><label>Year</label><select id="h_year" onchange="renderIHistory()"><option value="">All</option></select></div><div class="fg"><label>Month</label><select id="h_month" onchange="renderIHistory()"><option value="">All</option><option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option><option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option><option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select></div><div class="fg"><label>Item</label><select id="h_item" onchange="renderIHistory()"><option value="">All</option></select></div></div></div><div id="history-container"></div></div></div>
+<div class="page inv" id="pg-i-report"><div class="container"><div class="card inv"><div class="card-title">📊 Stock Report<div class="ct-right"><button class="btn bs" onclick="exportInvReport()" style="font-size:0.7rem;padding:3px 9px">⬇️ CSV</button><button class="btn bp" onclick="window.print()" style="font-size:0.7rem;padding:3px 9px;margin-left:4px">🖨️ Print</button></div></div><div class="filter-bar"><div class="fg"><label>Month</label><select id="rpt_month" onchange="renderInvReport()"><option value="">All</option><option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option><option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option><option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select></div><div class="fg"><label>Year</label><select id="rpt_year" onchange="renderInvReport()"><option value="">All</option></select></div></div><div class="tw"><table class="inv"><thead><tr><th>NO.</th><th>Product Name</th><th>Unit</th><th class="center">Opening</th><th class="center">Closing</th><th class="center">Diff</th><th>Category</th><th>Remark</th></tr></thead><tbody id="rpt-tbody"></tbody></table></div><div style="margin-top:14px;padding:9px;background:#f0f9f0;border-radius:7px;font-size:0.72rem;color:#555;text-align:center">SIGNATURE (PURCHASE) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SIGNATURE (HOD)</div></div></div></div>
+</div><!-- end inventory -->
+
+<!-- ══════════ GROCERY STOCK SECTION ══════════ -->
+<div class="section groc" id="sec-grocery">
+<div class="tabs" id="grocery-tabs">
+  <div class="groc-tab tab active" id="gtab-dashboard" onclick="showPage('g-dashboard',this,'grocery-tabs')">🏠 Dashboard</div>
+  <div class="groc-tab tab" id="gtab-items" onclick="showPage('g-items',this,'grocery-tabs')">➕ Manage Items</div>
+  <div class="groc-tab tab" id="gtab-tracker" onclick="showPage('g-tracker',this,'grocery-tabs')">📦 Stock Tracker</div>
+  <div class="groc-tab tab" id="gtab-expiry" onclick="showPage('g-expiry',this,'grocery-tabs')">⏰ Expiry Alerts</div>
+  <div class="groc-tab tab" id="gtab-order" onclick="showPage('g-order',this,'grocery-tabs')">📋 Order List</div>
 </div>
 
-<!-- I: DASHBOARD -->
-<div class="page active inv" id="pg-i-dashboard"><div class="container">
-  <div class="kpi-grid" id="i-kpi"></div>
-  <div class="card inv"><div class="card-title">📦 Current Stock Status <span class="ct-right" id="i-cur-month"></span></div>
-    <div class="tw"><table><thead><tr><th>#</th><th>Product Name</th><th>Unit</th><th class="center">Opening</th><th class="center">Current</th><th class="center">Diff</th><th>Status</th></tr></thead>
-    <tbody id="i-dash-tbody"></tbody></table></div>
+<!-- G: DASHBOARD -->
+<div class="page active groc" id="pg-g-dashboard"><div class="container">
+  <div class="kpi-grid" id="g-kpi"></div>
+  <!-- Alert Banner -->
+  <div id="g-alert-banner" style="background:#1a1a2e;color:#fff;padding:10px 15px;border-radius:9px;margin-bottom:13px;display:flex;gap:16px;flex-wrap:wrap;font-size:0.76rem;align-items:center"></div>
+  <div class="card groc"><div class="card-title">🚦 Stock Overview — Traffic Light</div>
+    <div id="g-overview-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px"></div>
   </div>
-  <div class="card inv"><div class="card-title">🏆 Top Changed Items</div><div id="i-top-changed"></div></div>
+  <div class="card groc"><div class="card-title">⚠️ Items Needing Attention</div><div id="g-attention"></div></div>
 </div></div>
 
-<!-- I: MANAGE ITEMS -->
-<div class="page inv" id="pg-i-items"><div class="container">
-  <div class="card inv"><div class="card-title">➕ Add New Item</div>
+<!-- G: MANAGE ITEMS -->
+<div class="page groc" id="pg-g-items"><div class="container">
+  <div class="card groc"><div class="card-title">➕ Add New Grocery Item</div>
     <div class="form-row">
-      <div class="fg" style="flex:3"><label>Product Name *</label><input type="text" id="i_name" placeholder="e.g. Computer"></div>
-      <div class="fg"><label>Unit</label><select id="i_unit"><option>Nos</option><option>Kg</option><option>Ltr</option><option>Pcs</option><option>Box</option><option>Set</option></select></div>
-      <div class="fg"><label>Opening Stock *</label><input type="number" id="i_opening" placeholder="0" min="0"></div>
-      <div class="fg"><label>Category</label><select id="i_cat"><option value="">--</option><option>Electronics</option><option>Furniture</option><option>Office Equipment</option><option>Kitchen</option><option>Storage</option><option>Other</option></select></div>
+      <div class="fg" style="flex:3"><label>Product Name *</label><input type="text" id="g_name" placeholder="e.g. Basmati Rice"></div>
+      <div class="fg"><label>Category</label><select id="g_cat"><option>Pulses & Legumes</option><option>Beverages</option><option>Spices & Masala</option><option>Oils & Fats</option><option>Dry Fruits & Nuts</option><option>Ready Food & Pasta</option><option>General & Condiments</option><option>Housekeeping</option><option>Other</option></select></div>
+      <div class="fg"><label>UOM</label><select id="g_uom"><option>kg</option><option>g</option><option>ltr</option><option>ml</option><option>pkt</option><option>btl</option><option>can</option><option>nos</option><option>piece</option></select></div>
     </div>
-    <div class="btn-row">
-      <button class="btn bs" onclick="addItem()">➕ Add Item</button>
-      <button class="btn bw" onclick="clearItemForm()">🔄 Clear</button>
-    </div>
-  </div>
-  <div class="card inv"><div class="card-title">📋 All Items <span id="item-count" class="ct-right"></span></div>
-    <div class="tw"><table><thead><tr><th>#</th><th>Product Name</th><th>Category</th><th>Unit</th><th class="center">Opening</th><th class="center">Current</th><th></th></tr></thead>
-    <tbody id="items-tbody"></tbody></table></div>
-  </div>
-  <div class="card inv"><div class="card-title">📁 Bulk Import CSV</div>
-    <div class="upload-area inv" onclick="document.getElementById('itemCSV').click()">
-      <input type="file" id="itemCSV" accept=".csv" onchange="importItemsCSV(event)">
-      <div style="font-size:1.7rem">📂</div>
-      <p style="margin-top:5px;color:#555;font-size:0.8rem">Click to upload CSV</p>
-      <p style="font-size:0.68rem;color:#999;margin-top:2px">Columns: ProductName, Unit, OpeningStock, Category</p>
-      <div class="btn bs" style="display:inline-block;margin-top:7px;font-size:0.74rem">Choose File</div>
-    </div>
-  </div>
-</div></div>
-
-<!-- I: MONTHLY UPDATE -->
-<div class="page inv" id="pg-i-update"><div class="container">
-  <div class="card inv"><div class="card-title">📝 Monthly Stock Update</div>
     <div class="form-row">
-      <div class="fg"><label>Month *</label><select id="upd_month"><option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option><option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option><option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
-      <div class="fg"><label>Year *</label><input type="number" id="upd_year" value="2026" min="2020" max="2099"></div>
-      <div class="fg" style="display:flex;align-items:flex-end"><button class="btn bs" onclick="loadUpdateForm()" style="width:100%">📋 Load Items</button></div>
+      <div class="fg"><label>Current Stock *</label><input type="number" id="g_stock" placeholder="0" step="0.25" min="0"></div>
+      <div class="fg"><label>Min Stock</label><input type="number" id="g_min" placeholder="0" step="0.25" min="0"></div>
+      <div class="fg"><label>Expiry Date</label><input type="date" id="g_expiry"></div>
     </div>
+    <div class="btn-row"><button class="btn bo" onclick="addGrocItem()">➕ Add Item</button><button class="btn bw" onclick="clearGrocForm()">🔄 Clear</button></div>
   </div>
-  <div id="update-form-container"><div style="color:#aaa;text-align:center;padding:24px;background:#fff;border-radius:11px">Month select karo aur "Load Items" click karo</div></div>
+  <div class="card groc"><div class="card-title">📋 All Items <span id="g-item-count" class="ct-right"></span></div>
+    <div class="filter-bar"><div class="fg"><label>Category</label><select id="g_filter_cat" onchange="renderGrocItems()"><option value="">All</option></select></div><div class="fg" style="flex:2"><label>Search</label><input type="text" id="g_search" placeholder="Item name..." oninput="renderGrocItems()"></div></div>
+    <div class="tw"><table class="groc"><thead><tr><th>#</th><th>Product Name</th><th>Category</th><th>UOM</th><th class="center">Stock</th><th class="center">Min</th><th>Expiry</th><th>Status</th><th></th></tr></thead><tbody id="g-items-tbody"></tbody></table></div>
+  </div>
 </div></div>
 
-<!-- I: HISTORY -->
-<div class="page inv" id="pg-i-history"><div class="container">
-  <div class="card inv"><div class="card-title">🔍 Filter</div>
-    <div class="filter-bar">
-      <div class="fg"><label>Year</label><select id="h_year" onchange="renderIHistory()"><option value="">All</option></select></div>
-      <div class="fg"><label>Month</label><select id="h_month" onchange="renderIHistory()"><option value="">All</option><option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option><option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option><option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select></div>
-      <div class="fg"><label>Item</label><select id="h_item" onchange="renderIHistory()"><option value="">All</option></select></div>
-    </div>
+<!-- G: STOCK TRACKER -->
+<div class="page groc" id="pg-g-tracker"><div class="container">
+  <div class="card groc"><div class="card-title">📦 Stock Tracker <span class="ct-right">Double-click stock to edit</span></div>
+    <div class="filter-bar"><div class="fg"><label>Category</label><select id="gt_cat" onchange="renderGrocTracker()"><option value="">All</option></select></div><div class="fg"><label>Filter</label><select id="gt_filter" onchange="renderGrocTracker()"><option value="all">All Items</option><option value="low">Low / Zero Stock</option><option value="expiring">Expiring Soon</option></select></div><div class="fg" style="flex:2"><label>Search</label><input type="text" id="gt_search" placeholder="Search..." oninput="renderGrocTracker()"></div></div>
+    <div class="tw"><table class="groc"><thead><tr><th></th><th>#</th><th>Product Name</th><th>UOM</th><th>Stock</th><th>Min Stock</th><th>Expiry Date</th><th>Days Left</th><th>Status</th><th></th></tr></thead><tbody id="g-tracker-tbody"></tbody></table></div>
   </div>
-  <div id="history-container"></div>
 </div></div>
 
-<!-- I: REPORT -->
-<div class="page inv" id="pg-i-report"><div class="container">
-  <div class="card inv"><div class="card-title">📊 Stock Report
-    <div class="ct-right">
-      <button class="btn bs" onclick="exportInvReport()" style="font-size:0.7rem;padding:3px 9px">⬇️ CSV</button>
-      <button class="btn bp" onclick="window.print()" style="font-size:0.7rem;padding:3px 9px;margin-left:4px">🖨️ Print</button>
-    </div>
-  </div>
-    <div class="filter-bar">
-      <div class="fg"><label>Month</label><select id="rpt_month" onchange="renderInvReport()"><option value="">All</option><option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option><option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option><option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select></div>
-      <div class="fg"><label>Year</label><select id="rpt_year" onchange="renderInvReport()"><option value="">All</option></select></div>
-    </div>
-    <div class="tw"><table class="inv"><thead><tr><th>NO.</th><th>Product Name</th><th>Unit</th><th class="center">Opening</th><th class="center">Closing</th><th class="center">Diff</th><th>Category</th><th>Remark</th></tr></thead>
-    <tbody id="rpt-tbody"></tbody></table></div>
-    <div style="margin-top:14px;padding:9px;background:#f0f9f0;border-radius:7px;font-size:0.72rem;color:#555;text-align:center">
-      SIGNATURE (PURCHASE) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SIGNATURE (HOD)
-    </div>
+<!-- G: EXPIRY ALERTS -->
+<div class="page groc" id="pg-g-expiry"><div class="container">
+  <div class="card groc"><div class="card-title">⏰ Expiry Alert Centre</div>
+    <div id="g-expiry-content"></div>
   </div>
 </div></div>
-</div><!-- end inventory section -->
+
+<!-- G: ORDER LIST -->
+<div class="page groc" id="pg-g-order"><div class="container">
+  <div class="card groc"><div class="card-title">📋 Items to Reorder <span class="ct-right" id="g-order-count"></span>
+    <button class="btn bwa" style="margin-left:8px;font-size:0.7rem;padding:3px 10px" onclick="sendWhatsApp()">📲 WhatsApp</button>
+    <button class="btn bs" style="margin-left:4px;font-size:0.7rem;padding:3px 10px" onclick="exportOrderCSV()">⬇️ CSV</button>
+  </div>
+    <div id="g-order-content"></div>
+  </div>
+</div></div>
+</div><!-- end grocery -->
+
+<!-- ══════════ ADMIN SETTINGS MODAL ══════════ -->
+<div class="settings-overlay" id="settingsOverlay">
+  <div class="settings-modal">
+    <div class="sm-header">
+      <h2>⚙️ View Controls — Admin Settings</h2>
+      <button class="sm-close" onclick="closeSettings()">✕</button>
+    </div>
+    <div class="sm-body">
+      <p style="font-size:0.75rem;color:#666;background:#f0f4ff;padding:8px 10px;border-radius:7px;margin-bottom:14px">🔗 <b>OFF</b> karo → View Link mein woh tab/section dikhega hi nahi.</p>
+
+      <div class="sm-section">
+        <div class="sm-section-title">📱 Sections</div>
+        <div class="toggle-row"><span class="toggle-label">📦 Purchase Report</span><label class="toggle-switch"><input type="checkbox" id="vs_sec_purchase" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">🏪 Store Inventory</span><label class="toggle-switch"><input type="checkbox" id="vs_sec_inventory" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">🥬 Grocery Stock</span><label class="toggle-switch"><input type="checkbox" id="vs_sec_grocery" checked><span class="toggle-slider"></span></label></div>
+      </div>
+
+      <div class="sm-section">
+        <div class="sm-section-title">📦 Purchase Tabs</div>
+        <div class="toggle-row"><span class="toggle-label">🏠 Dashboard</span><label class="toggle-switch"><input type="checkbox" id="vs_p_dashboard" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">📅 Day-wise</span><label class="toggle-switch"><input type="checkbox" id="vs_p_daywise" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">📆 Week-wise</span><label class="toggle-switch"><input type="checkbox" id="vs_p_weekly" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">🗓️ Monthly</span><label class="toggle-switch"><input type="checkbox" id="vs_p_monthly" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">📊 Quarterly</span><label class="toggle-switch"><input type="checkbox" id="vs_p_quarterly" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">🏆 Annual</span><label class="toggle-switch"><input type="checkbox" id="vs_p_annual" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">🏪 Vendors</span><label class="toggle-switch"><input type="checkbox" id="vs_p_vendors" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">📋 Records</span><label class="toggle-switch"><input type="checkbox" id="vs_p_records" checked><span class="toggle-slider"></span></label></div>
+      </div>
+
+      <div class="sm-section">
+        <div class="sm-section-title">🏪 Store Inventory Tabs</div>
+        <div class="toggle-row"><span class="toggle-label">🏠 Dashboard</span><label class="toggle-switch"><input type="checkbox" id="vs_i_dashboard" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">📅 History</span><label class="toggle-switch"><input type="checkbox" id="vs_i_history" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">📊 Report</span><label class="toggle-switch"><input type="checkbox" id="vs_i_report" checked><span class="toggle-slider"></span></label></div>
+      </div>
+
+      <div class="sm-section">
+        <div class="sm-section-title">🥬 Grocery Stock Tabs</div>
+        <div class="toggle-row"><span class="toggle-label">🏠 Dashboard</span><label class="toggle-switch"><input type="checkbox" id="vs_g_dashboard" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">📦 Stock Tracker</span><label class="toggle-switch"><input type="checkbox" id="vs_g_tracker" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">⏰ Expiry Alerts</span><label class="toggle-switch"><input type="checkbox" id="vs_g_expiry" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">📋 Order List</span><label class="toggle-switch"><input type="checkbox" id="vs_g_order" checked><span class="toggle-slider"></span></label></div>
+      </div>
+
+      <button class="sm-save-btn" onclick="saveSettings()">💾 Save Settings</button>
+    </div>
+  </div>
+</div>
 
 <div id="toast"></div>
 <div class="tooltip" id="tooltip"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, deleteDoc, doc, setDoc, onSnapshot, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, deleteDoc, doc, setDoc, getDoc, onSnapshot, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCVgNHEiedIAz6GJdFNfnGRBPUtX6vM6ko",
@@ -495,55 +397,88 @@ const firebaseConfig = {
   messagingSenderId: "519728871190",
   appId: "1:519728871190:web:edc388a5599cc4c85b8237"
 };
-
 const fbApp = initializeApp(firebaseConfig);
 const db = getFirestore(fbApp);
 
-const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const MONTHS_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-let pData = [], iItems = [], iStock = [];
-let charts = {};
-const isAdmin = !window.location.href.includes('view=true');
+const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const MONTHS_FULL=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+let pData=[],iItems=[],iStock=[],gItems=[];
+let charts={};
+const isAdmin=!window.location.href.includes('view=true');
+
+// ── SETTINGS MAP ──
+const TAB_MAP={
+  vs_p_dashboard:{tabId:'ptab-dashboard'},vs_p_daywise:{tabId:'ptab-daywise'},
+  vs_p_weekly:{tabId:'ptab-weekly'},vs_p_monthly:{tabId:'ptab-monthly'},
+  vs_p_quarterly:{tabId:'ptab-quarterly'},vs_p_annual:{tabId:'ptab-annual'},
+  vs_p_vendors:{tabId:'ptab-vendors'},vs_p_records:{tabId:'ptab-records'},
+  vs_i_dashboard:{tabId:'itab-dashboard'},vs_i_history:{tabId:'itab-history'},vs_i_report:{tabId:'itab-report'},
+  vs_g_dashboard:{tabId:'gtab-dashboard'},vs_g_tracker:{tabId:'gtab-tracker'},
+  vs_g_expiry:{tabId:'gtab-expiry'},vs_g_order:{tabId:'gtab-order'},
+};
+const SEC_MAP={vs_sec_purchase:'stab-purchase',vs_sec_inventory:'stab-inventory',vs_sec_grocery:'stab-grocery'};
+let viewSettings={};
+
+async function loadViewSettings(){
+  try{const snap=await getDoc(doc(db,'app_settings','view_controls'));if(snap.exists())viewSettings=snap.data();else{Object.keys(TAB_MAP).forEach(k=>viewSettings[k]=true);Object.keys(SEC_MAP).forEach(k=>viewSettings[k]=true);}}
+  catch(e){Object.keys(TAB_MAP).forEach(k=>viewSettings[k]=true);Object.keys(SEC_MAP).forEach(k=>viewSettings[k]=true);}
+  applyViewSettings();
+}
+function applyViewSettings(){
+  if(isAdmin){document.getElementById('admin-settings-btn').style.display='block';return;}
+  document.getElementById('share-btn').style.display='none';
+  document.getElementById('admin-settings-btn').style.display='none';
+  ['ptab-entry','ptab-import','itab-items','itab-update','gtab-items'].forEach(id=>{let el=document.getElementById(id);if(el)el.style.display='none';});
+  Object.entries(SEC_MAP).forEach(([key,stabId])=>{let el=document.getElementById(stabId);if(el)el.style.display=viewSettings[key]!==false?'':'none';});
+  Object.entries(TAB_MAP).forEach(([key,{tabId}])=>{let el=document.getElementById(tabId);if(el)el.style.display=viewSettings[key]!==false?'':'none';});
+  document.getElementById('view-banner').style.display='flex';
+}
+
+// ── SETTINGS MODAL ──
+window.openSettings=function(){
+  Object.keys(TAB_MAP).forEach(k=>{let el=document.getElementById(k);if(el)el.checked=viewSettings[k]!==false;});
+  Object.keys(SEC_MAP).forEach(k=>{let el=document.getElementById(k);if(el)el.checked=viewSettings[k]!==false;});
+  document.getElementById('settingsOverlay').classList.add('open');
+};
+window.closeSettings=function(){document.getElementById('settingsOverlay').classList.remove('open');};
+window.saveSettings=async function(){
+  let ns={};
+  Object.keys(TAB_MAP).forEach(k=>{let el=document.getElementById(k);if(el)ns[k]=el.checked;});
+  Object.keys(SEC_MAP).forEach(k=>{let el=document.getElementById(k);if(el)ns[k]=el.checked;});
+  try{await setDoc(doc(db,'app_settings','view_controls'),ns);viewSettings=ns;closeSettings();toast('✅ Settings saved!');}
+  catch(e){toast('❌ '+e.message);}
+};
+document.getElementById('settingsOverlay').addEventListener('click',function(e){if(e.target===this)closeSettings();});
 
 // ── UTILS ──
-const fmt = n => parseFloat(n||0).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
-const fmtS = n => { n=parseFloat(n||0); if(n>=100000)return'₹'+(n/100000).toFixed(1)+'L'; if(n>=1000)return'₹'+(n/1000).toFixed(1)+'K'; return'₹'+fmt(n); };
-const fmtD = d => { if(!d)return''; try{let p=d.split('-');return`${p[2]}-${MONTHS[parseInt(p[1])-1]}-${p[0].slice(2)}`}catch(e){return d} };
-const toISO = s => {
-  if(!s)return''; if(/^\d{4}-\d{2}-\d{2}$/.test(s))return s;
-  let mo={jan:'01',feb:'02',mar:'03',apr:'04',may:'05',jun:'06',jul:'07',aug:'08',sep:'09',oct:'10',nov:'11',dec:'12'};
-  let m=s.match(/(\d+)[- ]([a-z]+)[- ](\d+)/i);
-  if(m){let yr=m[3].length===2?'20'+m[3]:m[3];return`${yr}-${mo[m[2].toLowerCase()]||'01'}-${m[1].padStart(2,'0')}`}
-  return s;
-};
-const toast = (msg,dur=2600) => { let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',dur); };
-const mkChart = (id,type,labels,datasets,opts={}) => {
-  let ctx=document.getElementById(id); if(!ctx)return;
-  if(charts[id])charts[id].destroy();
-  charts[id]=new Chart(ctx,{type,data:{labels,datasets},options:{responsive:true,plugins:{legend:{display:opts.legend??true,position:'bottom',labels:{font:{size:9},boxWidth:10}}},scales:type==='doughnut'||type==='pie'?{}:{y:{ticks:{callback:v=>fmtS(v)}},...(opts.scales||{})}}});
-};
-const gColor = g => g>0?'#2e7d32':g<0?'#c62828':'#555';
-const gIcon = g => g>0?'▲':g<0?'▼':'—';
-const getFiltered = (year='',month='',vendor='',cat='',search='') => pData.filter(r=>{
-  if(year&&!r.date.startsWith(year))return false;
-  if(month&&r.date.slice(5,7)!==month)return false;
-  if(vendor&&r.sup!==vendor)return false;
-  if(cat&&r.cat!==cat)return false;
-  if(search){let q=search.toLowerCase();if(!r.sup.toLowerCase().includes(q)&&!r.inv.toLowerCase().includes(q))return false}
-  return true;
-});
-const mLabel = (y,m) => `${MONTHS_FULL[parseInt(m)-1]} ${y}`;
+const fmt=n=>parseFloat(n||0).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtS=n=>{n=parseFloat(n||0);if(n>=100000)return'₹'+(n/100000).toFixed(1)+'L';if(n>=1000)return'₹'+(n/1000).toFixed(1)+'K';return'₹'+fmt(n);};
+const fmtD=d=>{if(!d)return'';try{let p=d.split('-');return`${p[2]}-${MONTHS[parseInt(p[1])-1]}-${p[0].slice(2)}`}catch(e){return d}};
+const toISO=s=>{if(!s)return'';if(/^\d{4}-\d{2}-\d{2}$/.test(s))return s;let mo={jan:'01',feb:'02',mar:'03',apr:'04',may:'05',jun:'06',jul:'07',aug:'08',sep:'09',oct:'10',nov:'11',dec:'12'};let m=s.match(/(\d+)[- ]([a-z]+)[- ](\d+)/i);if(m){let yr=m[3].length===2?'20'+m[3]:m[3];return`${yr}-${mo[m[2].toLowerCase()]||'01'}-${m[1].padStart(2,'0')}`}return s;};
+const toast=(msg,dur=2600)=>{let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',dur);};
+const mkChart=(id,type,labels,datasets,opts={})=>{let ctx=document.getElementById(id);if(!ctx)return;if(charts[id])charts[id].destroy();charts[id]=new Chart(ctx,{type,data:{labels,datasets},options:{responsive:true,plugins:{legend:{display:opts.legend??true,position:'bottom',labels:{font:{size:9},boxWidth:10}}},scales:type==='doughnut'||type==='pie'?{}:{y:{ticks:{callback:v=>fmtS(v)}},...(opts.scales||{})}}});};
+const gColor=g=>g>0?'#2e7d32':g<0?'#c62828':'#555';
+const gIcon=g=>g>0?'▲':g<0?'▼':'—';
+const getFiltered=(year='',month='',vendor='',cat='',search='')=>pData.filter(r=>{if(year&&!r.date.startsWith(year))return false;if(month&&r.date.slice(5,7)!==month)return false;if(vendor&&r.sup!==vendor)return false;if(cat&&r.cat!==cat)return false;if(search){let q=search.toLowerCase();if(!r.sup.toLowerCase().includes(q)&&!r.inv.toLowerCase().includes(q))return false}return true;});
+const mLabel=(y,m)=>`${MONTHS_FULL[parseInt(m)-1]} ${y}`;
 
-// ── SECTION/PAGE NAV ──
-window.showSection = function(id,el) {
+// ── GROCERY HELPERS ──
+const daysLeft=expiry=>{if(!expiry)return null;return Math.ceil((new Date(expiry)-new Date())/(1000*60*60*24));};
+const expStatus=expiry=>{if(!expiry)return'none';const d=daysLeft(expiry);if(d<0)return'expired';if(d<=60)return'expiring';return'fresh';};
+const trafficLight=item=>{const es=expStatus(item.expiry);const isLow=item.min>0&&item.stock<item.min;if(item.stock===0||es==='expired')return'red';if(isLow||es==='expiring')return'yellow';return'green';};
+
+// ── NAV ──
+window.showSection=function(id,el){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
   document.getElementById('sec-'+id).classList.add('active');
   if(el)el.classList.add('active');
+  if(id==='grocery')renderGrocDashboard();
 };
-window.showPage = function(id,el,tabsId) {
-  let container = document.getElementById('sec-'+( tabsId.startsWith('purchase')?'purchase':'inventory'));
+window.showPage=function(id,el,tabsId){
+  let sec=tabsId.startsWith('purchase')?'purchase':tabsId.startsWith('inventory')?'inventory':'grocery';
+  let container=document.getElementById('sec-'+sec);
   container.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(tabsId).querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('pg-'+id).classList.add('active');
@@ -560,201 +495,246 @@ window.showPage = function(id,el,tabsId) {
   if(id==='i-items')renderItems();
   if(id==='i-history')renderIHistory();
   if(id==='i-report')renderInvReport();
+  if(id==='g-dashboard')renderGrocDashboard();
+  if(id==='g-items')renderGrocItems();
+  if(id==='g-tracker')renderGrocTracker();
+  if(id==='g-expiry')renderGrocExpiry();
+  if(id==='g-order')renderGrocOrder();
 };
 
-// ── FIREBASE LISTENERS ──
+// ── FIREBASE ──
 function startListeners(){
   document.getElementById('status').textContent='🔄 Connecting...';
-  onSnapshot(query(collection(db,'purchases'),orderBy('ts','desc')), snap=>{
+  onSnapshot(query(collection(db,'purchases'),orderBy('ts','desc')),snap=>{
     pData=snap.docs.map(d=>({...d.data(),_id:d.id}));
     document.getElementById('status').textContent='🟢 Live';
     document.getElementById('last-updated').textContent='Updated: '+new Date().toLocaleTimeString();
-    updatePDropdowns(); renderPDashboard();
-  }, err=>{ document.getElementById('status').textContent='🔴 Offline'; toast('⚠️ '+err.message); });
-
-  onSnapshot(query(collection(db,'inventory_items'),orderBy('srno','asc')), snap=>{
-    iItems=snap.docs.map(d=>({...d.data(),_id:d.id}));
-    updateIDropdowns(); renderIDashboard(); renderItems();
-  });
-  onSnapshot(query(collection(db,'inventory_stock'),orderBy('ts','desc')), snap=>{
-    iStock=snap.docs.map(d=>({...d.data(),_id:d.id}));
-    renderIDashboard(); renderIHistory(); updateIYearDropdowns();
+    updatePDropdowns();renderPDashboard();
+  },err=>{document.getElementById('status').textContent='🔴 Offline';toast('⚠️ '+err.message);});
+  onSnapshot(query(collection(db,'inventory_items'),orderBy('srno','asc')),snap=>{iItems=snap.docs.map(d=>({...d.data(),_id:d.id}));updateIDropdowns();renderIDashboard();renderItems();});
+  onSnapshot(query(collection(db,'inventory_stock'),orderBy('ts','desc')),snap=>{iStock=snap.docs.map(d=>({...d.data(),_id:d.id}));renderIDashboard();renderIHistory();updateIYearDropdowns();});
+  onSnapshot(query(collection(db,'grocery_items'),orderBy('name','asc')),snap=>{
+    gItems=snap.docs.map(d=>({...d.data(),_id:d.id}));
+    renderGrocDashboard();renderGrocItems();renderGrocTracker();updateGrocCatDropdowns();
   });
 }
 
-// ── PURCHASE: ADD/DELETE ──
-window.addEntry = async () => {
-  let inv=document.getElementById('f_inv').value.trim();
-  let date=document.getElementById('f_date').value;
-  let sup=document.getElementById('f_sup').value.trim().toUpperCase();
-  let cat=document.getElementById('f_cat').value;
-  let base=parseFloat(document.getElementById('f_base').value)||0;
-  let tax=parseFloat(document.getElementById('f_tax').value)||0;
-  let note=document.getElementById('f_note').value.trim();
-  if(!inv||!date||!sup||!base){toast('⚠️ Invoice No, Date, Supplier & Base Amount required!');return}
-  let btn=document.getElementById('addBtn');btn.disabled=true;btn.textContent='Saving...';
-  try{ await addDoc(collection(db,'purchases'),{inv,date,sup,cat,base,tax,total:base+tax,note,ts:Date.now()}); clearForm();toast('✅ Invoice saved!'); }
-  catch(e){toast('❌ '+e.message)}
-  btn.disabled=false;btn.textContent='➕ Add Invoice';
-};
-window.deleteEntry = async id => {
+// ══════════ GROCERY FUNCTIONS ══════════
+window.addGrocItem=async()=>{
   if(!isAdmin){toast('⚠️ View-only');return}
-  if(!confirm('Delete?'))return;
-  try{await deleteDoc(doc(db,'purchases',id));toast('🗑️ Deleted')}catch(e){toast('❌ '+e.message)}
+  let name=document.getElementById('g_name').value.trim().toUpperCase();
+  let cat=document.getElementById('g_cat').value;
+  let uom=document.getElementById('g_uom').value;
+  let stock=parseFloat(document.getElementById('g_stock').value)||0;
+  let min=parseFloat(document.getElementById('g_min').value)||0;
+  let expiry=document.getElementById('g_expiry').value;
+  if(!name){toast('⚠️ Product name required!');return}
+  try{await addDoc(collection(db,'grocery_items'),{name,cat,uom,stock,min,expiry,updatedAt:new Date().toISOString(),ts:Date.now()});clearGrocForm();toast('✅ Item added!');}
+  catch(e){toast('❌ '+e.message);}
 };
-window.calcTotal = () => { let b=parseFloat(document.getElementById('f_base').value)||0,t=parseFloat(document.getElementById('f_tax').value)||0; document.getElementById('f_total').value=(b+t).toFixed(2); };
-window.clearForm = () => { ['f_inv','f_sup','f_base','f_note'].forEach(id=>document.getElementById(id).value=''); document.getElementById('f_tax').value='0'; document.getElementById('f_total').value=''; document.getElementById('f_cat').value=''; document.getElementById('f_date').valueAsDate=new Date(); };
+window.clearGrocForm=()=>{['g_name','g_stock','g_min'].forEach(id=>document.getElementById(id).value='');document.getElementById('g_expiry').value='';};
+window.deleteGrocItem=async id=>{if(!isAdmin){toast('⚠️ View-only');return}if(!confirm('Delete?'))return;try{await deleteDoc(doc(db,'grocery_items',id));toast('🗑️ Deleted');}catch(e){toast('❌ '+e.message);}};
 
-// ── PURCHASE DASHBOARD ──
-function renderPDashboard(){
-  let now=new Date(),cy=now.getFullYear()+'',cm=(now.getMonth()+1+'').padStart(2,'0');
-  let lm=new Date(now.getFullYear(),now.getMonth()-1,1),ly=lm.getFullYear()+'',lmm=(lm.getMonth()+1+'').padStart(2,'0');
-  let all=pData,cur=pData.filter(r=>r.date.startsWith(cy+'-'+cm)),prev=pData.filter(r=>r.date.startsWith(ly+'-'+lmm));
-  let tot=r=>r.reduce((s,x)=>s+x.total,0),txs=r=>r.reduce((s,x)=>s+x.tax,0);
-  let curT=tot(cur),prevT=tot(prev),g=prevT>0?((curT-prevT)/prevT*100):0,allT=tot(all);
-  document.getElementById('p-kpi').innerHTML=[
-    {lbl:'Total Purchase',val:'₹'+fmt(allT),cls:'k1'},
-    {lbl:'This Month',val:'₹'+fmt(curT),cls:'k2',trend:g},
-    {lbl:'Month Tax',val:'₹'+fmt(txs(cur)),cls:'k3'},
-    {lbl:'Total Invoices',val:all.length,cls:'k4'},
-    {lbl:'Unique Vendors',val:new Set(all.map(r=>r.sup)).size,cls:'k5'},
-    {lbl:'Avg Invoice',val:'₹'+fmt(all.length?allT/all.length:0),cls:'k6'},
-  ].map(k=>`<div class="kpi ${k.cls}"><div class="kpi-val">${k.val}</div><div class="kpi-lbl">${k.lbl}</div>${k.trend!==undefined?`<span class="kpi-trend ${k.trend>=0?'trend-up':'trend-dn'}">${gIcon(k.trend)} ${Math.abs(k.trend).toFixed(1)}%</span>`:''}</div>`).join('');
+window.editGrocStock=function(td,itemId,currentStock){
+  if(!isAdmin){return;}
+  let inp=document.createElement('input');
+  inp.type='number';inp.value=currentStock;inp.step='0.25';inp.min='0';
+  inp.style.cssText='width:70px;padding:3px 5px;border:1.5px solid #e65100;border-radius:4px;font-size:0.8rem;font-weight:700;';
+  td.innerHTML='';td.appendChild(inp);inp.focus();inp.select();
+  async function commit(){
+    let v=parseFloat(inp.value)||0;
+    try{await setDoc(doc(db,'grocery_items',itemId),{stock:v,updatedAt:new Date().toISOString()},{merge:true});toast('✅ Stock updated!');}
+    catch(e){toast('❌ '+e.message);}
+  }
+  inp.addEventListener('blur',commit,{once:true});
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')inp.blur();if(e.key==='Escape'){inp.removeEventListener('blur',commit);renderGrocTracker();}});
+};
 
-  document.getElementById('p-growth').innerHTML=[
-    {lbl:'Purchase vs Last Month',cur:curT,prev:prevT},
-    {lbl:'Invoices Growth',cur:cur.length,prev:prev.length},
-    {lbl:'Tax Growth',cur:txs(cur),prev:txs(prev)},
-    {lbl:'Vendors Growth',cur:new Set(cur.map(r=>r.sup)).size,prev:new Set(prev.map(r=>r.sup)).size},
-  ].map(g2=>{let gp=g2.prev>0?((g2.cur-g2.prev)/g2.prev*100):0;return`<div class="growth-card"><div class="growth-val" style="color:${gColor(gp)}">${gIcon(gp)} ${Math.abs(gp).toFixed(1)}%</div><div style="font-size:0.66rem;color:#888;margin-top:2px">${g2.lbl}</div></div>`}).join('');
+function renderGrocDashboard(){
+  const all=gItems;
+  const expired=all.filter(i=>expStatus(i.expiry)==='expired').length;
+  const expiring=all.filter(i=>expStatus(i.expiry)==='expiring').length;
+  const low=all.filter(i=>i.min>0&&i.stock<i.min).length;
+  const zero=all.filter(i=>i.stock===0).length;
+  const fresh=all.filter(i=>expStatus(i.expiry)==='fresh').length;
+  document.getElementById('g-kpi').innerHTML=[
+    {lbl:'Total Items',val:all.length,cls:'ko1'},
+    {lbl:'Fresh',val:fresh,cls:'ko2'},
+    {lbl:'Expiring Soon',val:expiring,cls:'ko4'},
+    {lbl:'Expired',val:expired,cls:'ko3'},
+    {lbl:'Low / Zero Stock',val:low+zero,cls:'ko5'},
+  ].map(k=>`<div class="kpi ${k.cls}"><div class="kpi-val">${k.val}</div><div class="kpi-lbl">${k.lbl}</div></div>`).join('');
 
-  let mL=[],mB=[],mT=[];
-  for(let i=11;i>=0;i--){ let d=new Date(now.getFullYear(),now.getMonth()-i,1),y=d.getFullYear()+'',m=(d.getMonth()+1+'').padStart(2,'0'); mL.push(MONTHS[d.getMonth()]+"'"+y.slice(2)); let rows=pData.filter(r=>r.date.startsWith(y+'-'+m)); mB.push(rows.reduce((s,r)=>s+r.base,0)); mT.push(rows.reduce((s,r)=>s+r.tax,0)); }
-  mkChart('trendChart','bar',mL,[{label:'Base',data:mB,backgroundColor:'rgba(21,101,192,0.75)',borderRadius:4},{label:'Tax',data:mT,backgroundColor:'rgba(198,40,40,0.7)',borderRadius:4}],{scales:{x:{stacked:true},y:{stacked:true}}});
+  document.getElementById('g-alert-banner').innerHTML=`
+    <span style="font-weight:700;opacity:0.6;font-size:0.7rem">TODAY'S ALERTS</span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:50%;background:#e74c3c;display:inline-block"></span>${expired} Expired</span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:50%;background:#f39c12;display:inline-block"></span>${expiring} Expiring (≤60d)</span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:50%;background:#e67e22;display:inline-block"></span>${low} Low Stock</span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:50%;background:#95a5a6;display:inline-block"></span>${zero} Zero Stock</span>
+    <span style="margin-left:auto;opacity:0.5;font-size:0.68rem">Double-click stock to edit</span>`;
 
-  let vm={};pData.forEach(r=>{vm[r.sup]=(vm[r.sup]||0)+r.total});
-  let vs=Object.entries(vm).sort((a,b)=>b[1]-a[1]).slice(0,5);
-  if(vs.length)mkChart('vendorPieChart','doughnut',vs.map(v=>v[0]),[{data:vs.map(v=>v[1]),backgroundColor:['#1565c0','#2e7d32','#f9a825','#c62828','#6a1b9a'],borderWidth:2}]);
-  let cm2={};pData.forEach(r=>{let c=r.cat||'Other';cm2[c]=(cm2[c]||0)+r.total});
-  let cs=Object.entries(cm2).sort((a,b)=>b[1]-a[1]);
-  if(cs.length)mkChart('catDoughnut','doughnut',cs.map(c=>c[0]),[{data:cs.map(c=>c[1]),backgroundColor:['#0288d1','#388e3c','#f57c00','#d32f2f','#7b1fa2','#00796b'],borderWidth:2}]);
-  let dim=new Date(parseInt(cy),parseInt(cm),0).getDate(),dL=[],dV=[];
-  for(let d=1;d<=dim;d++){let ds=`${cy}-${cm}-${d.toString().padStart(2,'0')}`;dL.push(d);dV.push(pData.filter(r=>r.date===ds).reduce((s,r)=>s+r.total,0));}
-  mkChart('dailyChart','bar',dL,[{label:'Daily',data:dV,backgroundColor:'rgba(21,101,192,0.6)',borderRadius:3}],{legend:false});
-  renderHeatmap(cy);
-  let tvm={};cur.forEach(r=>{tvm[r.sup]=(tvm[r.sup]||0)+r.total});
-  let tvs=Object.entries(tvm).sort((a,b)=>b[1]-a[1]).slice(0,5),mx=tvs[0]?tvs[0][1]:1;
-  document.getElementById('dash-top-vendors').innerHTML=tvs.length?tvs.map(([n,a],i)=>`<div class="vrank"><div class="rnum ${['r1','r2','r3','rn','rn'][i]}">${i+1}</div><div class="vname">${n}</div><div class="vbar-wrap"><div class="vbar" style="width:${(a/mx*100).toFixed(0)}%"></div></div><div class="vamt">${fmtS(a)}</div></div>`).join(''):'<div style="color:#aaa;text-align:center;padding:12px">No data this month</div>';
-  let rec=[...pData].slice(0,5);
-  document.getElementById('p-recent').innerHTML=rec.length?`<div class="tw"><table><thead><tr><th>Invoice</th><th>Date</th><th>Supplier</th><th class="right">Total</th></tr></thead><tbody>${rec.map(r=>`<tr><td><span class="badge bb">${r.inv}</span></td><td>${fmtD(r.date)}</td><td>${r.sup}</td><td class="right fw" style="color:#1565c0">₹${fmt(r.total)}</td></tr>`).join('')}</tbody></table></div>`:'<div style="color:#aaa;text-align:center;padding:12px">No entries yet</div>';
-  document.getElementById('recent-entries').innerHTML=document.getElementById('p-recent').innerHTML;
+  // Overview grid
+  document.getElementById('g-overview-grid').innerHTML=all.map(item=>{
+    const tl=trafficLight(item);
+    const tlC=tl==='red'?'#e74c3c':tl==='yellow'?'#f39c12':'#27ae60';
+    const bg=tl==='red'?'#fdf0f0':tl==='yellow'?'#fefdf0':'#f0fdf4';
+    return`<div style="background:${bg};border:1px solid ${tlC}40;border-radius:9px;padding:10px 12px;border-left:4px solid ${tlC}">
+      <div style="font-size:0.76rem;font-weight:700;color:#333;margin-bottom:4px">${item.name}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span style="font-size:1.1rem;font-weight:800;color:${tlC}">${item.stock} <span style="font-size:0.65rem;opacity:0.7">${item.uom}</span></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:${tlC};box-shadow:0 0 4px ${tlC}80;display:inline-block"></span>
+      </div>
+      <div style="font-size:0.65rem;color:#888;margin-top:3px">${item.cat}</div>
+    </div>`;
+  }).join('')||'<div style="color:#aaa;text-align:center;padding:20px;grid-column:1/-1">No items. Add items first.</div>';
+
+  // Attention
+  const attention=all.filter(i=>trafficLight(i)!=='green').sort((a,b)=>a.name.localeCompare(b.name));
+  document.getElementById('g-attention').innerHTML=attention.length?`<div class="tw"><table class="groc"><thead><tr><th></th><th>Product</th><th>Category</th><th class="center">Stock</th><th>Expiry</th><th>Issue</th></tr></thead><tbody>${attention.map(item=>{
+    const tl=trafficLight(item);const tlC=tl==='red'?'tl-red':'tl-yellow';
+    const dl=daysLeft(item.expiry);
+    const issue=item.stock===0?'<span class="badge br">Zero Stock</span>':expStatus(item.expiry)==='expired'?'<span class="badge br">Expired</span>':expStatus(item.expiry)==='expiring'?`<span class="badge by">${dl}d left</span>`:'<span class="badge by">Low Stock</span>';
+    return`<tr><td><span class="tl-dot ${tlC}"></span></td><td class="fw">${item.name}</td><td><span class="badge bo2">${item.cat}</span></td><td class="center fw">${item.stock} ${item.uom}</td><td style="font-size:0.7rem;color:#888">${item.expiry||'—'}</td><td>${issue}</td></tr>`;
+  }).join('')}</tbody></table></div>`:'<div style="color:#27ae60;text-align:center;padding:18px;font-weight:600">✅ Sab theek hai! Koi alert nahi.</div>';
 }
 
-// ── HEATMAP ──
-function renderHeatmap(year){
-  document.getElementById('hm-year-lbl').textContent=year;
-  let dMap={};pData.filter(r=>r.date.startsWith(year)).forEach(r=>{dMap[r.date]=(dMap[r.date]||0)+r.total});
-  let maxVal=Math.max(...Object.values(dMap),1);
-  let getColor=v=>{ if(!v)return'#ebedf0'; let p=v/maxVal; if(p<0.25)return'#c8d9f7'; if(p<0.5)return'#8fb5f0'; if(p<0.75)return'#5590e8'; return'#1565c0'; };
-  let weeks=[],week=new Array(7).fill(null);
-  let d=new Date(parseInt(year),0,1),end=new Date(parseInt(year),11,31);
-  for(let i=0;i<d.getDay();i++)week[i]=null;
-  while(d<=end){let dow=d.getDay(),ds=d.toISOString().slice(0,10);week[dow]={date:ds,val:dMap[ds]||0};if(dow===6){weeks.push([...week]);week=new Array(7).fill(null);}d.setDate(d.getDate()+1);}
-  if(week.some(x=>x!==null))weeks.push(week);
-  let monRow='<div class="hm-months">',lastMon=-1;
-  weeks.forEach(wk=>{let f=wk.find(x=>x!==null);if(f){let mon=parseInt(f.date.slice(5,7))-1;if(mon!==lastMon){monRow+=`<div class="hm-mon" style="width:16px">${MONTHS[mon]}</div>`;lastMon=mon;}else monRow+='<div style="width:16px"></div>';}else monRow+='<div style="width:16px"></div>';});
-  monRow+='</div>';
-  let html=monRow;
-  for(let row=0;row<7;row++){html+=`<div class="hm-row"><div class="hm-label">${row%2===1?DAYS[row]:''}</div>`;weeks.forEach(wk=>{let cell=wk[row];html+=cell?`<div class="hm-cell" style="background:${getColor(cell.val)}" onmousemove="showTip(event,'${cell.date}: ₹${fmt(cell.val)}')" onmouseleave="hideTip()"></div>`:'<div class="hm-cell" style="background:transparent"></div>';});html+='</div>';}
-  document.getElementById('heatmap-container').innerHTML=html;
+function renderGrocItems(){
+  const cat=document.getElementById('g_filter_cat')?document.getElementById('g_filter_cat').value:'';
+  const srch=document.getElementById('g_search')?document.getElementById('g_search').value.toLowerCase():'';
+  let items=gItems.filter(i=>{if(cat&&i.cat!==cat)return false;if(srch&&!i.name.toLowerCase().includes(srch))return false;return true;});
+  document.getElementById('g-item-count').textContent=`(${gItems.length} total)`;
+  document.getElementById('g-items-tbody').innerHTML=items.map((item,i)=>{
+    const tl=trafficLight(item);const tlC=tl==='red'?'tl-red':tl==='yellow'?'tl-yellow':'tl-green';
+    const es=expStatus(item.expiry);
+    const expB=es==='expired'?'<span class="badge br">❌ Expired</span>':es==='expiring'?'<span class="badge by">⚠️ Expiring</span>':es==='fresh'?'<span class="badge bg">✅ Fresh</span>':'<span style="color:#ccc">—</span>';
+    return`<tr><td>${i+1}</td><td class="fw">${item.name}</td><td><span class="badge bo2">${item.cat}</span></td><td style="color:#888;font-size:0.72rem">${item.uom}</td><td class="center fw">${item.stock}</td><td class="center" style="color:#888">${item.min||'—'}</td><td style="font-size:0.72rem;color:#666">${item.expiry||'—'}</td><td>${expB}</td><td>${isAdmin?`<button class="btn bd" style="padding:3px 6px;font-size:0.66rem" onclick="deleteGrocItem('${item._id}')">🗑️</button>`:''}</td></tr>`;
+  }).join('')||'<tr><td colspan="9" style="text-align:center;color:#aaa;padding:18px">No items found.</td></tr>';
 }
+
+function renderGrocTracker(){
+  const cat=document.getElementById('gt_cat')?document.getElementById('gt_cat').value:'';
+  const filt=document.getElementById('gt_filter')?document.getElementById('gt_filter').value:'all';
+  const srch=document.getElementById('gt_search')?document.getElementById('gt_search').value.toLowerCase():'';
+  let items=gItems.filter(i=>{
+    if(cat&&i.cat!==cat)return false;
+    const es=expStatus(i.expiry);const isLow=i.min>0&&i.stock<i.min;
+    if(filt==='low'&&!(i.stock===0||isLow))return false;
+    if(filt==='expiring'&&es!=='expiring')return false;
+    if(srch&&!i.name.toLowerCase().includes(srch))return false;
+    return true;
+  });
+
+  // Group by category
+  let bycat={};items.forEach(i=>{if(!bycat[i.cat])bycat[i.cat]=[];bycat[i.cat].push(i);});
+  let rows='';
+  Object.entries(bycat).forEach(([cat,citems])=>{
+    rows+=`<tr class="g-cat-row"><td colspan="10">📦 ${cat} (${citems.length})</td></tr>`;
+    citems.forEach(item=>{
+      const tl=trafficLight(item);const tlC=tl==='red'?'tl-red':tl==='yellow'?'tl-yellow':'tl-green';
+      const barColor=tl==='red'?'#e74c3c':tl==='yellow'?'#f39c12':'#27ae60';
+      const maxS=Math.max(item.min*1.5,item.stock,1);
+      const pct=Math.min(100,Math.round((item.stock/maxS)*100));
+      const dl=daysLeft(item.expiry);
+      let daysHtml='<span style="color:#ccc;font-size:0.7rem">—</span>';
+      if(dl!==null){if(dl<0)daysHtml=`<span class="days-chip dc-red">Expired ${Math.abs(dl)}d ago</span>`;else if(dl===0)daysHtml=`<span class="days-chip dc-red">Today!</span>`;else if(dl<=30)daysHtml=`<span class="days-chip dc-red">${dl}d left</span>`;else if(dl<=60)daysHtml=`<span class="days-chip dc-orange">${dl}d left</span>`;else daysHtml=`<span class="days-chip dc-green">${dl}d left</span>`;}
+      const es=expStatus(item.expiry);
+      const expB=es==='expired'?'<span class="badge br">❌ Expired</span>':es==='expiring'?'<span class="badge by">⚠️ Expiring</span>':es==='fresh'?'<span class="badge bg">✅ Fresh</span>':'<span style="color:#ccc;font-size:0.7rem">—</span>';
+      rows+=`<tr>
+        <td><span class="tl-dot ${tlC}"></span></td>
+        <td style="color:#ccc;font-size:0.7rem">${item._id.slice(-4)}</td>
+        <td class="fw">${item.name}</td>
+        <td style="color:#888;font-size:0.7rem">${item.uom}</td>
+        <td ondblclick="editGrocStock(this,'${item._id}',${item.stock})">
+          <div class="sbar-wrap">
+            <span class="editable" style="font-weight:700;font-size:0.9rem;color:${barColor}">${item.stock}</span>
+            <div class="sbar"><div class="sbar-fill" style="width:${pct}%;background:${barColor}"></div></div>
+          </div>
+        </td>
+        <td style="color:#aaa;font-size:0.72rem">${item.min||'—'}</td>
+        <td style="color:#666;font-size:0.7rem">${item.expiry||'—'}</td>
+        <td>${daysHtml}</td>
+        <td>${expB}</td>
+        <td>${isAdmin?`<button class="btn bd" style="padding:2px 6px;font-size:0.65rem" onclick="deleteGrocItem('${item._id}')">🗑️</button>`:''}</td>
+      </tr>`;
+    });
+  });
+  document.getElementById('g-tracker-tbody').innerHTML=rows||'<tr><td colspan="10" style="text-align:center;color:#aaa;padding:18px">No items found.</td></tr>';
+}
+
+function renderGrocExpiry(){
+  const all=[...gItems].filter(i=>i.expiry).sort((a,b)=>new Date(a.expiry)-new Date(b.expiry));
+  const expired=all.filter(i=>expStatus(i.expiry)==='expired');
+  const expiring=all.filter(i=>expStatus(i.expiry)==='expiring');
+  const fresh=all.filter(i=>expStatus(i.expiry)==='fresh');
+
+  const mkTable=(items,badge)=>items.length?`<div class="tw"><table class="groc"><thead><tr><th>Product</th><th>Category</th><th class="center">Stock</th><th>Expiry Date</th><th>Days</th></tr></thead><tbody>${items.map(item=>{const dl=daysLeft(item.expiry);return`<tr><td class="fw">${item.name}</td><td><span class="badge bo2">${item.cat}</span></td><td class="center">${item.stock} ${item.uom}</td><td style="font-size:0.72rem">${item.expiry}</td><td>${dl<0?`<span class="days-chip dc-red">Expired ${Math.abs(dl)}d ago</span>`:dl<=30?`<span class="days-chip dc-red">${dl}d left</span>`:`<span class="days-chip dc-orange">${dl}d left</span>`}</td></tr>`}).join('')}</tbody></table></div>`:'<div style="color:#aaa;padding:12px;text-align:center">None</div>';
+
+  document.getElementById('g-expiry-content').innerHTML=`
+    <div style="margin-bottom:14px"><div style="font-size:0.82rem;font-weight:700;color:#c0392b;padding:8px 0;border-bottom:2px solid #fce4e4;margin-bottom:8px">❌ Expired (${expired.length})</div>${mkTable(expired)}</div>
+    <div style="margin-bottom:14px"><div style="font-size:0.82rem;font-weight:700;color:#d35400;padding:8px 0;border-bottom:2px solid #fef3cd;margin-bottom:8px">⚠️ Expiring Soon — within 60 days (${expiring.length})</div>${mkTable(expiring)}</div>
+    <div><div style="font-size:0.82rem;font-weight:700;color:#1e8449;padding:8px 0;border-bottom:2px solid #d5f5e3;margin-bottom:8px">✅ Fresh (${fresh.length})</div>${mkTable(fresh)}</div>`;
+}
+
+function renderGrocOrder(){
+  const low=gItems.filter(i=>i.min>0&&i.stock<i.min);
+  const zero=gItems.filter(i=>i.stock===0&&!low.find(x=>x._id===i._id));
+  const all=[...low,...zero];
+  document.getElementById('g-order-count').textContent=`(${all.length} items)`;
+  if(!all.length){document.getElementById('g-order-content').innerHTML='<div style="color:#27ae60;text-align:center;padding:24px;font-weight:600">✅ Sab stock theek hai! Koi order nahi.</div>';return;}
+  let bycat={};all.forEach(i=>{if(!bycat[i.cat])bycat[i.cat]=[];bycat[i.cat].push(i);});
+  let html='<div class="tw"><table class="groc"><thead><tr><th>Product</th><th>Category</th><th class="center">Current</th><th class="center">Min Required</th><th class="center">Need</th><th>UOM</th></tr></thead><tbody>';
+  Object.entries(bycat).forEach(([cat,items])=>{
+    html+=`<tr class="g-cat-row"><td colspan="6">📦 ${cat}</td></tr>`;
+    items.forEach(item=>{const need=item.min>0?Math.max(0,item.min-item.stock):0;html+=`<tr><td class="fw">${item.name}</td><td><span class="badge bo2">${item.cat}</span></td><td class="center" style="color:#e74c3c;font-weight:700">${item.stock}</td><td class="center" style="color:#888">${item.min||'—'}</td><td class="center fw" style="color:#e65100">${need||'—'}</td><td style="color:#888;font-size:0.72rem">${item.uom}</td></tr>`;});
+  });
+  html+='</tbody></table></div>';
+  document.getElementById('g-order-content').innerHTML=html;
+}
+
+window.sendWhatsApp=()=>{
+  const low=gItems.filter(i=>i.min>0&&i.stock<i.min);
+  const zero=gItems.filter(i=>i.stock===0&&!low.find(x=>x._id===i._id));
+  const all=[...low,...zero];
+  if(!all.length){toast('✅ No items to reorder!');return;}
+  let msg='📦 *Stareef Hospitality — Ginger Jaipur*\n*Reorder List — '+new Date().toLocaleDateString('en-IN')+'*\n\n';
+  let lastCat='';
+  all.forEach(i=>{if(i.cat!==lastCat){msg+=`\n*${i.cat}*\n`;lastCat=i.cat;}const need=i.min>0?i.min-i.stock:0;msg+=`• ${i.name}: Need ${need||'?'} ${i.uom} (Stock: ${i.stock})\n`;});
+  msg+='\n_StockSense Pro — Manohar Singh_';
+  window.open('https://wa.me/?text='+encodeURIComponent(msg));
+};
+
+window.exportOrderCSV=()=>{
+  const low=gItems.filter(i=>i.min>0&&i.stock<i.min);
+  if(!low.length){toast('⚠️ No items');return;}
+  let csv='Product,Category,Current Stock,Min Stock,Need,UOM\n';
+  low.forEach(i=>csv+=`"${i.name}","${i.cat}",${i.stock},${i.min},${Math.max(0,i.min-i.stock)},"${i.uom}"\n`);
+  dl(csv,'order_list_'+new Date().toISOString().slice(0,10)+'.csv','text/csv');toast('✅ Exported!');
+};
+
+function updateGrocCatDropdowns(){
+  const cats=[...new Set(gItems.map(i=>i.cat))].sort();
+  ['g_filter_cat','gt_cat'].forEach(id=>{let el=document.getElementById(id);if(!el)return;let c=el.value;el.innerHTML='<option value="">All</option>'+cats.map(c=>`<option>${c}</option>`).join('');el.value=c;});
+}
+
+// ══════════ PURCHASE FUNCTIONS (same as before) ══════════
+window.addEntry=async()=>{if(!isAdmin){toast('⚠️ View-only');return}let inv=document.getElementById('f_inv').value.trim(),date=document.getElementById('f_date').value,sup=document.getElementById('f_sup').value.trim().toUpperCase(),cat=document.getElementById('f_cat').value,base=parseFloat(document.getElementById('f_base').value)||0,tax=parseFloat(document.getElementById('f_tax').value)||0,note=document.getElementById('f_note').value.trim();if(!inv||!date||!sup||!base){toast('⚠️ Required fields missing!');return}let btn=document.getElementById('addBtn');btn.disabled=true;btn.textContent='Saving...';try{await addDoc(collection(db,'purchases'),{inv,date,sup,cat,base,tax,total:base+tax,note,ts:Date.now()});clearForm();toast('✅ Invoice saved!');}catch(e){toast('❌ '+e.message)}btn.disabled=false;btn.textContent='➕ Add Invoice';};
+window.deleteEntry=async id=>{if(!isAdmin){toast('⚠️ View-only');return}if(!confirm('Delete?'))return;try{await deleteDoc(doc(db,'purchases',id));toast('🗑️ Deleted')}catch(e){toast('❌ '+e.message)}};
+window.calcTotal=()=>{let b=parseFloat(document.getElementById('f_base').value)||0,t=parseFloat(document.getElementById('f_tax').value)||0;document.getElementById('f_total').value=(b+t).toFixed(2);};
+window.clearForm=()=>{['f_inv','f_sup','f_base','f_note'].forEach(id=>document.getElementById(id).value='');document.getElementById('f_tax').value='0';document.getElementById('f_total').value='';document.getElementById('f_cat').value='';document.getElementById('f_date').valueAsDate=new Date();};
+
+function renderPDashboard(){let now=new Date(),cy=now.getFullYear()+'',cm=(now.getMonth()+1+'').padStart(2,'0');let lm=new Date(now.getFullYear(),now.getMonth()-1,1),ly=lm.getFullYear()+'',lmm=(lm.getMonth()+1+'').padStart(2,'0');let cur=pData.filter(r=>r.date.startsWith(cy+'-'+cm)),prev=pData.filter(r=>r.date.startsWith(ly+'-'+lmm));let tot=r=>r.reduce((s,x)=>s+x.total,0),txs=r=>r.reduce((s,x)=>s+x.tax,0);let curT=tot(cur),prevT=tot(prev),g=prevT>0?((curT-prevT)/prevT*100):0,allT=tot(pData);document.getElementById('p-kpi').innerHTML=[{lbl:'Total Purchase',val:'₹'+fmt(allT),cls:'k1'},{lbl:'This Month',val:'₹'+fmt(curT),cls:'k2',trend:g},{lbl:'Month Tax',val:'₹'+fmt(txs(cur)),cls:'k3'},{lbl:'Total Invoices',val:pData.length,cls:'k4'},{lbl:'Unique Vendors',val:new Set(pData.map(r=>r.sup)).size,cls:'k5'},{lbl:'Avg Invoice',val:'₹'+fmt(pData.length?allT/pData.length:0),cls:'k6'}].map(k=>`<div class="kpi ${k.cls}"><div class="kpi-val">${k.val}</div><div class="kpi-lbl">${k.lbl}</div>${k.trend!==undefined?`<span class="kpi-trend ${k.trend>=0?'trend-up':'trend-dn'}">${gIcon(k.trend)} ${Math.abs(k.trend).toFixed(1)}%</span>`:''}</div>`).join('');document.getElementById('p-growth').innerHTML=[{lbl:'Purchase vs Last Month',cur:curT,prev:prevT},{lbl:'Invoices Growth',cur:cur.length,prev:prev.length},{lbl:'Tax Growth',cur:txs(cur),prev:txs(prev)},{lbl:'Vendors Growth',cur:new Set(cur.map(r=>r.sup)).size,prev:new Set(prev.map(r=>r.sup)).size}].map(g2=>{let gp=g2.prev>0?((g2.cur-g2.prev)/g2.prev*100):0;return`<div class="growth-card"><div class="growth-val" style="color:${gColor(gp)}">${gIcon(gp)} ${Math.abs(gp).toFixed(1)}%</div><div style="font-size:0.66rem;color:#888;margin-top:2px">${g2.lbl}</div></div>`}).join('');let mL=[],mB=[],mT2=[];for(let i=11;i>=0;i--){let d=new Date(now.getFullYear(),now.getMonth()-i,1),y=d.getFullYear()+'',m=(d.getMonth()+1+'').padStart(2,'0');mL.push(MONTHS[d.getMonth()]+"'"+y.slice(2));let rows=pData.filter(r=>r.date.startsWith(y+'-'+m));mB.push(rows.reduce((s,r)=>s+r.base,0));mT2.push(rows.reduce((s,r)=>s+r.tax,0));}mkChart('trendChart','bar',mL,[{label:'Base',data:mB,backgroundColor:'rgba(21,101,192,0.75)',borderRadius:4},{label:'Tax',data:mT2,backgroundColor:'rgba(198,40,40,0.7)',borderRadius:4}],{scales:{x:{stacked:true},y:{stacked:true}}});let vm={};pData.forEach(r=>{vm[r.sup]=(vm[r.sup]||0)+r.total});let vs=Object.entries(vm).sort((a,b)=>b[1]-a[1]).slice(0,5);if(vs.length)mkChart('vendorPieChart','doughnut',vs.map(v=>v[0]),[{data:vs.map(v=>v[1]),backgroundColor:['#1565c0','#2e7d32','#f9a825','#c62828','#6a1b9a'],borderWidth:2}]);let cm2={};pData.forEach(r=>{let c=r.cat||'Other';cm2[c]=(cm2[c]||0)+r.total});let cs=Object.entries(cm2).sort((a,b)=>b[1]-a[1]);if(cs.length)mkChart('catDoughnut','doughnut',cs.map(c=>c[0]),[{data:cs.map(c=>c[1]),backgroundColor:['#0288d1','#388e3c','#f57c00','#d32f2f','#7b1fa2','#00796b'],borderWidth:2}]);let dim=new Date(parseInt(cy),parseInt(cm),0).getDate(),dL=[],dV=[];for(let d=1;d<=dim;d++){let ds=`${cy}-${cm}-${d.toString().padStart(2,'0')}`;dL.push(d);dV.push(pData.filter(r=>r.date===ds).reduce((s,r)=>s+r.total,0));}mkChart('dailyChart','bar',dL,[{label:'Daily',data:dV,backgroundColor:'rgba(21,101,192,0.6)',borderRadius:3}],{legend:false});renderHeatmap(cy);let tvm={};cur.forEach(r=>{tvm[r.sup]=(tvm[r.sup]||0)+r.total});let tvs=Object.entries(tvm).sort((a,b)=>b[1]-a[1]).slice(0,5),mx=tvs[0]?tvs[0][1]:1;document.getElementById('dash-top-vendors').innerHTML=tvs.length?tvs.map(([n,a],i)=>`<div class="vrank"><div class="rnum ${['r1','r2','r3','rn','rn'][i]}">${i+1}</div><div class="vname">${n}</div><div class="vbar-wrap"><div class="vbar" style="width:${(a/mx*100).toFixed(0)}%"></div></div><div class="vamt">${fmtS(a)}</div></div>`).join(''):'<div style="color:#aaa;text-align:center;padding:12px">No data</div>';document.getElementById('recent-entries').innerHTML=[...pData].slice(0,5).length?`<div class="tw"><table><thead><tr><th>Invoice</th><th>Date</th><th>Supplier</th><th class="right">Total</th></tr></thead><tbody>${[...pData].slice(0,5).map(r=>`<tr><td><span class="badge bb">${r.inv}</span></td><td>${fmtD(r.date)}</td><td>${r.sup}</td><td class="right fw" style="color:#1565c0">₹${fmt(r.total)}</td></tr>`).join('')}</tbody></table></div>`:'<div style="color:#aaa;text-align:center;padding:12px">No entries</div>';document.getElementById('p-recent').innerHTML=document.getElementById('recent-entries').innerHTML;}
+
+function renderHeatmap(year){document.getElementById('hm-year-lbl').textContent=year;let dMap={};pData.filter(r=>r.date.startsWith(year)).forEach(r=>{dMap[r.date]=(dMap[r.date]||0)+r.total});let maxVal=Math.max(...Object.values(dMap),1);let getColor=v=>{if(!v)return'#ebedf0';let p=v/maxVal;if(p<0.25)return'#c8d9f7';if(p<0.5)return'#8fb5f0';if(p<0.75)return'#5590e8';return'#1565c0';};let weeks=[],week=new Array(7).fill(null);let d=new Date(parseInt(year),0,1),end=new Date(parseInt(year),11,31);for(let i=0;i<d.getDay();i++)week[i]=null;while(d<=end){let dow=d.getDay(),ds=d.toISOString().slice(0,10);week[dow]={date:ds,val:dMap[ds]||0};if(dow===6){weeks.push([...week]);week=new Array(7).fill(null);}d.setDate(d.getDate()+1);}if(week.some(x=>x!==null))weeks.push(week);let monRow='<div class="hm-months">',lastMon=-1;weeks.forEach(wk=>{let f=wk.find(x=>x!==null);if(f){let mon=parseInt(f.date.slice(5,7))-1;if(mon!==lastMon){monRow+=`<div class="hm-mon" style="width:16px">${MONTHS[mon]}</div>`;lastMon=mon;}else monRow+='<div style="width:16px"></div>';}else monRow+='<div style="width:16px"></div>';});monRow+='</div>';let html=monRow;for(let row=0;row<7;row++){html+=`<div class="hm-row"><div class="hm-label">${row%2===1?DAYS[row]:''}</div>`;weeks.forEach(wk=>{let cell=wk[row];html+=cell?`<div class="hm-cell" style="background:${getColor(cell.val)}" onmousemove="showTip(event,'${cell.date}: ₹${fmt(cell.val)}')" onmouseleave="hideTip()"></div>`:'<div class="hm-cell" style="background:transparent"></div>';});html+='</div>';}document.getElementById('heatmap-container').innerHTML=html;}
 window.showTip=(e,txt)=>{let t=document.getElementById('tooltip');t.textContent=txt;t.style.display='block';t.style.left=(e.pageX+10)+'px';t.style.top=(e.pageY-28)+'px'};
 window.hideTip=()=>{document.getElementById('tooltip').style.display='none'};
-
-// ── PURCHASE: DAY/WEEK/MONTH/QTR/ANNUAL/VENDOR/RECORDS ──
-window.renderDaywise=()=>{
-  let year=document.getElementById('dw_year').value,month=document.getElementById('dw_month').value,vendor=document.getElementById('dw_vendor').value;
-  let rows=getFiltered(year,month,vendor);
-  let dMap={};rows.forEach(r=>{if(!dMap[r.date])dMap[r.date]={base:0,tax:0,total:0,count:0,vendors:{}};dMap[r.date].base+=r.base;dMap[r.date].tax+=r.tax;dMap[r.date].total+=r.total;dMap[r.date].count++;dMap[r.date].vendors[r.sup]=(dMap[r.date].vendors[r.sup]||0)+r.total;});
-  let days=Object.keys(dMap).sort();
-  if(charts.day)charts.day.destroy();let ctx=document.getElementById('dayChart');
-  charts.day=new Chart(ctx,{type:'bar',data:{labels:days.map(d=>fmtD(d)),datasets:[{label:'Daily',data:days.map(d=>dMap[d].total),backgroundColor:'rgba(21,101,192,0.7)',borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>fmtS(v)}}}}});
-  document.getElementById('dw-summary').textContent=`${days.length} days | ₹${fmt(days.reduce((s,d)=>s+dMap[d].total,0))}`;
-  document.getElementById('dw-body').innerHTML=days.map(d=>{let x=dMap[d],tv=Object.entries(x.vendors).sort((a,b)=>b[1]-a[1])[0],dow=new Date(d).getDay();return`<tr><td><b>${fmtD(d)}</b></td><td><span class="badge ${dow===0||dow===6?'br':'bb'}">${DAYS[dow]}</span></td><td class="right">${x.count}</td><td class="right">₹${fmt(x.base)}</td><td class="right" style="color:#c62828">₹${fmt(x.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(x.total)}</td><td style="font-size:0.72rem">${tv?tv[0]:''}</td></tr>`;}).join('')||'<tr><td colspan="7" style="text-align:center;color:#aaa;padding:14px">Select Year & Month</td></tr>';
-  let tb=days.reduce((s,d)=>s+dMap[d].base,0),tt=days.reduce((s,d)=>s+dMap[d].tax,0),tto=days.reduce((s,d)=>s+dMap[d].total,0),tc=days.reduce((s,d)=>s+dMap[d].count,0);
-  document.getElementById('dw-foot').innerHTML=`<tr><td colspan="2">TOTAL (${days.length} days)</td><td class="right">${tc}</td><td class="right">₹${fmt(tb)}</td><td class="right">₹${fmt(tt)}</td><td class="right">₹${fmt(tto)}</td><td></td></tr>`;
-};
-window.renderWeekly=()=>{
-  let rows=getFiltered(document.getElementById('ww_year').value,document.getElementById('ww_month').value);
-  let wMap={};rows.forEach(r=>{let d=new Date(r.date),jan1=new Date(d.getFullYear(),0,1),wn=Math.ceil(((d-jan1)/86400000+jan1.getDay()+1)/7),wk=`${d.getFullYear()}-W${wn.toString().padStart(2,'0')}`;if(!wMap[wk])wMap[wk]={base:0,tax:0,total:0,count:0,dates:[]};wMap[wk].base+=r.base;wMap[wk].tax+=r.tax;wMap[wk].total+=r.total;wMap[wk].count++;if(!wMap[wk].dates.includes(r.date))wMap[wk].dates.push(r.date);});
-  let wks=Object.keys(wMap).sort();
-  if(charts.week)charts.week.destroy();charts.week=new Chart(document.getElementById('weekChart'),{type:'line',data:{labels:wks,datasets:[{label:'Weekly',data:wks.map(w=>wMap[w].total),borderColor:'#1565c0',backgroundColor:'rgba(21,101,192,0.1)',fill:true,tension:0.4,pointRadius:4}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>fmtS(v)}}}}});
-  document.getElementById('ww-body').innerHTML=wks.map(wk=>{let x=wMap[wk],ds=x.dates.sort(),p=ds.length?`${fmtD(ds[0])} — ${fmtD(ds[ds.length-1])}`:'-';return`<tr><td><span class="badge bb">${wk}</span></td><td style="font-size:0.72rem">${p}</td><td class="right">${x.dates.length}</td><td class="right">${x.count}</td><td class="right">₹${fmt(x.base)}</td><td class="right" style="color:#c62828">₹${fmt(x.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(x.total)}</td><td class="right">₹${fmt(x.total/(x.dates.length||1))}</td></tr>`;}).join('')||'<tr><td colspan="8" style="text-align:center;color:#aaa;padding:12px">No data</td></tr>';
-  let tto=wks.reduce((s,w)=>s+wMap[w].total,0),tc=wks.reduce((s,w)=>s+wMap[w].count,0);
-  document.getElementById('ww-foot').innerHTML=`<tr><td colspan="3">TOTAL (${wks.length} weeks)</td><td class="right">${tc}</td><td colspan="2"></td><td class="right fw">₹${fmt(tto)}</td><td class="right">₹${fmt(wks.length?tto/wks.length:0)}</td></tr>`;
-};
-window.renderMonthly=()=>{
-  let rows=document.getElementById('mo_year').value?pData.filter(r=>r.date.startsWith(document.getElementById('mo_year').value)):pData;
-  let mMap={};rows.forEach(r=>{let k=r.date.slice(0,7);if(!mMap[k])mMap[k]={base:0,tax:0,total:0,count:0};mMap[k].base+=r.base;mMap[k].tax+=r.tax;mMap[k].total+=r.total;mMap[k].count++;});
-  let mks=Object.keys(mMap).sort();
-  mkChart('moChart','bar',mks.map(k=>{let p=k.split('-');return MONTHS[parseInt(p[1])-1]+"'"+p[0].slice(2)}),[{label:'Base',data:mks.map(k=>mMap[k].base),backgroundColor:'rgba(21,101,192,0.75)',borderRadius:4,stack:'s'},{label:'Tax',data:mks.map(k=>mMap[k].tax),backgroundColor:'rgba(198,40,40,0.7)',borderRadius:4,stack:'s'}],{scales:{x:{stacked:true},y:{stacked:true}}});
-  let prev=0;
-  document.getElementById('mo-body').innerHTML=mks.map(k=>{let d=mMap[k],p=k.split('-'),dim=new Date(parseInt(p[0]),parseInt(p[1]),0).getDate(),g=prev>0?((d.total-prev)/prev*100):null;prev=d.total;return`<tr><td><b>${MONTHS_FULL[parseInt(p[1])-1]} ${p[0]}</b></td><td class="right">${d.count}</td><td class="right">₹${fmt(d.base)}</td><td class="right" style="color:#c62828">₹${fmt(d.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(d.total)}</td><td class="right">₹${fmt(d.total/dim)}</td><td class="right"><span class="${g===null?'':'badge '+(g>=0?'bg':'br')}">${g===null?'—':(g>=0?'▲':'▼')+Math.abs(g).toFixed(1)+'%'}</span></td></tr>`;}).join('')||'<tr><td colspan="7" style="text-align:center;color:#aaa;padding:12px">No data</td></tr>';
-  let tto=mks.reduce((s,k)=>s+mMap[k].total,0),tc=mks.reduce((s,k)=>s+mMap[k].count,0),tb=mks.reduce((s,k)=>s+mMap[k].base,0),tt=mks.reduce((s,k)=>s+mMap[k].tax,0);
-  document.getElementById('mo-foot').innerHTML=`<tr><td>TOTAL (${mks.length})</td><td class="right">${tc}</td><td class="right">₹${fmt(tb)}</td><td class="right">₹${fmt(tt)}</td><td class="right">₹${fmt(tto)}</td><td colspan="2"></td></tr>`;
-};
-window.renderQuarterly=()=>{
-  let rows=document.getElementById('qy_year').value?pData.filter(r=>r.date.startsWith(document.getElementById('qy_year').value)):pData;
-  let qD={Q1:[4,5,6],Q2:[7,8,9],Q3:[10,11,12],Q4:[1,2,3]},qMap={};
-  ['Q1','Q2','Q3','Q4'].forEach(q=>qMap[q]={base:0,tax:0,total:0,count:0});
-  rows.forEach(r=>{let m=parseInt(r.date.slice(5,7));for(let q in qD){if(qD[q].includes(m)){qMap[q].base+=r.base;qMap[q].tax+=r.tax;qMap[q].total+=r.total;qMap[q].count++;break;}}});
-  let qN=['Q1 (Apr-Jun)','Q2 (Jul-Sep)','Q3 (Oct-Dec)','Q4 (Jan-Mar)'],qK=['Q1','Q2','Q3','Q4'];
-  mkChart('qtrChart','bar',qN,[{label:'Base',data:qK.map(q=>qMap[q].base),backgroundColor:'rgba(21,101,192,0.75)',borderRadius:5},{label:'Tax',data:qK.map(q=>qMap[q].tax),backgroundColor:'rgba(198,40,40,0.7)',borderRadius:5}]);
-  mkChart('qtrPie','doughnut',qN,[{data:qK.map(q=>qMap[q].total),backgroundColor:['#1565c0','#2e7d32','#f9a825','#c62828'],borderWidth:2}]);
-  let grand=qK.reduce((s,q)=>s+qMap[q].total,0);
-  document.getElementById('qtr-body').innerHTML=qK.map((q,i)=>{let d=qMap[q];return`<tr><td><span class="badge bb fw">${q}</span></td><td style="font-size:0.72rem;color:#888">${qN[i].split('(')[1].replace(')','')}</td><td class="right">${d.count}</td><td class="right">₹${fmt(d.base)}</td><td class="right" style="color:#c62828">₹${fmt(d.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(d.total)}</td><td class="right">${grand>0?(d.total/grand*100).toFixed(1)+'%':'0%'}</td></tr>`;}).join('');
-  let tc=qK.reduce((s,q)=>s+qMap[q].count,0);
-  document.getElementById('qtr-foot').innerHTML=`<tr><td colspan="2">TOTAL</td><td class="right">${tc}</td><td class="right">₹${fmt(qK.reduce((s,q)=>s+qMap[q].base,0))}</td><td class="right">₹${fmt(qK.reduce((s,q)=>s+qMap[q].tax,0))}</td><td class="right">₹${fmt(grand)}</td><td class="right">100%</td></tr>`;
-};
-window.renderAnnual=()=>{
-  let yMap={};pData.forEach(r=>{let y=r.date.slice(0,4);if(!yMap[y])yMap[y]={base:0,tax:0,total:0,count:0,vendors:new Set()};yMap[y].base+=r.base;yMap[y].tax+=r.tax;yMap[y].total+=r.total;yMap[y].count++;yMap[y].vendors.add(r.sup);});
-  let yks=Object.keys(yMap).sort(),best=yks.reduce((a,b)=>yMap[a].total>yMap[b].total?a:b,yks[0]||'');
-  document.getElementById('annual-kpi').innerHTML=[{lbl:'Years of Data',val:yks.length,cls:'k1'},{lbl:'Best Year',val:best||'-',cls:'k3'},{lbl:'Best Year Total',val:best?'₹'+fmt(yMap[best].total):'-',cls:'k2'},{lbl:'All-Time Total',val:'₹'+fmt(yks.reduce((s,y)=>s+yMap[y].total,0)),cls:'k4'}].map(k=>`<div class="kpi ${k.cls}"><div class="kpi-val">${k.val}</div><div class="kpi-lbl">${k.lbl}</div></div>`).join('');
-  mkChart('annualChart','bar',yks,[{label:'Base',data:yks.map(y=>yMap[y].base),backgroundColor:'rgba(21,101,192,0.75)',borderRadius:5},{label:'Tax',data:yks.map(y=>yMap[y].tax),backgroundColor:'rgba(198,40,40,0.7)',borderRadius:5}]);
-  let prev=0;document.getElementById('annual-body').innerHTML=[...yks].reverse().map(y=>{let d=yMap[y],g=prev>0?((d.total-prev)/prev*100):null;prev=d.total;return`<tr><td><b>${y}</b></td><td class="right">${d.count}</td><td class="right">${d.vendors.size}</td><td class="right">₹${fmt(d.base)}</td><td class="right" style="color:#c62828">₹${fmt(d.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(d.total)}</td><td class="right">₹${fmt(d.total/12)}</td><td class="right"><span class="${g===null?'':'badge '+(g>=0?'bg':'br')}">${g===null?'1st Year':(g>=0?'▲':'▼')+Math.abs(g).toFixed(1)+'%'}</span></td></tr>`;}).join('')||'<tr><td colspan="8" style="text-align:center;color:#aaa;padding:12px">No data</td></tr>';
-  let mMap2={};pData.forEach(r=>{let k=r.date.slice(0,7);if(!mMap2[k])mMap2[k]=0;mMap2[k]+=r.total});
-  let me=Object.entries(mMap2).sort((a,b)=>b[1]-a[1]);
-  let mkC=(title,entries,color)=>`<div class="card" style="border-left:4px solid ${color}"><div class="card-title" style="color:${color}">${title}</div>${entries.slice(0,3).map(([k,v])=>{let p=k.split('-');return`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f0f0f0"><span>${MONTHS_FULL[parseInt(p[1])-1]} ${p[0]}</span><span class="fw" style="color:${color}">₹${fmt(v)}</span></div>`}).join('')}</div>`;
-  document.getElementById('best-worst').innerHTML=mkC('🥇 Highest Purchase Months',me,'#1565c0')+mkC('📉 Lowest Purchase Months',[...me].reverse(),'#c62828');
-};
-window.renderVendors=()=>{
-  let rows=getFiltered(document.getElementById('v_year').value,document.getElementById('v_month').value);
-  let vm={};rows.forEach(r=>{if(!vm[r.sup])vm[r.sup]={base:0,tax:0,total:0,count:0};vm[r.sup].base+=r.base;vm[r.sup].tax+=r.tax;vm[r.sup].total+=r.total;vm[r.sup].count++;});
-  let sorted=Object.entries(vm).sort((a,b)=>b[1].total-a[1].total),grand=rows.reduce((s,r)=>s+r.total,0),mx=sorted[0]?sorted[0][1].total:1;
-  document.getElementById('vendor-rank-list').innerHTML=sorted.slice(0,10).map(([n,d],i)=>`<div class="vrank"><div class="rnum ${['r1','r2','r3','rn','rn','rn','rn','rn','rn','rn'][i]}">${i+1}</div><div class="vname">${n}</div><div class="vbar-wrap"><div class="vbar" style="width:${(d.total/mx*100).toFixed(0)}%"></div></div><div class="vamt">${fmtS(d.total)}</div></div>`).join('')||'<div style="color:#aaa;text-align:center;padding:14px">No data</div>';
-  document.getElementById('vendor-table').innerHTML=sorted.map(([n,d],i)=>`<tr><td>${i+1}</td><td class="fw">${n}</td><td class="right">${d.count}</td><td class="right">₹${fmt(d.base)}</td><td class="right" style="color:#c62828">₹${fmt(d.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(d.total)}</td><td class="right">₹${fmt(d.total/d.count)}</td><td class="right">${grand>0?(d.total/grand*100).toFixed(1)+'%':'0%'}</td></tr>`).join('')||'<tr><td colspan="8" style="text-align:center;color:#aaa;padding:12px">No data</td></tr>';
-};
-window.renderRecords=()=>{
-  let rows=getFiltered(document.getElementById('r_year').value,document.getElementById('r_month').value,document.getElementById('r_vendor').value,document.getElementById('r_cat').value,document.getElementById('r_search').value);
-  document.getElementById('rec-count').textContent=`(${rows.length} entries)`;
-  if(!rows.length){document.getElementById('rec-body').innerHTML='<tr><td colspan="10" style="text-align:center;color:#aaa;padding:18px">No records found</td></tr>';document.getElementById('rec-foot').innerHTML='';return}
-  document.getElementById('rec-body').innerHTML=rows.map((r,i)=>`<tr><td>${i+1}</td><td><span class="badge bb">${r.inv}</span></td><td>${fmtD(r.date)}</td><td>${r.sup}</td><td>${r.cat?`<span class="badge bg">${r.cat}</span>`:''}</td><td class="right">₹${fmt(r.base)}</td><td class="right" style="color:#c62828">₹${fmt(r.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(r.total)}</td><td style="font-size:0.7rem;color:#888">${r.note||''}</td><td>${isAdmin?`<button class="btn bd" style="padding:3px 6px;font-size:0.66rem" onclick="deleteEntry('${r._id}')">🗑️</button>`:''}</td></tr>`).join('');
-  let tb=rows.reduce((s,r)=>s+r.base,0),tt=rows.reduce((s,r)=>s+r.tax,0),tto=rows.reduce((s,r)=>s+r.total,0);
-  document.getElementById('rec-foot').innerHTML=`<tr><td colspan="5" class="right">TOTAL (${rows.length})</td><td class="right">₹${fmt(tb)}</td><td class="right">₹${fmt(tt)}</td><td class="right">₹${fmt(tto)}</td><td colspan="2"></td></tr>`;
-};
-
-// ── PURCHASE DROPDOWNS ──
-function updatePDropdowns(){
-  let years=[...new Set(pData.map(r=>r.date.slice(0,4)))].sort().reverse();
-  let vendors=[...new Set(pData.map(r=>r.sup))].sort();
-  let cats=[...new Set(pData.filter(r=>r.cat).map(r=>r.cat))].sort();
-  ['r_year','mo_year','qy_year','ww_year','dw_year','v_year'].forEach(id=>{let el=document.getElementById(id);if(!el)return;let c=el.value;el.innerHTML=(id==='dw_year'?'<option value="">Select</option>':'<option value="">All</option>')+years.map(y=>`<option>${y}</option>`).join('');el.value=c;});
-  ['r_vendor','dw_vendor'].forEach(id=>{let el=document.getElementById(id);if(!el)return;let c=el.value;el.innerHTML='<option value="">All</option>'+vendors.map(v=>`<option>${v}</option>`).join('');el.value=c;});
-  let rc=document.getElementById('r_cat');if(rc){let c=rc.value;rc.innerHTML='<option value="">All</option>'+cats.map(c=>`<option>${c}</option>`).join('');rc.value=c;}
-  document.getElementById('supList').innerHTML=vendors.map(v=>`<option value="${v}">`).join('');
-}
-
-// ── PURCHASE EXPORT ──
+window.renderDaywise=()=>{let year=document.getElementById('dw_year').value,month=document.getElementById('dw_month').value,vendor=document.getElementById('dw_vendor').value;let rows=getFiltered(year,month,vendor);let dMap={};rows.forEach(r=>{if(!dMap[r.date])dMap[r.date]={base:0,tax:0,total:0,count:0,vendors:{}};dMap[r.date].base+=r.base;dMap[r.date].tax+=r.tax;dMap[r.date].total+=r.total;dMap[r.date].count++;dMap[r.date].vendors[r.sup]=(dMap[r.date].vendors[r.sup]||0)+r.total;});let days=Object.keys(dMap).sort();if(charts.day)charts.day.destroy();charts.day=new Chart(document.getElementById('dayChart'),{type:'bar',data:{labels:days.map(d=>fmtD(d)),datasets:[{label:'Daily',data:days.map(d=>dMap[d].total),backgroundColor:'rgba(21,101,192,0.7)',borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>fmtS(v)}}}}});document.getElementById('dw-summary').textContent=`${days.length} days | ₹${fmt(days.reduce((s,d)=>s+dMap[d].total,0))}`;document.getElementById('dw-body').innerHTML=days.map(d=>{let x=dMap[d],tv=Object.entries(x.vendors).sort((a,b)=>b[1]-a[1])[0],dow=new Date(d).getDay();return`<tr><td><b>${fmtD(d)}</b></td><td><span class="badge ${dow===0||dow===6?'br':'bb'}">${DAYS[dow]}</span></td><td class="right">${x.count}</td><td class="right">₹${fmt(x.base)}</td><td class="right" style="color:#c62828">₹${fmt(x.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(x.total)}</td><td style="font-size:0.72rem">${tv?tv[0]:''}</td></tr>`;}).join('')||'<tr><td colspan="7" style="text-align:center;color:#aaa;padding:14px">Select Year & Month</td></tr>';let tb=days.reduce((s,d)=>s+dMap[d].base,0),tt=days.reduce((s,d)=>s+dMap[d].tax,0),tto=days.reduce((s,d)=>s+dMap[d].total,0),tc=days.reduce((s,d)=>s+dMap[d].count,0);document.getElementById('dw-foot').innerHTML=`<tr><td colspan="2">TOTAL (${days.length} days)</td><td class="right">${tc}</td><td class="right">₹${fmt(tb)}</td><td class="right">₹${fmt(tt)}</td><td class="right">₹${fmt(tto)}</td><td></td></tr>`;};
+window.renderWeekly=()=>{let rows=getFiltered(document.getElementById('ww_year').value,document.getElementById('ww_month').value);let wMap={};rows.forEach(r=>{let d=new Date(r.date),jan1=new Date(d.getFullYear(),0,1),wn=Math.ceil(((d-jan1)/86400000+jan1.getDay()+1)/7),wk=`${d.getFullYear()}-W${wn.toString().padStart(2,'0')}`;if(!wMap[wk])wMap[wk]={base:0,tax:0,total:0,count:0,dates:[]};wMap[wk].base+=r.base;wMap[wk].tax+=r.tax;wMap[wk].total+=r.total;wMap[wk].count++;if(!wMap[wk].dates.includes(r.date))wMap[wk].dates.push(r.date);});let wks=Object.keys(wMap).sort();if(charts.week)charts.week.destroy();charts.week=new Chart(document.getElementById('weekChart'),{type:'line',data:{labels:wks,datasets:[{label:'Weekly',data:wks.map(w=>wMap[w].total),borderColor:'#1565c0',backgroundColor:'rgba(21,101,192,0.1)',fill:true,tension:0.4,pointRadius:4}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>fmtS(v)}}}}});document.getElementById('ww-body').innerHTML=wks.map(wk=>{let x=wMap[wk],ds=x.dates.sort(),p=ds.length?`${fmtD(ds[0])} — ${fmtD(ds[ds.length-1])}`:'-';return`<tr><td><span class="badge bb">${wk}</span></td><td style="font-size:0.72rem">${p}</td><td class="right">${x.dates.length}</td><td class="right">${x.count}</td><td class="right">₹${fmt(x.base)}</td><td class="right" style="color:#c62828">₹${fmt(x.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(x.total)}</td><td class="right">₹${fmt(x.total/(x.dates.length||1))}</td></tr>`;}).join('')||'<tr><td colspan="8" style="text-align:center;color:#aaa;padding:12px">No data</td></tr>';let tto=wks.reduce((s,w)=>s+wMap[w].total,0),tc=wks.reduce((s,w)=>s+wMap[w].count,0);document.getElementById('ww-foot').innerHTML=`<tr><td colspan="3">TOTAL (${wks.length} weeks)</td><td class="right">${tc}</td><td colspan="2"></td><td class="right fw">₹${fmt(tto)}</td><td class="right">₹${fmt(wks.length?tto/wks.length:0)}</td></tr>`;};
+window.renderMonthly=()=>{let rows=document.getElementById('mo_year').value?pData.filter(r=>r.date.startsWith(document.getElementById('mo_year').value)):pData;let mMap={};rows.forEach(r=>{let k=r.date.slice(0,7);if(!mMap[k])mMap[k]={base:0,tax:0,total:0,count:0};mMap[k].base+=r.base;mMap[k].tax+=r.tax;mMap[k].total+=r.total;mMap[k].count++;});let mks=Object.keys(mMap).sort();mkChart('moChart','bar',mks.map(k=>{let p=k.split('-');return MONTHS[parseInt(p[1])-1]+"'"+p[0].slice(2)}),[{label:'Base',data:mks.map(k=>mMap[k].base),backgroundColor:'rgba(21,101,192,0.75)',borderRadius:4,stack:'s'},{label:'Tax',data:mks.map(k=>mMap[k].tax),backgroundColor:'rgba(198,40,40,0.7)',borderRadius:4,stack:'s'}],{scales:{x:{stacked:true},y:{stacked:true}}});let prev=0;document.getElementById('mo-body').innerHTML=mks.map(k=>{let d=mMap[k],p=k.split('-'),dim=new Date(parseInt(p[0]),parseInt(p[1]),0).getDate(),g=prev>0?((d.total-prev)/prev*100):null;prev=d.total;return`<tr><td><b>${MONTHS_FULL[parseInt(p[1])-1]} ${p[0]}</b></td><td class="right">${d.count}</td><td class="right">₹${fmt(d.base)}</td><td class="right" style="color:#c62828">₹${fmt(d.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(d.total)}</td><td class="right">₹${fmt(d.total/dim)}</td><td class="right"><span class="${g===null?'':'badge '+(g>=0?'bg':'br')}">${g===null?'—':(g>=0?'▲':'▼')+Math.abs(g).toFixed(1)+'%'}</span></td></tr>`;}).join('')||'<tr><td colspan="7" style="text-align:center;color:#aaa;padding:12px">No data</td></tr>';let tto=mks.reduce((s,k)=>s+mMap[k].total,0),tc=mks.reduce((s,k)=>s+mMap[k].count,0),tb=mks.reduce((s,k)=>s+mMap[k].base,0),tt=mks.reduce((s,k)=>s+mMap[k].tax,0);document.getElementById('mo-foot').innerHTML=`<tr><td>TOTAL (${mks.length})</td><td class="right">${tc}</td><td class="right">₹${fmt(tb)}</td><td class="right">₹${fmt(tt)}</td><td class="right">₹${fmt(tto)}</td><td colspan="2"></td></tr>`;};
+window.renderQuarterly=()=>{let rows=document.getElementById('qy_year').value?pData.filter(r=>r.date.startsWith(document.getElementById('qy_year').value)):pData;let qD={Q1:[4,5,6],Q2:[7,8,9],Q3:[10,11,12],Q4:[1,2,3]},qMap={};['Q1','Q2','Q3','Q4'].forEach(q=>qMap[q]={base:0,tax:0,total:0,count:0});rows.forEach(r=>{let m=parseInt(r.date.slice(5,7));for(let q in qD){if(qD[q].includes(m)){qMap[q].base+=r.base;qMap[q].tax+=r.tax;qMap[q].total+=r.total;qMap[q].count++;break;}}});let qN=['Q1 (Apr-Jun)','Q2 (Jul-Sep)','Q3 (Oct-Dec)','Q4 (Jan-Mar)'],qK=['Q1','Q2','Q3','Q4'];mkChart('qtrChart','bar',qN,[{label:'Base',data:qK.map(q=>qMap[q].base),backgroundColor:'rgba(21,101,192,0.75)',borderRadius:5},{label:'Tax',data:qK.map(q=>qMap[q].tax),backgroundColor:'rgba(198,40,40,0.7)',borderRadius:5}]);mkChart('qtrPie','doughnut',qN,[{data:qK.map(q=>qMap[q].total),backgroundColor:['#1565c0','#2e7d32','#f9a825','#c62828'],borderWidth:2}]);let grand=qK.reduce((s,q)=>s+qMap[q].total,0);document.getElementById('qtr-body').innerHTML=qK.map((q,i)=>{let d=qMap[q];return`<tr><td><span class="badge bb fw">${q}</span></td><td style="font-size:0.72rem;color:#888">${qN[i].split('(')[1].replace(')','')}</td><td class="right">${d.count}</td><td class="right">₹${fmt(d.base)}</td><td class="right" style="color:#c62828">₹${fmt(d.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(d.total)}</td><td class="right">${grand>0?(d.total/grand*100).toFixed(1)+'%':'0%'}</td></tr>`;}).join('');document.getElementById('qtr-foot').innerHTML=`<tr><td colspan="2">TOTAL</td><td class="right">${qK.reduce((s,q)=>s+qMap[q].count,0)}</td><td class="right">₹${fmt(qK.reduce((s,q)=>s+qMap[q].base,0))}</td><td class="right">₹${fmt(qK.reduce((s,q)=>s+qMap[q].tax,0))}</td><td class="right">₹${fmt(grand)}</td><td class="right">100%</td></tr>`;};
+window.renderAnnual=()=>{let yMap={};pData.forEach(r=>{let y=r.date.slice(0,4);if(!yMap[y])yMap[y]={base:0,tax:0,total:0,count:0,vendors:new Set()};yMap[y].base+=r.base;yMap[y].tax+=r.tax;yMap[y].total+=r.total;yMap[y].count++;yMap[y].vendors.add(r.sup);});let yks=Object.keys(yMap).sort(),best=yks.reduce((a,b)=>yMap[a].total>yMap[b].total?a:b,yks[0]||'');document.getElementById('annual-kpi').innerHTML=[{lbl:'Years of Data',val:yks.length,cls:'k1'},{lbl:'Best Year',val:best||'-',cls:'k3'},{lbl:'Best Year Total',val:best?'₹'+fmt(yMap[best].total):'-',cls:'k2'},{lbl:'All-Time Total',val:'₹'+fmt(yks.reduce((s,y)=>s+yMap[y].total,0)),cls:'k4'}].map(k=>`<div class="kpi ${k.cls}"><div class="kpi-val">${k.val}</div><div class="kpi-lbl">${k.lbl}</div></div>`).join('');mkChart('annualChart','bar',yks,[{label:'Base',data:yks.map(y=>yMap[y].base),backgroundColor:'rgba(21,101,192,0.75)',borderRadius:5},{label:'Tax',data:yks.map(y=>yMap[y].tax),backgroundColor:'rgba(198,40,40,0.7)',borderRadius:5}]);let prev=0;document.getElementById('annual-body').innerHTML=[...yks].reverse().map(y=>{let d=yMap[y],g=prev>0?((d.total-prev)/prev*100):null;prev=d.total;return`<tr><td><b>${y}</b></td><td class="right">${d.count}</td><td class="right">${d.vendors.size}</td><td class="right">₹${fmt(d.base)}</td><td class="right" style="color:#c62828">₹${fmt(d.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(d.total)}</td><td class="right">₹${fmt(d.total/12)}</td><td class="right"><span class="${g===null?'':'badge '+(g>=0?'bg':'br')}">${g===null?'1st Year':(g>=0?'▲':'▼')+Math.abs(g).toFixed(1)+'%'}</span></td></tr>`;}).join('')||'<tr><td colspan="8" style="text-align:center;color:#aaa;padding:12px">No data</td></tr>';let mMap2={};pData.forEach(r=>{let k=r.date.slice(0,7);if(!mMap2[k])mMap2[k]=0;mMap2[k]+=r.total});let me=Object.entries(mMap2).sort((a,b)=>b[1]-a[1]);let mkC=(title,entries,color)=>`<div class="card" style="border-left:4px solid ${color}"><div class="card-title" style="color:${color}">${title}</div>${entries.slice(0,3).map(([k,v])=>{let p=k.split('-');return`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f0f0f0"><span>${MONTHS_FULL[parseInt(p[1])-1]} ${p[0]}</span><span class="fw" style="color:${color}">₹${fmt(v)}</span></div>`}).join('')}</div>`;document.getElementById('best-worst').innerHTML=mkC('🥇 Highest Purchase Months',me,'#1565c0')+mkC('📉 Lowest Purchase Months',[...me].reverse(),'#c62828');};
+window.renderVendors=()=>{let rows=getFiltered(document.getElementById('v_year').value,document.getElementById('v_month').value);let vm={};rows.forEach(r=>{if(!vm[r.sup])vm[r.sup]={base:0,tax:0,total:0,count:0};vm[r.sup].base+=r.base;vm[r.sup].tax+=r.tax;vm[r.sup].total+=r.total;vm[r.sup].count++;});let sorted=Object.entries(vm).sort((a,b)=>b[1].total-a[1].total),grand=rows.reduce((s,r)=>s+r.total,0),mx=sorted[0]?sorted[0][1].total:1;document.getElementById('vendor-rank-list').innerHTML=sorted.slice(0,10).map(([n,d],i)=>`<div class="vrank"><div class="rnum ${['r1','r2','r3','rn','rn','rn','rn','rn','rn','rn'][i]}">${i+1}</div><div class="vname">${n}</div><div class="vbar-wrap"><div class="vbar" style="width:${(d.total/mx*100).toFixed(0)}%"></div></div><div class="vamt">${fmtS(d.total)}</div></div>`).join('')||'<div style="color:#aaa;text-align:center;padding:14px">No data</div>';document.getElementById('vendor-table').innerHTML=sorted.map(([n,d],i)=>`<tr><td>${i+1}</td><td class="fw">${n}</td><td class="right">${d.count}</td><td class="right">₹${fmt(d.base)}</td><td class="right" style="color:#c62828">₹${fmt(d.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(d.total)}</td><td class="right">₹${fmt(d.total/d.count)}</td><td class="right">${grand>0?(d.total/grand*100).toFixed(1)+'%':'0%'}</td></tr>`).join('')||'<tr><td colspan="8" style="text-align:center;color:#aaa;padding:12px">No data</td></tr>';};
+window.renderRecords=()=>{let rows=getFiltered(document.getElementById('r_year').value,document.getElementById('r_month').value,document.getElementById('r_vendor').value,document.getElementById('r_cat').value,document.getElementById('r_search').value);document.getElementById('rec-count').textContent=`(${rows.length} entries)`;if(!rows.length){document.getElementById('rec-body').innerHTML='<tr><td colspan="10" style="text-align:center;color:#aaa;padding:18px">No records found</td></tr>';document.getElementById('rec-foot').innerHTML='';return}document.getElementById('rec-body').innerHTML=rows.map((r,i)=>`<tr><td>${i+1}</td><td><span class="badge bb">${r.inv}</span></td><td>${fmtD(r.date)}</td><td>${r.sup}</td><td>${r.cat?`<span class="badge bg">${r.cat}</span>`:''}</td><td class="right">₹${fmt(r.base)}</td><td class="right" style="color:#c62828">₹${fmt(r.tax)}</td><td class="right fw" style="color:#1565c0">₹${fmt(r.total)}</td><td style="font-size:0.7rem;color:#888">${r.note||''}</td><td>${isAdmin?`<button class="btn bd" style="padding:3px 6px;font-size:0.66rem" onclick="deleteEntry('${r._id}')">🗑️</button>`:''}</td></tr>`).join('');let tb=rows.reduce((s,r)=>s+r.base,0),tt=rows.reduce((s,r)=>s+r.tax,0),tto=rows.reduce((s,r)=>s+r.total,0);document.getElementById('rec-foot').innerHTML=`<tr><td colspan="5" class="right">TOTAL (${rows.length})</td><td class="right">₹${fmt(tb)}</td><td class="right">₹${fmt(tt)}</td><td class="right">₹${fmt(tto)}</td><td colspan="2"></td></tr>`;};
+function updatePDropdowns(){let years=[...new Set(pData.map(r=>r.date.slice(0,4)))].sort().reverse();let vendors=[...new Set(pData.map(r=>r.sup))].sort();let cats=[...new Set(pData.filter(r=>r.cat).map(r=>r.cat))].sort();['r_year','mo_year','qy_year','ww_year','dw_year','v_year'].forEach(id=>{let el=document.getElementById(id);if(!el)return;let c=el.value;el.innerHTML=(id==='dw_year'?'<option value="">Select</option>':'<option value="">All</option>')+years.map(y=>`<option>${y}</option>`).join('');el.value=c;});['r_vendor','dw_vendor'].forEach(id=>{let el=document.getElementById(id);if(!el)return;let c=el.value;el.innerHTML='<option value="">All</option>'+vendors.map(v=>`<option>${v}</option>`).join('');el.value=c;});let rc=document.getElementById('r_cat');if(rc){let c=rc.value;rc.innerHTML='<option value="">All</option>'+cats.map(c=>`<option>${c}</option>`).join('');rc.value=c;}document.getElementById('supList').innerHTML=vendors.map(v=>`<option value="${v}">`).join('');}
 window.exportCSV=()=>{let rows=getFiltered(document.getElementById('r_year').value,document.getElementById('r_month').value);if(!rows.length){toast('⚠️ No data');return}let csv='SrNo,InvoiceNo,InvoiceDate,SupplierName,Category,BaseAmount,Tax,TotalAmount,Notes\n';rows.forEach((r,i)=>{csv+=`${i+1},"${r.inv}","${fmtD(r.date)}","${r.sup}","${r.cat||''}",${r.base},${r.tax},${r.total},"${r.note||''}"\n`});dl(csv,'purchase_'+new Date().toISOString().slice(0,10)+'.csv','text/csv');toast('✅ Exported!');};
 window.exportMonthCSV=()=>{let now=new Date(),y=now.getFullYear()+'',m=(now.getMonth()+1+'').padStart(2,'0');let rows=getFiltered(y,m);if(!rows.length){toast('⚠️ No data');return}let csv='SrNo,InvoiceNo,InvoiceDate,SupplierName,Base,Tax,Total\n';rows.forEach((r,i)=>{csv+=`${i+1},"${r.inv}","${fmtD(r.date)}","${r.sup}",${r.base},${r.tax},${r.total}\n`});dl(csv,`purchase_${MONTHS[now.getMonth()]}_${y}.csv`,'text/csv');toast('✅ Exported!');};
 window.exportVendorCSV=()=>{let vm={};pData.forEach(r=>{if(!vm[r.sup])vm[r.sup]={base:0,tax:0,total:0,count:0};vm[r.sup].base+=r.base;vm[r.sup].tax+=r.tax;vm[r.sup].total+=r.total;vm[r.sup].count++});let csv='Rank,Vendor,Invoices,Base,Tax,Total\n';Object.entries(vm).sort((a,b)=>b[1].total-a[1].total).forEach(([n,d],i)=>{csv+=`${i+1},"${n}",${d.count},${d.base.toFixed(2)},${d.tax.toFixed(2)},${d.total.toFixed(2)}\n`});dl(csv,'vendors.csv','text/csv');toast('✅ Exported!');};
@@ -763,158 +743,31 @@ window.restoreData=e=>{let file=e.target.files[0];if(!file)return;let r=new File
 window.handleCSV=e=>{Array.from(e.target.files).forEach(file=>{let reader=new FileReader();reader.onload=async ev=>{let lines=ev.target.result.split('\n').filter(l=>l.trim());let headers=lines[0].split(',').map(h=>h.trim().toLowerCase().replace(/"/g,''));let gi=ns=>{for(let n of ns){let i=headers.indexOf(n);if(i>-1)return i}return -1};let iI=gi(['invoiceno','invoice no']),iD=gi(['invoicedate','invoice date','date']),iS=gi(['suppliername','supplier name','supplier']),iB=gi(['invoicetotalamount','baseamount','base amount','amount']),iT=gi(['invoicetax','tax']),iTo=gi(['totalamount','total amount','total']);let added=0;for(let i=1;i<lines.length;i++){let c=lines[i].split(',').map(x=>x.trim().replace(/"/g,''));if(c.length<3)continue;let base=parseFloat(iB>-1?c[iB]:0)||0,tax=parseFloat(iT>-1?c[iT]:0)||0,total=parseFloat(iTo>-1?c[iTo]:0)||(base+tax);if(!base&&!total)continue;await addDoc(collection(db,'purchases'),{inv:iI>-1?c[iI]:'INV-'+i,date:toISO(iD>-1?c[iD]:''),sup:(iS>-1?c[iS]:'Unknown').toUpperCase(),cat:'',base,tax,total,note:'',ts:Date.now()+i});added++;}toast(`✅ ${added} imported!`);};reader.readAsText(file);});e.target.value='';};
 window.clearAll=()=>{if(confirm('Sab purchase data delete karein?')){pData.forEach(async r=>await deleteDoc(doc(db,'purchases',r._id)));toast('🗑️ Clearing...');}};
 
-// ── INVENTORY ──
-window.addItem=async()=>{
-  let name=document.getElementById('i_name').value.trim().toUpperCase();
-  let unit=document.getElementById('i_unit').value;
-  let opening=parseInt(document.getElementById('i_opening').value)||0;
-  let cat=document.getElementById('i_cat').value;
-  if(!name){toast('⚠️ Product name required!');return}
-  let srno=iItems.length?Math.max(...iItems.map(i=>i.srno||0))+1:1;
-  try{await addDoc(collection(db,'inventory_items'),{name,unit,opening,current:opening,cat,srno,addedOn:new Date().toISOString().slice(0,10),ts:Date.now()});clearItemForm();toast('✅ Item added!');}catch(e){toast('❌ '+e.message)}
-};
+// INVENTORY
+window.addItem=async()=>{if(!isAdmin){toast('⚠️ View-only');return}let name=document.getElementById('i_name').value.trim().toUpperCase(),unit=document.getElementById('i_unit').value,opening=parseInt(document.getElementById('i_opening').value)||0,cat=document.getElementById('i_cat').value;if(!name){toast('⚠️ Product name required!');return}let srno=iItems.length?Math.max(...iItems.map(i=>i.srno||0))+1:1;try{await addDoc(collection(db,'inventory_items'),{name,unit,opening,current:opening,cat,srno,addedOn:new Date().toISOString().slice(0,10),ts:Date.now()});clearItemForm();toast('✅ Item added!');}catch(e){toast('❌ '+e.message)}};
 window.clearItemForm=()=>{['i_name','i_opening'].forEach(id=>document.getElementById(id).value='');document.getElementById('i_unit').value='Nos';document.getElementById('i_cat').value='';};
 window.deleteItem=async id=>{if(!isAdmin){toast('⚠️ View-only');return}if(!confirm('Delete?'))return;try{await deleteDoc(doc(db,'inventory_items',id));toast('🗑️ Deleted')}catch(e){toast('❌ '+e.message)}};
-
-function renderItems(){
-  document.getElementById('item-count').textContent=`(${iItems.length} items)`;
-  document.getElementById('items-tbody').innerHTML=iItems.length?iItems.map((item,i)=>`<tr><td>${item.srno||i+1}</td><td class="fw">${item.name}</td><td>${item.cat?`<span class="badge bgr">${item.cat}</span>`:''}</td><td><span class="badge bb">${item.unit}</span></td><td class="center fw">${item.opening||0}</td><td class="center" style="color:#2e7d32;font-weight:700">${item.current||item.opening||0}</td><td>${isAdmin?`<button class="btn bd" style="padding:3px 6px;font-size:0.66rem" onclick="deleteItem('${item._id}')">🗑️</button>`:''}</td></tr>`).join(''):'<tr><td colspan="7" style="text-align:center;color:#aaa;padding:18px">No items yet. Add items above.</td></tr>';
-}
-
-function renderIDashboard(){
-  if(!iItems.length){document.getElementById('i-kpi').innerHTML='';document.getElementById('i-dash-tbody').innerHTML='<tr><td colspan="7" style="text-align:center;color:#aaa;padding:20px">No items. Go to "Manage Items" tab.</td></tr>';return}
-  let latestMk=iStock.length?iStock[0].monthKey:null;
-  document.getElementById('i-cur-month').textContent=latestMk?mLabel(latestMk.slice(0,4),latestMk.slice(5,7)):'No update yet';
-  let sMap={};if(latestMk)iStock.filter(s=>s.monthKey===latestMk).forEach(s=>{sMap[s.itemId]=s.qty});
-  let totO=iItems.reduce((s,i)=>s+(i.opening||0),0),totC=iItems.reduce((s,i)=>s+(sMap[i._id]!==undefined?sMap[i._id]:(i.current||i.opening||0)),0);
-  document.getElementById('i-kpi').innerHTML=[
-    {lbl:'Total Items',val:iItems.length,cls:'kg1'},
-    {lbl:'Opening Stock',val:totO,cls:'kg2'},
-    {lbl:'Current Stock',val:totC,cls:'kg3'},
-    {lbl:'Net Change',val:(totC-totO>=0?'+':'')+(totC-totO),cls:'kg4'},
-  ].map(k=>`<div class="kpi ${k.cls}"><div class="kpi-val">${k.val}</div><div class="kpi-lbl">${k.lbl}</div></div>`).join('');
-  document.getElementById('i-dash-tbody').innerHTML=iItems.map((item,i)=>{
-    let cur=sMap[item._id]!==undefined?sMap[item._id]:(item.current||item.opening||0);
-    let diff=cur-(item.opening||0);
-    let st=diff===0?`<span class="status-dot dot-ok"></span><span style="font-size:0.7rem;color:#2e7d32">Same</span>`:diff>0?`<span class="status-dot dot-warn"></span><span style="font-size:0.7rem;color:#e65100">Increased</span>`:`<span class="status-dot dot-bad"></span><span style="font-size:0.7rem;color:#c62828">Decreased</span>`;
-    return`<tr><td>${item.srno||i+1}</td><td class="fw">${item.name}</td><td><span class="badge bb">${item.unit}</span></td><td class="center">${item.opening||0}</td><td class="center fw" style="color:#2e7d32">${cur}</td><td class="center"><span class="${diff>0?'diff-plus':diff<0?'diff-minus':'diff-zero'}">${diff>0?'+':''}${diff}</span></td><td>${st}</td></tr>`;
-  }).join('');
-  // Top changed
-  let changes=iItems.map(item=>{let cur=sMap[item._id]!==undefined?sMap[item._id]:(item.current||item.opening||0);return{name:item.name,diff:cur-(item.opening||0),cur};}).filter(x=>x.diff!==0).sort((a,b)=>Math.abs(b.diff)-Math.abs(a.diff)).slice(0,5);
-  let el=document.getElementById('i-top-changed');
-  el.innerHTML=changes.length?changes.map((c,i)=>`<div class="vrank"><div class="rnum rn">${i+1}</div><div class="vname">${c.name}</div><div class="vbar-wrap"><div class="vbar-g vbar" style="width:100%"></div></div><div class="vamt" style="color:${c.diff>0?'#2e7d32':'#c62828'}">${c.diff>0?'+':''}${c.diff}</div></div>`).join(''):'<div style="color:#aaa;text-align:center;padding:12px">No changes recorded yet</div>';
-}
-
-window.loadUpdateForm=()=>{
-  let month=document.getElementById('upd_month').value,year=document.getElementById('upd_year').value;
-  if(!iItems.length){toast('⚠️ No items. Add items first!');return}
-  let mk=`${year}-${month}`,existing={};
-  iStock.filter(s=>s.monthKey===mk).forEach(s=>{existing[s.itemId]={qty:s.qty,remark:s.remark||''}});
-  document.getElementById('update-form-container').innerHTML=`
-    <div class="card inv"><div class="month-header"><h3>📝 ${mLabel(year,month)}</h3><span style="font-size:0.72rem;color:#555">${iItems.length} items</span></div>
-      <div class="tw"><table><thead><tr><th>#</th><th>Product Name</th><th>Unit</th><th class="center">Opening</th><th class="center">Current Qty *</th><th>Remark</th></tr></thead>
-      <tbody>${iItems.map((item,i)=>`<tr><td>${item.srno||i+1}</td><td class="fw">${item.name}</td><td><span class="badge bb">${item.unit}</span></td><td class="center">${item.opening||0}</td><td class="center"><input type="number" class="qty-input" id="qty_${item._id}" value="${existing[item._id]!==undefined?existing[item._id].qty:(item.current||item.opening||0)}" min="0"></td><td><input type="text" style="font-size:0.72rem;padding:4px 6px;width:100%" id="rmk_${item._id}" value="${existing[item._id]?existing[item._id].remark:''}" placeholder="Remark"></td></tr>`).join('')}</tbody></table></div>
-      <div class="btn-row"><button class="btn bs" onclick="saveUpdate('${mk}','${year}','${month}')">💾 Save ${mLabel(year,month)}</button><button class="btn bw" onclick="resetToOpening()">🔄 Reset to Opening</button></div>
-    </div>`;
-};
+function renderItems(){document.getElementById('item-count').textContent=`(${iItems.length} items)`;document.getElementById('items-tbody').innerHTML=iItems.length?iItems.map((item,i)=>`<tr><td>${item.srno||i+1}</td><td class="fw">${item.name}</td><td>${item.cat?`<span class="badge bgr">${item.cat}</span>`:''}</td><td><span class="badge bb">${item.unit}</span></td><td class="center fw">${item.opening||0}</td><td class="center" style="color:#2e7d32;font-weight:700">${item.current||item.opening||0}</td><td>${isAdmin?`<button class="btn bd" style="padding:3px 6px;font-size:0.66rem" onclick="deleteItem('${item._id}')">🗑️</button>`:''}</td></tr>`).join(''):'<tr><td colspan="7" style="text-align:center;color:#aaa;padding:18px">No items yet.</td></tr>';}
+function renderIDashboard(){if(!iItems.length){document.getElementById('i-kpi').innerHTML='';document.getElementById('i-dash-tbody').innerHTML='<tr><td colspan="7" style="text-align:center;color:#aaa;padding:20px">No items.</td></tr>';return}let latestMk=iStock.length?iStock[0].monthKey:null;document.getElementById('i-cur-month').textContent=latestMk?mLabel(latestMk.slice(0,4),latestMk.slice(5,7)):'No update yet';let sMap={};if(latestMk)iStock.filter(s=>s.monthKey===latestMk).forEach(s=>{sMap[s.itemId]=s.qty});let totO=iItems.reduce((s,i)=>s+(i.opening||0),0),totC=iItems.reduce((s,i)=>s+(sMap[i._id]!==undefined?sMap[i._id]:(i.current||i.opening||0)),0);document.getElementById('i-kpi').innerHTML=[{lbl:'Total Items',val:iItems.length,cls:'kg1'},{lbl:'Opening Stock',val:totO,cls:'kg2'},{lbl:'Current Stock',val:totC,cls:'kg3'},{lbl:'Net Change',val:(totC-totO>=0?'+':'')+(totC-totO),cls:'kg4'}].map(k=>`<div class="kpi ${k.cls}"><div class="kpi-val">${k.val}</div><div class="kpi-lbl">${k.lbl}</div></div>`).join('');document.getElementById('i-dash-tbody').innerHTML=iItems.map((item,i)=>{let cur=sMap[item._id]!==undefined?sMap[item._id]:(item.current||item.opening||0),diff=cur-(item.opening||0),st=diff===0?`<span class="status-dot dot-ok"></span><span style="font-size:0.7rem;color:#2e7d32">Same</span>`:diff>0?`<span class="status-dot dot-warn"></span><span style="font-size:0.7rem;color:#e65100">Increased</span>`:`<span class="status-dot dot-bad"></span><span style="font-size:0.7rem;color:#c62828">Decreased</span>`;return`<tr><td>${item.srno||i+1}</td><td class="fw">${item.name}</td><td><span class="badge bb">${item.unit}</span></td><td class="center">${item.opening||0}</td><td class="center fw" style="color:#2e7d32">${cur}</td><td class="center"><span class="${diff>0?'diff-plus':diff<0?'diff-minus':'diff-zero'}">${diff>0?'+':''}${diff}</span></td><td>${st}</td></tr>`;}).join('');let changes=iItems.map(item=>{let cur=sMap[item._id]!==undefined?sMap[item._id]:(item.current||item.opening||0);return{name:item.name,diff:cur-(item.opening||0)};}).filter(x=>x.diff!==0).sort((a,b)=>Math.abs(b.diff)-Math.abs(a.diff)).slice(0,5);document.getElementById('i-top-changed').innerHTML=changes.length?changes.map((c,i)=>`<div class="vrank"><div class="rnum rn">${i+1}</div><div class="vname">${c.name}</div><div class="vbar-wrap"><div class="vbar-g vbar" style="width:100%"></div></div><div class="vamt" style="color:${c.diff>0?'#2e7d32':'#c62828'}">${c.diff>0?'+':''}${c.diff}</div></div>`).join(''):'<div style="color:#aaa;text-align:center;padding:12px">No changes yet</div>';}
+window.loadUpdateForm=()=>{if(!isAdmin){toast('⚠️ View-only');return}let month=document.getElementById('upd_month').value,year=document.getElementById('upd_year').value;if(!iItems.length){toast('⚠️ No items!');return}let mk=`${year}-${month}`,existing={};iStock.filter(s=>s.monthKey===mk).forEach(s=>{existing[s.itemId]={qty:s.qty,remark:s.remark||''}});document.getElementById('update-form-container').innerHTML=`<div class="card inv"><div class="month-header"><h3>📝 ${mLabel(year,month)}</h3><span style="font-size:0.72rem;color:#555">${iItems.length} items</span></div><div class="tw"><table><thead><tr><th>#</th><th>Product Name</th><th>Unit</th><th class="center">Opening</th><th class="center">Current Qty *</th><th>Remark</th></tr></thead><tbody>${iItems.map((item,i)=>`<tr><td>${item.srno||i+1}</td><td class="fw">${item.name}</td><td><span class="badge bb">${item.unit}</span></td><td class="center">${item.opening||0}</td><td class="center"><input type="number" class="qty-input" id="qty_${item._id}" value="${existing[item._id]!==undefined?existing[item._id].qty:(item.current||item.opening||0)}" min="0"></td><td><input type="text" style="font-size:0.72rem;padding:4px 6px;width:100%" id="rmk_${item._id}" value="${existing[item._id]?existing[item._id].remark:''}" placeholder="Remark"></td></tr>`).join('')}</tbody></table></div><div class="btn-row"><button class="btn bs" onclick="saveUpdate('${mk}','${year}','${month}')">💾 Save ${mLabel(year,month)}</button><button class="btn bw" onclick="resetToOpening()">🔄 Reset</button></div></div>`;};
 window.resetToOpening=()=>{iItems.forEach(item=>{let el=document.getElementById('qty_'+item._id);if(el)el.value=item.opening||0;});};
-window.saveUpdate=async(mk,year,month)=>{
-  if(!isAdmin){toast('⚠️ View-only');return}
-  let btn=event.target;btn.disabled=true;btn.textContent='Saving...';
-  try{
-    let existing=iStock.filter(s=>s.monthKey===mk);
-    for(let s of existing)await deleteDoc(doc(db,'inventory_stock',s._id));
-    for(let item of iItems){
-      let qEl=document.getElementById('qty_'+item._id),rEl=document.getElementById('rmk_'+item._id);if(!qEl)continue;
-      let qty=parseInt(qEl.value)||0,remark=rEl?rEl.value.trim():'';
-      await addDoc(collection(db,'inventory_stock'),{itemId:item._id,itemName:item.name,unit:item.unit,opening:item.opening||0,qty,remark,monthKey:mk,year,month,ts:Date.now()});
-      await setDoc(doc(db,'inventory_items',item._id),{...item,current:qty,_id:undefined},{merge:true});
-    }
-    toast(`✅ ${mLabel(year,month)} saved!`);
-  }catch(e){toast('❌ '+e.message)}
-  btn.disabled=false;btn.textContent=`💾 Save ${mLabel(year,month)}`;
-};
-
-window.renderIHistory=()=>{
-  let year=document.getElementById('h_year').value,month=document.getElementById('h_month').value,itemId=document.getElementById('h_item').value;
-  let filtered=iStock.filter(s=>{if(year&&s.year!==year)return false;if(month&&s.month!==month)return false;if(itemId&&s.itemId!==itemId)return false;return true;});
-  let byMonth={};filtered.forEach(s=>{if(!byMonth[s.monthKey])byMonth[s.monthKey]=[];byMonth[s.monthKey].push(s);});
-  let container=document.getElementById('history-container');
-  if(!Object.keys(byMonth).length){container.innerHTML='<div style="color:#aaa;text-align:center;padding:24px;background:#fff;border-radius:11px">No history found</div>';return}
-  container.innerHTML=Object.keys(byMonth).sort().reverse().map(mk=>{
-    let rows=byMonth[mk].sort((a,b)=>(a.itemName||'').localeCompare(b.itemName||'')),y=mk.slice(0,4),m=mk.slice(5,7);
-    let tO=rows.reduce((s,r)=>s+(r.opening||0),0),tC=rows.reduce((s,r)=>s+(r.qty||0),0);
-    return`<div class="hc-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px"><span style="font-size:0.85rem;font-weight:700;color:#2e7d32">📅 ${mLabel(y,m)}</span><div style="display:flex;gap:6px"><span class="badge bg">Open: ${tO}</span><span class="badge bb">Close: ${tC}</span><span class="badge ${tC-tO>=0?'bg':'br'}">Diff: ${tC-tO>=0?'+':''}${tC-tO}</span></div></div>
-    <div class="tw"><table><thead><tr><th>Item</th><th>Unit</th><th class="center">Opening</th><th class="center">Closing</th><th class="center">Diff</th><th>Remark</th></tr></thead><tbody>${rows.map(r=>{let d=r.qty-(r.opening||0);return`<tr><td class="fw">${r.itemName}</td><td><span class="badge bb">${r.unit}</span></td><td class="center">${r.opening||0}</td><td class="center fw" style="color:#2e7d32">${r.qty}</td><td class="center"><span class="${d>0?'diff-plus':d<0?'diff-minus':'diff-zero'}">${d>0?'+':''}${d}</span></td><td style="font-size:0.7rem;color:#888">${r.remark||''}</td></tr>`}).join('')}</tbody></table></div></div>`;
-  }).join('');
-};
-
-window.renderInvReport=()=>{
-  let month=document.getElementById('rpt_month').value,year=document.getElementById('rpt_year').value;
-  let key=year&&month?`${year}-${month}`:null,sMap={};
-  let filtered=key?iStock.filter(s=>s.monthKey===key):iStock;
-  filtered.sort((a,b)=>b.ts-a.ts).forEach(s=>{if(!sMap[s.itemId])sMap[s.itemId]=s;});
-  document.getElementById('rpt-tbody').innerHTML=iItems.map((item,i)=>{
-    let s=sMap[item._id],closing=s?s.qty:(item.current||item.opening||0),diff=closing-(item.opening||0);
-    return`<tr><td>${item.srno||i+1}</td><td class="fw">${item.name}</td><td class="center">${item.unit}</td><td class="center">${item.opening||0}</td><td class="center fw" style="color:#2e7d32">${closing}</td><td class="center"><span class="${diff>0?'diff-plus':diff<0?'diff-minus':'diff-zero'}">${diff>0?'+':''}${diff}</span></td><td style="font-size:0.7rem">${item.cat||''}</td><td style="font-size:0.7rem;color:#888">${s&&s.remark?s.remark:''}</td></tr>`;
-  }).join('')||'<tr><td colspan="8" style="text-align:center;color:#aaa;padding:18px">No data</td></tr>';
-};
-window.exportInvReport=()=>{
-  let month=document.getElementById('rpt_month').value,year=document.getElementById('rpt_year').value;
-  let key=year&&month?`${year}-${month}`:null,sMap={};
-  let filtered=key?iStock.filter(s=>s.monthKey===key):iStock;
-  filtered.sort((a,b)=>b.ts-a.ts).forEach(s=>{if(!sMap[s.itemId])sMap[s.itemId]=s;});
-  let csv='NO.,Product Name,Unit,Opening,Closing,Difference,Category,Remark\n';
-  iItems.forEach((item,i)=>{let s=sMap[item._id],closing=s?s.qty:(item.current||item.opening||0),diff=closing-(item.opening||0);csv+=`${item.srno||i+1},"${item.name}","${item.unit}",${item.opening||0},${closing},${diff},"${item.cat||''}","${s&&s.remark?s.remark:''}"\n`});
-  dl(csv,`inventory_${key||'all'}.csv`,'text/csv');toast('✅ Exported!');
-};
-
-// ── INV DROPDOWNS ──
-function updateIDropdowns(){
-  let el=document.getElementById('h_item');if(!el)return;let c=el.value;
-  el.innerHTML='<option value="">All</option>'+iItems.map(i=>`<option value="${i._id}">${i.name}</option>`).join('');el.value=c;
-}
-function updateIYearDropdowns(){
-  let years=[...new Set(iStock.map(s=>s.year))].sort().reverse();
-  ['h_year','rpt_year'].forEach(id=>{let el=document.getElementById(id);if(!el)return;let c=el.value;el.innerHTML='<option value="">All</option>'+years.map(y=>`<option>${y}</option>`).join('');el.value=c;});
-}
-
-// ── INV IMPORT ──
-window.importItemsCSV=e=>{
-  let file=e.target.files[0];if(!file)return;
-  let reader=new FileReader();reader.onload=async ev=>{
-    let lines=ev.target.result.split('\n').filter(l=>l.trim());
-    let headers=lines[0].split(',').map(h=>h.trim().toLowerCase().replace(/"/g,''));
-    let gi=ns=>{for(let n of ns){let i=headers.indexOf(n);if(i>-1)return i}return -1};
-    let iN=gi(['productname','product name','name']),iU=gi(['unit']),iO=gi(['openingstock','opening stock','opening','qty']),iC=gi(['category','cat']);
-    let added=0,next=iItems.length?Math.max(...iItems.map(i=>i.srno||0))+1:1;
-    for(let i=1;i<lines.length;i++){
-      let c=lines[i].split(',').map(x=>x.trim().replace(/"/g,''));
-      let name=(iN>-1?c[iN]:'').toUpperCase();if(!name)continue;
-      await addDoc(collection(db,'inventory_items'),{name,unit:iU>-1?c[iU]:'Nos',opening:parseInt(iO>-1?c[iO]:0)||0,current:parseInt(iO>-1?c[iO]:0)||0,cat:iC>-1?c[iC]:'',srno:next++,addedOn:new Date().toISOString().slice(0,10),ts:Date.now()+i});added++;
-    }
-    toast(`✅ ${added} items imported!`);
-  };reader.readAsText(file);e.target.value='';
-};
+window.saveUpdate=async(mk,year,month)=>{if(!isAdmin){toast('⚠️ View-only');return}let btn=event.target;btn.disabled=true;btn.textContent='Saving...';try{let existing=iStock.filter(s=>s.monthKey===mk);for(let s of existing)await deleteDoc(doc(db,'inventory_stock',s._id));for(let item of iItems){let qEl=document.getElementById('qty_'+item._id),rEl=document.getElementById('rmk_'+item._id);if(!qEl)continue;let qty=parseInt(qEl.value)||0,remark=rEl?rEl.value.trim():'';await addDoc(collection(db,'inventory_stock'),{itemId:item._id,itemName:item.name,unit:item.unit,opening:item.opening||0,qty,remark,monthKey:mk,year,month,ts:Date.now()});await setDoc(doc(db,'inventory_items',item._id),{...item,current:qty,_id:undefined},{merge:true});}toast(`✅ ${mLabel(year,month)} saved!`);}catch(e){toast('❌ '+e.message)}btn.disabled=false;btn.textContent=`💾 Save ${mLabel(year,month)}`;};
+window.renderIHistory=()=>{let year=document.getElementById('h_year').value,month=document.getElementById('h_month').value,itemId=document.getElementById('h_item').value;let filtered=iStock.filter(s=>{if(year&&s.year!==year)return false;if(month&&s.month!==month)return false;if(itemId&&s.itemId!==itemId)return false;return true;});let byMonth={};filtered.forEach(s=>{if(!byMonth[s.monthKey])byMonth[s.monthKey]=[];byMonth[s.monthKey].push(s);});let container=document.getElementById('history-container');if(!Object.keys(byMonth).length){container.innerHTML='<div style="color:#aaa;text-align:center;padding:24px;background:#fff;border-radius:11px">No history found</div>';return}container.innerHTML=Object.keys(byMonth).sort().reverse().map(mk=>{let rows=byMonth[mk].sort((a,b)=>(a.itemName||'').localeCompare(b.itemName||'')),y=mk.slice(0,4),m=mk.slice(5,7),tO=rows.reduce((s,r)=>s+(r.opening||0),0),tC=rows.reduce((s,r)=>s+(r.qty||0),0);return`<div class="hc-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px"><span style="font-size:0.85rem;font-weight:700;color:#2e7d32">📅 ${mLabel(y,m)}</span><div style="display:flex;gap:6px"><span class="badge bg">Open: ${tO}</span><span class="badge bb">Close: ${tC}</span><span class="badge ${tC-tO>=0?'bg':'br'}">Diff: ${tC-tO>=0?'+':''}${tC-tO}</span></div></div><div class="tw"><table><thead><tr><th>Item</th><th>Unit</th><th class="center">Opening</th><th class="center">Closing</th><th class="center">Diff</th><th>Remark</th></tr></thead><tbody>${rows.map(r=>{let d=r.qty-(r.opening||0);return`<tr><td class="fw">${r.itemName}</td><td><span class="badge bb">${r.unit}</span></td><td class="center">${r.opening||0}</td><td class="center fw" style="color:#2e7d32">${r.qty}</td><td class="center"><span class="${d>0?'diff-plus':d<0?'diff-minus':'diff-zero'}">${d>0?'+':''}${d}</span></td><td style="font-size:0.7rem;color:#888">${r.remark||''}</td></tr>`}).join('')}</tbody></table></div></div>`;}).join('');};
+window.renderInvReport=()=>{let month=document.getElementById('rpt_month').value,year=document.getElementById('rpt_year').value,key=year&&month?`${year}-${month}`:null,sMap={};let filtered=key?iStock.filter(s=>s.monthKey===key):iStock;filtered.sort((a,b)=>b.ts-a.ts).forEach(s=>{if(!sMap[s.itemId])sMap[s.itemId]=s;});document.getElementById('rpt-tbody').innerHTML=iItems.map((item,i)=>{let s=sMap[item._id],closing=s?s.qty:(item.current||item.opening||0),diff=closing-(item.opening||0);return`<tr><td>${item.srno||i+1}</td><td class="fw">${item.name}</td><td class="center">${item.unit}</td><td class="center">${item.opening||0}</td><td class="center fw" style="color:#2e7d32">${closing}</td><td class="center"><span class="${diff>0?'diff-plus':diff<0?'diff-minus':'diff-zero'}">${diff>0?'+':''}${diff}</span></td><td style="font-size:0.7rem">${item.cat||''}</td><td style="font-size:0.7rem;color:#888">${s&&s.remark?s.remark:''}</td></tr>`;}).join('')||'<tr><td colspan="8" style="text-align:center;color:#aaa;padding:18px">No data</td></tr>';};
+window.exportInvReport=()=>{let month=document.getElementById('rpt_month').value,year=document.getElementById('rpt_year').value,key=year&&month?`${year}-${month}`:null,sMap={};let filtered=key?iStock.filter(s=>s.monthKey===key):iStock;filtered.sort((a,b)=>b.ts-a.ts).forEach(s=>{if(!sMap[s.itemId])sMap[s.itemId]=s;});let csv='NO.,Product Name,Unit,Opening,Closing,Difference,Category,Remark\n';iItems.forEach((item,i)=>{let s=sMap[item._id],closing=s?s.qty:(item.current||item.opening||0),diff=closing-(item.opening||0);csv+=`${item.srno||i+1},"${item.name}","${item.unit}",${item.opening||0},${closing},${diff},"${item.cat||''}","${s&&s.remark?s.remark:''}"\n`});dl(csv,`inventory_${key||'all'}.csv`,'text/csv');toast('✅ Exported!');};
+function updateIDropdowns(){let el=document.getElementById('h_item');if(!el)return;let c=el.value;el.innerHTML='<option value="">All</option>'+iItems.map(i=>`<option value="${i._id}">${i.name}</option>`).join('');el.value=c;}
+function updateIYearDropdowns(){let years=[...new Set(iStock.map(s=>s.year))].sort().reverse();['h_year','rpt_year'].forEach(id=>{let el=document.getElementById(id);if(!el)return;let c=el.value;el.innerHTML='<option value="">All</option>'+years.map(y=>`<option>${y}</option>`).join('');el.value=c;});}
+window.importItemsCSV=e=>{let file=e.target.files[0];if(!file)return;let reader=new FileReader();reader.onload=async ev=>{let lines=ev.target.result.split('\n').filter(l=>l.trim());let headers=lines[0].split(',').map(h=>h.trim().toLowerCase().replace(/"/g,''));let gi=ns=>{for(let n of ns){let i=headers.indexOf(n);if(i>-1)return i}return -1};let iN=gi(['productname','product name','name']),iU=gi(['unit']),iO=gi(['openingstock','opening stock','opening','qty']),iC=gi(['category','cat']);let added=0,next=iItems.length?Math.max(...iItems.map(i=>i.srno||0))+1:1;for(let i=1;i<lines.length;i++){let c=lines[i].split(',').map(x=>x.trim().replace(/"/g,''));let name=(iN>-1?c[iN]:'').toUpperCase();if(!name)continue;await addDoc(collection(db,'inventory_items'),{name,unit:iU>-1?c[iU]:'Nos',opening:parseInt(iO>-1?c[iO]:0)||0,current:parseInt(iO>-1?c[iO]:0)||0,cat:iC>-1?c[iC]:'',srno:next++,addedOn:new Date().toISOString().slice(0,10),ts:Date.now()+i});added++;}toast(`✅ ${added} items imported!`);};reader.readAsText(file);e.target.value='';};
 
 const dl=(content,name,type)=>{let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()};
 window.copyShareLink=()=>{let url=window.location.href.split('?')[0]+'?view=true';navigator.clipboard.writeText(url).then(()=>toast('✅ View link copied!')).catch(()=>prompt('Copy:',url));};
 
-// ── VIEW MODE ──
-if(!isAdmin){
-  document.getElementById('tab-entry').style.display='none';
-  document.getElementById('tab-import').style.display='none';
-  document.getElementById('share-btn').style.display='none';
-  document.getElementById('view-banner').style.display='flex';
-}
-
-// ── INIT ──
+// INIT
 document.getElementById('f_date').valueAsDate=new Date();
 let now2=new Date();
 document.getElementById('upd_month').value=(now2.getMonth()+1+'').padStart(2,'0');
 document.getElementById('upd_year').value=now2.getFullYear();
-startListeners();
+loadViewSettings().then(()=>startListeners());
 </script>
 </body>
 </html>
-  

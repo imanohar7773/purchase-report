@@ -429,9 +429,29 @@ function applyViewSettings(){
   if(isAdmin){document.getElementById('admin-settings-btn').style.display='block';return;}
   document.getElementById('share-btn').style.display='none';
   document.getElementById('admin-settings-btn').style.display='none';
+  // Always hide admin-only tabs
   ['ptab-entry','ptab-import','itab-items','itab-update','gtab-items'].forEach(id=>{let el=document.getElementById(id);if(el)el.style.display='none';});
-  Object.entries(SEC_MAP).forEach(([key,stabId])=>{let el=document.getElementById(stabId);if(el)el.style.display=viewSettings[key]!==false?'':'none';});
+  // Apply section visibility
+  Object.entries(SEC_MAP).forEach(([key,stabId])=>{
+    let visible=viewSettings[key]!==false;
+    let el=document.getElementById(stabId);
+    if(el)el.style.display=visible?'':'none';
+    // Also hide the section itself
+    let secId=stabId==='stab-purchase'?'sec-purchase':stabId==='stab-inventory'?'sec-inventory':'sec-grocery';
+    let sec=document.getElementById(secId);
+    if(sec&&!visible)sec.style.display='none';
+  });
+  // Apply tab visibility
   Object.entries(TAB_MAP).forEach(([key,{tabId}])=>{let el=document.getElementById(tabId);if(el)el.style.display=viewSettings[key]!==false?'':'none';});
+  // If grocery section hidden and currently active, switch to purchase
+  if(viewSettings['vs_sec_grocery']===false){
+    let gs=document.getElementById('sec-grocery');
+    if(gs&&gs.classList.contains('active')){
+      gs.classList.remove('active');
+      document.getElementById('sec-purchase').classList.add('active');
+      document.getElementById('stab-purchase').classList.add('active');
+    }
+  }
   document.getElementById('view-banner').style.display='flex';
 }
 

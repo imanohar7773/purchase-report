@@ -302,16 +302,26 @@ input:focus,select:focus{border-color:#1565c0}
     <div class="btn-row"><button class="btn bo" onclick="addGrocItem()">➕ Add Item</button><button class="btn bw" onclick="clearGrocForm()">🔄 Clear</button></div>
   </div>
   <div class="card groc"><div class="card-title">📋 All Items <span id="g-item-count" class="ct-right"></span></div>
-    <div class="filter-bar"><div class="fg"><label>Category</label><select id="g_filter_cat" onchange="renderGrocItems()"><option value="">All</option></select></div><div class="fg" style="flex:2"><label>Search</label><input type="text" id="g_search" placeholder="Item name..." oninput="renderGrocItems()"></div></div>
+    <div class="filter-bar">
+      <div class="fg"><label>Category</label><select id="g_filter_cat" onchange="renderGrocItems()"><option value="">All Categories</option></select></div>
+      <div class="fg" style="flex:2"><label>Search</label><input type="text" id="g_search" placeholder="Item naam likho..." oninput="renderGrocItems()"></div>
+      <div class="fg" style="display:flex;align-items:flex-end"><button class="btn bw" onclick="document.getElementById('g_search').value='';document.getElementById('g_filter_cat').value='';renderGrocItems();" style="width:100%;font-size:0.72rem">🔄 Reset</button></div>
+    </div>
     <div class="tw"><table class="groc"><thead><tr><th>#</th><th>Product Name</th><th>Category</th><th>UOM</th><th class="center">Stock</th><th class="center">Min</th><th>Expiry</th><th>Status</th><th></th></tr></thead><tbody id="g-items-tbody"></tbody></table></div>
   </div>
 </div></div>
 
 <!-- G: STOCK TRACKER -->
 <div class="page groc" id="pg-g-tracker"><div class="container">
-  <div class="card groc"><div class="card-title">📦 Stock Tracker <span class="ct-right">Double-click stock to edit</span></div>
-    <div class="filter-bar"><div class="fg"><label>Category</label><select id="gt_cat" onchange="renderGrocTracker()"><option value="">All</option></select></div><div class="fg"><label>Filter</label><select id="gt_filter" onchange="renderGrocTracker()"><option value="all">All Items</option><option value="low">Low / Zero Stock</option><option value="expiring">Expiring Soon</option></select></div><div class="fg" style="flex:2"><label>Search</label><input type="text" id="gt_search" placeholder="Search..." oninput="renderGrocTracker()"></div></div>
-    <div class="tw"><table class="groc"><thead><tr><th></th><th>#</th><th>Product Name</th><th>UOM</th><th>Stock</th><th>Min Stock</th><th>Expiry Date</th><th>Days Left</th><th>Status</th><th></th></tr></thead><tbody id="g-tracker-tbody"></tbody></table></div>
+  <div class="card groc"><div class="card-title">📦 Stock Tracker <span class="ct-right">Double-click stock/expiry to edit</span></div>
+    <div class="filter-bar">
+      <div class="fg"><label>Category</label><select id="gt_cat" onchange="renderGrocTracker()"><option value="">All Categories</option></select></div>
+      <div class="fg"><label>Filter</label><select id="gt_filter" onchange="renderGrocTracker()"><option value="all">All Items</option><option value="low">Low / Zero Stock</option><option value="expiring">Expiring Soon</option></select></div>
+      <div class="fg" style="flex:2"><label>Search</label><input type="text" id="gt_search" placeholder="Item naam likho..." oninput="renderGrocTracker()"></div>
+      <div class="fg" style="display:flex;align-items:flex-end"><button class="btn bo" onclick="document.getElementById('gt_search').value='';document.getElementById('gt_cat').value='';document.getElementById('gt_filter').value='all';renderGrocTracker();" style="width:100%;font-size:0.72rem">🔄 Reset</button></div>
+    </div>
+    <div id="g-tracker-count" style="font-size:0.75rem;color:#888;margin-bottom:8px"></div>
+    <div class="tw"><table class="groc"><thead><tr><th></th><th>#</th><th>Product Name</th><th>UOM</th><th>Stock ✏️</th><th>Min</th><th>Expiry ✏️</th><th>Days Left</th><th>Status</th><th></th></tr></thead><tbody id="g-tracker-tbody"></tbody></table></div>
   </div>
 </div></div>
 
@@ -555,19 +565,29 @@ window.addGrocItem=async()=>{
 window.clearGrocForm=()=>{['g_name','g_stock','g_min'].forEach(id=>document.getElementById(id).value='');document.getElementById('g_expiry').value='';};
 window.deleteGrocItem=async id=>{if(!isAdmin){toast('⚠️ View-only');return}if(!confirm('Delete?'))return;try{await deleteDoc(doc(db,'grocery_items',id));toast('🗑️ Deleted');}catch(e){toast('❌ '+e.message);}};
 
-window.editGrocStock=function(td,itemId,currentStock){
-  if(!isAdmin){return;}
+window.editGrocField=async function(td,itemId,field,currentVal){
+  if(!isAdmin){toast('⚠️ View-only mode');return;}
   let inp=document.createElement('input');
-  inp.type='number';inp.value=currentStock;inp.step='0.25';inp.min='0';
-  inp.style.cssText='width:70px;padding:3px 5px;border:1.5px solid #e65100;border-radius:4px;font-size:0.8rem;font-weight:700;';
-  td.innerHTML='';td.appendChild(inp);inp.focus();inp.select();
+  inp.type=field==='expiry'?'date':'number';
+  inp.value=currentVal||'';
+  if(field==='stock'){inp.step='0.25';inp.min='0';}
+  inp.style.cssText='width:'+(field==='expiry'?'130':'70')+'px;padding:3px 6px;border:2px solid #e65100;border-radius:5px;font-size:0.8rem;font-weight:700;outline:none;';
+  td.innerHTML='';td.appendChild(inp);inp.focus();
+  if(inp.select)inp.select();
+  let committed=false;
   async function commit(){
-    let v=parseFloat(inp.value)||0;
-    try{await setDoc(doc(db,'grocery_items',itemId),{stock:v,updatedAt:new Date().toISOString()},{merge:true});toast('✅ Stock updated!');}
-    catch(e){toast('❌ '+e.message);}
+    if(committed)return;committed=true;
+    let v=field==='expiry'?inp.value:(parseFloat(inp.value)||0);
+    try{
+      await setDoc(doc(db,'grocery_items',itemId),{[field]:v,updatedAt:new Date().toISOString()},{merge:true});
+      toast('✅ '+(field==='expiry'?'Expiry':'Stock')+' updated!');
+    }catch(e){toast('❌ '+e.message);}
   }
   inp.addEventListener('blur',commit,{once:true});
-  inp.addEventListener('keydown',e=>{if(e.key==='Enter')inp.blur();if(e.key==='Escape'){inp.removeEventListener('blur',commit);renderGrocTracker();}});
+  inp.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){inp.blur();}
+    if(e.key==='Escape'){committed=true;renderGrocTracker();}
+  });
 };
 
 function renderGrocDashboard(){
@@ -620,9 +640,13 @@ function renderGrocDashboard(){
 
 function renderGrocItems(){
   const cat=document.getElementById('g_filter_cat')?document.getElementById('g_filter_cat').value:'';
-  const srch=document.getElementById('g_search')?document.getElementById('g_search').value.toLowerCase():'';
-  let items=gItems.filter(i=>{if(cat&&i.cat!==cat)return false;if(srch&&!i.name.toLowerCase().includes(srch))return false;return true;});
-  document.getElementById('g-item-count').textContent=`(${gItems.length} total)`;
+  const srch=(document.getElementById('g_search')?document.getElementById('g_search').value:'').toLowerCase().trim();
+  let items=[...gItems].filter(i=>{
+    if(cat&&i.cat!==cat)return false;
+    if(srch&&!i.name.toLowerCase().includes(srch))return false;
+    return true;
+  });
+  document.getElementById('g-item-count').textContent=`(${items.length} / ${gItems.length} items)`;
   document.getElementById('g-items-tbody').innerHTML=items.map((item,i)=>{
     const tl=trafficLight(item);const tlC=tl==='red'?'tl-red':tl==='yellow'?'tl-yellow':'tl-green';
     const es=expStatus(item.expiry);
@@ -634,15 +658,22 @@ function renderGrocItems(){
 function renderGrocTracker(){
   const cat=document.getElementById('gt_cat')?document.getElementById('gt_cat').value:'';
   const filt=document.getElementById('gt_filter')?document.getElementById('gt_filter').value:'all';
-  const srch=document.getElementById('gt_search')?document.getElementById('gt_search').value.toLowerCase():'';
-  let items=gItems.filter(i=>{
+  const srch=(document.getElementById('gt_search')?document.getElementById('gt_search').value:'').toLowerCase().trim();
+  let items=[...gItems].filter(i=>{
     if(cat&&i.cat!==cat)return false;
-    const es=expStatus(i.expiry);const isLow=i.min>0&&i.stock<i.min;
+    const es=expStatus(i.expiry);
+    const isLow=i.min>0&&i.stock<i.min;
     if(filt==='low'&&!(i.stock===0||isLow))return false;
     if(filt==='expiring'&&es!=='expiring')return false;
     if(srch&&!i.name.toLowerCase().includes(srch))return false;
     return true;
   });
+  const countEl=document.getElementById('g-tracker-count');
+  if(countEl)countEl.textContent=`${items.length} items dikh rahe hain (Total: ${gItems.length})`;
+  if(!items.length){
+    document.getElementById('g-tracker-tbody').innerHTML='<tr><td colspan="10" style="text-align:center;color:#aaa;padding:18px">Koi item nahi mila. Filter reset karo.</td></tr>';
+    return;
+  }
 
   // Group by category
   let bycat={};items.forEach(i=>{if(!bycat[i.cat])bycat[i.cat]=[];bycat[i.cat].push(i);});
@@ -664,14 +695,14 @@ function renderGrocTracker(){
         <td style="color:#ccc;font-size:0.7rem">${item._id.slice(-4)}</td>
         <td class="fw">${item.name}</td>
         <td style="color:#888;font-size:0.7rem">${item.uom}</td>
-        <td ondblclick="editGrocStock(this,'${item._id}',${item.stock})">
+        <td ondblclick="editGrocField(this,'${item._id}','stock',${item.stock})">
           <div class="sbar-wrap">
             <span class="editable" style="font-weight:700;font-size:0.9rem;color:${barColor}">${item.stock}</span>
             <div class="sbar"><div class="sbar-fill" style="width:${pct}%;background:${barColor}"></div></div>
           </div>
         </td>
         <td style="color:#aaa;font-size:0.72rem">${item.min||'—'}</td>
-        <td style="color:#666;font-size:0.7rem">${item.expiry||'—'}</td>
+        <td ondblclick="editGrocField(this,'${item._id}','expiry','${item.expiry||''}')" style="color:#666;font-size:0.7rem;cursor:pointer" title="Double click to edit">${item.expiry||'—'}</td>
         <td>${daysHtml}</td>
         <td>${expB}</td>
         <td>${isAdmin?`<button class="btn bd" style="padding:2px 6px;font-size:0.65rem" onclick="deleteGrocItem('${item._id}')">🗑️</button>`:''}</td>
@@ -733,7 +764,13 @@ window.exportOrderCSV=()=>{
 
 function updateGrocCatDropdowns(){
   const cats=[...new Set(gItems.map(i=>i.cat))].sort();
-  ['g_filter_cat','gt_cat'].forEach(id=>{let el=document.getElementById(id);if(!el)return;let c=el.value;el.innerHTML='<option value="">All</option>'+cats.map(c=>`<option>${c}</option>`).join('');el.value=c;});
+  ['g_filter_cat','gt_cat'].forEach(id=>{
+    let el=document.getElementById(id);
+    if(!el)return;
+    let c=el.value;
+    el.innerHTML='<option value="">All Categories</option>'+cats.map(c=>`<option value="${c}">${c}</option>`).join('');
+    if(c&&cats.includes(c))el.value=c;
+  });
 }
 
 // ══════════ PURCHASE FUNCTIONS (same as before) ══════════
